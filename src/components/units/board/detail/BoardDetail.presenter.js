@@ -2,7 +2,6 @@ import { getDate } from "../../../commons/libraries/utils";
 import * as S from "../detail/BoardDetail.styles";
 
 export default function BoardDetailUI(props) {
-  console.log(props.data?.fetchBoard);
   return (
     <S.Container>
       <S.HeaderWrapper>
@@ -29,8 +28,8 @@ export default function BoardDetailUI(props) {
         </div>
       </div>
       <S.BtnWrapper>
-        <S.Btn>목록으로</S.Btn>
-        <S.Btn>수정하기</S.Btn>
+        <S.Btn onClick={props.onClickMoveToList}>목록으로</S.Btn>
+        <S.Btn onClick={props.onClickEdit}>수정하기</S.Btn>
         <S.Btn onClick={props.onClickDelete}>삭제하기</S.Btn>
       </S.BtnWrapper>
     </S.Container>

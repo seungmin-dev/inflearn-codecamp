@@ -11,6 +11,14 @@ export default function BoardDetailContainer() {
     },
   });
 
+  const onClickMoveToList = () => {
+    router.push(`/boards`);
+  };
+
+  const onClickEdit = () => {
+    router.push(`/boards/${router.query.id}/edit`);
+  };
+
   const onClickDelete = () => {
     try {
       useMutation(DELETE_BOARD, {
@@ -24,5 +32,12 @@ export default function BoardDetailContainer() {
     }
   };
 
-  return <BoardDetailUI data={data} onClickDelete={onClickDelete} />;
+  return (
+    <BoardDetailUI
+      data={data}
+      onClickMoveToList={onClickMoveToList}
+      onClickEdit={onClickEdit}
+      onClickDelete={onClickDelete}
+    />
+  );
 }

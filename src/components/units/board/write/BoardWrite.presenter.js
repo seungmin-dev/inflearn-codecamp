@@ -3,7 +3,7 @@ import * as S from "./BoardWrite.styles";
 export default function BoardWriteUI(props) {
   return (
     <S.Container>
-      <S.Title>게시물 등록</S.Title>
+      <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
       <div
         style={{
           width: "100%",
@@ -16,6 +16,8 @@ export default function BoardWriteUI(props) {
           <S.Input
             type="text"
             onChange={props.onChangeWriter}
+            readOnly={props.data?.fetchBoard.writer}
+            defaultValue={props.data?.fetchBoard.writer}
             placeholder="이름을 적어주세요."
           ></S.Input>
           <S.Error>{props.writeError}</S.Error>
@@ -35,6 +37,7 @@ export default function BoardWriteUI(props) {
         <S.Input
           type="text"
           onChange={props.onChangeTitle}
+          defaultValue={props.data?.fetchBoard.title}
           placeholder="제목을 작성해주세요."
         ></S.Input>
         <S.Error>{props.titleError}</S.Error>
@@ -51,6 +54,7 @@ export default function BoardWriteUI(props) {
           }}
           type="text"
           onChange={props.onChangeContents}
+          defaultValue={props.data?.fetchBoard.contents}
           placeholder="내용을 작성해주세요."
         ></textarea>
         <S.Error>{props.contentsError}</S.Error>
@@ -118,8 +122,11 @@ export default function BoardWriteUI(props) {
           </label>
         </div>
       </S.BoxWrapper>
-      <S.SubmitButton onClick={props.onClickSubmit} isActive={props.isActive}>
-        등록하기
+      <S.SubmitButton
+        onClick={props.isEdit ? props.onClickUpdate : props.onClickSubmit}
+        isActive={props.isEdit ? true : props.isActive}
+      >
+        {props.isEdit ? "수정" : "등록"}하기
       </S.SubmitButton>
     </S.Container>
   );

@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { useMutation } from "@apollo/client";
-import { CREATE_BOARD } from "./BoardWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { useState } from "react";
 
-export default function BoardWriteContainer() {
+export default function BoardWriteContainer(props) {
   const router = useRouter();
 
   const [writer, setWriter] = useState("");
@@ -20,6 +20,7 @@ export default function BoardWriteContainer() {
   const [isActive, setIsActive] = useState(false);
 
   const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const onChangeWriter = (event) => {
     setWriter(event.target.value);
@@ -86,13 +87,45 @@ export default function BoardWriteContainer() {
             },
           },
         });
-        console.log(result.data.createBoard._id);
         router.push(`/boards/${result.data.createBoard._id}`);
       } catch (error) {
         alert(error.message);
       }
     }
   };
+
+  const onClickUpdate = async () => {
+    // early-exit pattern - 오류를 먼저 잡아내고 함수 종료
+    if (!title && !contents) {
+      alert("수정한 내용이 없습니다.");
+      return;
+    }
+    if (!password) {
+      alert("비밀번호를 입력해주세요.");
+      return;
+    }
+
+    const updateBoardInput = {};
+    if (title) updateBoardInput.title = title;
+    if (contents) updateBoardInput.contents = contents;
+
+    try {
+      const result = await updateBoard({
+        variables: {
+          boardId: router.query.id,
+          password,
+          updateBoardInput: {
+            title,
+            contents,
+          },
+        },
+      });
+      router.push(`/boards/${result.data.updateBoard._id}`);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <BoardWriteUI
       writerError={writerError}
@@ -104,7 +137,10 @@ export default function BoardWriteContainer() {
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}
       onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
       isActive={isActive}
+      isEdit={props.isEdit}
+      data={props.data}
     />
   );
 }
