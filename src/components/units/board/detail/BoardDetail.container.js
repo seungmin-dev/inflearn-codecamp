@@ -10,6 +10,7 @@ export default function BoardDetailContainer() {
       boardId: router.query.id,
     },
   });
+  const [deleteBoard] = useMutation(DELETE_BOARD);
 
   const onClickMoveToList = () => {
     router.push(`/boards`);
@@ -19,9 +20,10 @@ export default function BoardDetailContainer() {
     router.push(`/boards/${router.query.id}/edit`);
   };
 
-  const onClickDelete = () => {
+  const onClickDelete = async () => {
     try {
-      useMutation(DELETE_BOARD, {
+      console.log(router.query.id);
+      const result = await deleteBoard({
         variables: {
           boardId: router.query.id,
         },

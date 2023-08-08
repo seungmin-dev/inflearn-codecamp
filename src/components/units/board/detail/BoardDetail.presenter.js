@@ -1,4 +1,5 @@
 import { getDate } from "../../../commons/libraries/utils";
+import CommentsContainer from "../../comments/Comments.container";
 import * as S from "../detail/BoardDetail.styles";
 
 export default function BoardDetailUI(props) {
@@ -32,6 +33,7 @@ export default function BoardDetailUI(props) {
         <S.Btn onClick={props.onClickEdit}>수정하기</S.Btn>
         <S.Btn onClick={props.onClickDelete}>삭제하기</S.Btn>
       </S.BtnWrapper>
+      <CommentsContainer />
     </S.Container>
   );
 }
