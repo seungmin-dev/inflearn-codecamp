@@ -1,22 +1,23 @@
 import { getDate } from "../../../commons/libraries/utils";
 import CommentsContainer from "../../comments/Comments.container";
-import * as S from "../detail/BoardDetail.styles";
+import * as S from "./BoardDetail.styles";
+import { IBoardDetailUIProps } from "./BoardDetail.types";
 
-export default function BoardDetailUI(props) {
+export default function BoardDetailUI(props: IBoardDetailUIProps) {
   return (
     <S.Container>
       <S.HeaderWrapper>
         <S.ProfileImg src="/profile.png" />
         <S.WriterInfoWrapper>
-          <S.Writer>{props.data?.fetchBoard.writer}</S.Writer>
+          <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
           <S.CreatedAt>
-            Date : {getDate(props.data?.fetchBoard.createdAt)}
+            Date : {getDate(props.data?.fetchBoard?.createdAt)}
           </S.CreatedAt>
         </S.WriterInfoWrapper>
       </S.HeaderWrapper>
       <S.BoardWrapper>
-        <S.Title>{props.data?.fetchBoard.title}</S.Title>
-        <S.Contents>{props.data?.fetchBoard.contents}</S.Contents>
+        <S.Title>{props.data?.fetchBoard?.title}</S.Title>
+        <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
       </S.BoardWrapper>
       <div>
         <div>
@@ -33,7 +34,6 @@ export default function BoardDetailUI(props) {
         <S.Btn onClick={props.onClickEdit}>수정하기</S.Btn>
         <S.Btn onClick={props.onClickDelete}>삭제하기</S.Btn>
       </S.BtnWrapper>
-      <CommentsContainer />
     </S.Container>
   );
 }

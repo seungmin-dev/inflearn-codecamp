@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ISubmitButtonProps } from "./BoardWrite.types";
 
 export const Container = styled.div`
   width: 800px;
@@ -55,7 +56,8 @@ export const SubmitButton = styled.button`
   font-weight: bold;
   padding: 11px 40px;
   margin: 0 auto;
-  background-color: ${(props) => (props.isActive ? "#FFD600" : "#dcdcdc")};
+  background-color: ${(props: ISubmitButtonProps) =>
+    props.isActive ? "#FFD600" : "#dcdcdc"};
 `;
 export const RadioInput = styled.input`
   padding-left: 5px;

@@ -1,6 +1,7 @@
 import * as S from "./BoardWrite.styles";
+import { IBoardWriteUIProps } from "./BoardWrite.types";
 
-export default function BoardWriteUI(props) {
+export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
     <S.Container>
       <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
@@ -16,11 +17,12 @@ export default function BoardWriteUI(props) {
           <S.Input
             type="text"
             onChange={props.onChangeWriter}
-            readOnly={props.data?.fetchBoard.writer}
-            defaultValue={props.data?.fetchBoard.writer}
+            readOnly={!!props.data?.fetchBoard.writer}
+            // readOnly={Boolean(props.data?.fetchBoard.writer)}
+            defaultValue={props.data?.fetchBoard.writer ?? ""}
             placeholder="이름을 적어주세요."
           ></S.Input>
-          <S.Error>{props.writeError}</S.Error>
+          <S.Error>{props.writerError}</S.Error>
         </S.BoxWrapper>
         <S.BoxWrapper style={{ width: "49%" }}>
           <S.SmallTitle>비밀번호</S.SmallTitle>
@@ -52,7 +54,6 @@ export default function BoardWriteUI(props) {
             width: "100%",
             height: "200px",
           }}
-          type="text"
           onChange={props.onChangeContents}
           defaultValue={props.data?.fetchBoard.contents}
           placeholder="내용을 작성해주세요."

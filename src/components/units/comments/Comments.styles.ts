@@ -1,17 +1,43 @@
 import styled from "@emotion/styled";
 
 export const CommentsWrapper = styled.div`
+  width: 800px;
+  margin: 0 auto;
   padding-top: 30px;
 `;
 export const SmallTitle = styled.h4`
+  display: flex;
+  align-items: center;
   margin-bottom: 20px;
+  margin-right: 10px;
 `;
-export const StarWrapper = styled.div``;
-export const Star = styled.img``;
+export const StarWrapper = styled.div`
+  margin-bottom: 10px;
+`;
+export const Star = styled.img`
+  width: 20px;
+`;
 export const CommentsInputWrpper = styled.div`
   width: 100%;
   border: 1px solid #bdbdbd;
   margin-bottom: 30px;
+`;
+export const CommentsNewWriter = styled.input`
+  border: none;
+  border: 1px solid #bdbdbd;
+  height: 30px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  padding: 10px;
+`;
+export const CommentsNewPassword = styled.input`
+  border: none;
+  border: 1px solid #bdbdbd;
+  height: 30px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  padding: 10px;
 `;
 export const CommentsTextarea = styled.textarea`
   border: none;
@@ -82,12 +108,8 @@ export const CommentsStar = styled.img`
   width: 18px;
 `;
 export const CommentsButtonWrapper = styled.div``;
-export const CommentsButton = styled.button`
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-`;
 export const CommentsButtonImg = styled.img`
+  cursor: pointer;
   width: 16px;
 `;
 export const CommentsText = styled.input`

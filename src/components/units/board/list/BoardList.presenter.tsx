@@ -1,13 +1,14 @@
-import Link from "next/link.js";
-import * as S from "../list/BoardList.styles.js";
+import Link from "next/link";
+import * as S from "./BoardList.styles";
+import { IBoardListUIProps } from "./BoardList.types";
 
-export default function BoardListUI(props) {
+export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <S.Container>
       <S.Title>베스트 게시글</S.Title>
       <div>
         <S.CardWrapper>
-          {props.data?.fetchBoards.slice(0, 4).map((item) => (
+          {props.data?.fetchBoards?.slice(0, 4).map((item) => (
             <S.CardInfo key={item._id}>
               <S.CardTitle>{item.title}</S.CardTitle>
               <S.CardBelowWrapper>
@@ -42,7 +43,7 @@ export default function BoardListUI(props) {
           <S.ListHeaderTextDate>날짜</S.ListHeaderTextDate>
         </S.ListHeader>
         <S.ListBody>
-          {props.data?.fetchBoards.map((item, index) => (
+          {props.data?.fetchBoards?.map((item, index: number) => (
             <S.ListBodyLine key={item._id}>
               <S.ListBodyTextIndex>{index + 1}</S.ListBodyTextIndex>
               <Link href={`/boards/${item._id}`}>

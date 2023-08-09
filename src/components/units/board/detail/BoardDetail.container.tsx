@@ -2,6 +2,10 @@ import { useRouter } from "next/router";
 import BoardDetailUI from "./BoardDetail.presenter";
 import { useMutation, useQuery } from "@apollo/client";
 import { DELETE_BOARD, FETCH_BOARD } from "./BoardDetail.queries";
+import {
+  IMutation,
+  IMutationDeleteBoardArgs,
+} from "../../../../commons/types/generated/types";
 
 export default function BoardDetailContainer() {
   const router = useRouter();
@@ -10,7 +14,10 @@ export default function BoardDetailContainer() {
       boardId: router.query.id,
     },
   });
-  const [deleteBoard] = useMutation(DELETE_BOARD);
+  const [deleteBoard] = useMutation<
+    Pick<IMutation, "deleteBoard">,
+    IMutationDeleteBoardArgs
+  >(DELETE_BOARD);
 
   const onClickMoveToList = () => {
     router.push(`/boards`);
@@ -21,6 +28,10 @@ export default function BoardDetailContainer() {
   };
 
   const onClickDelete = async () => {
+    if (typeof router.query.id !== "string") {
+      alert("시스템에 문제가 있습니다.");
+      return;
+    }
     try {
       console.log(router.query.id);
       const result = await deleteBoard({
@@ -30,7 +41,7 @@ export default function BoardDetailContainer() {
       });
       router.push("/boards");
     } catch (error) {
-      alert(error.message);
+      if (error instanceof Error) alert(error.message);
     }
   };
 

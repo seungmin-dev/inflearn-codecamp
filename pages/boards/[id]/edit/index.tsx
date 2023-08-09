@@ -15,6 +15,8 @@ const FETCH_BOARD = gql`
 
 export default function BoardEditPage() {
   const router = useRouter();
+  console.log(router);
+  if (!router || typeof router.query.id !== "string") return <></>;
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
