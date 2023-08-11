@@ -13,7 +13,7 @@ const FETCH_BOARD = gql`
   }
 `;
 
-export default function BoardEditPage() {
+export default function BoardEditPage(): JSX.Element {
   const router = useRouter();
   console.log(router);
   if (!router || typeof router.query.id !== "string") return <></>;

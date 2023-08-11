@@ -1,9 +1,10 @@
+import ReactPlayer from "react-player";
 import { getDate } from "../../../commons/libraries/utils";
-import CommentsContainer from "../../comments/Comments.container";
 import * as S from "./BoardDetail.styles";
-import { IBoardDetailUIProps } from "./BoardDetail.types";
+import type { IBoardDetailUIProps } from "./BoardDetail.types";
+import { Tooltip } from "antd";
 
-export default function BoardDetailUI(props: IBoardDetailUIProps) {
+export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
   return (
     <S.Container>
       <S.HeaderWrapper>
@@ -14,10 +15,23 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
             Date : {getDate(props.data?.fetchBoard?.createdAt)}
           </S.CreatedAt>
         </S.WriterInfoWrapper>
+        <S.IconWrapper>
+          <S.LinkIcon />
+          <Tooltip
+            placement="topRight"
+            title={`${props.data?.fetchBoard?.boardAddress?.address} ${props.data?.fetchBoard?.boardAddress?.addressDetail}`}
+          >
+            <S.LocationIcon />
+          </Tooltip>
+        </S.IconWrapper>
       </S.HeaderWrapper>
       <S.BoardWrapper>
         <S.Title>{props.data?.fetchBoard?.title}</S.Title>
         <S.Contents>{props.data?.fetchBoard?.contents}</S.Contents>
+        <ReactPlayer
+          url={props.data?.fetchBoard?.youtubeUrl}
+          style={{ margin: "50px auto 30px" }}
+        />
       </S.BoardWrapper>
       <div>
         <div>

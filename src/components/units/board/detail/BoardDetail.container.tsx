@@ -2,12 +2,12 @@ import { useRouter } from "next/router";
 import BoardDetailUI from "./BoardDetail.presenter";
 import { useMutation, useQuery } from "@apollo/client";
 import { DELETE_BOARD, FETCH_BOARD } from "./BoardDetail.queries";
-import {
+import type {
   IMutation,
   IMutationDeleteBoardArgs,
 } from "../../../../commons/types/generated/types";
 
-export default function BoardDetailContainer() {
+export default function BoardDetailContainer(): JSX.Element {
   const router = useRouter();
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
@@ -19,15 +19,15 @@ export default function BoardDetailContainer() {
     IMutationDeleteBoardArgs
   >(DELETE_BOARD);
 
-  const onClickMoveToList = () => {
-    router.push(`/boards`);
+  const onClickMoveToList = (): void => {
+    void router.push(`/boards`);
   };
 
-  const onClickEdit = () => {
-    router.push(`/boards/${router.query.id}/edit`);
+  const onClickEdit = (): void => {
+    void router.push(`/boards/${router.query.id}/edit`);
   };
 
-  const onClickDelete = async () => {
+  const onClickDelete = async (): Promise<void> => {
     if (typeof router.query.id !== "string") {
       alert("시스템에 문제가 있습니다.");
       return;
@@ -39,7 +39,8 @@ export default function BoardDetailContainer() {
           boardId: router.query.id,
         },
       });
-      router.push("/boards");
+      console.log(result);
+      void router.push("/boards");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

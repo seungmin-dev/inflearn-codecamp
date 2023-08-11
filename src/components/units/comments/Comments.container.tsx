@@ -4,25 +4,25 @@ import {
   CREATE_BOARD_COMMENT,
   DELETE_BOARD_COMMENT,
   FETCH_BOARD_COMMENTS,
-  UPDATE_BOARD_COMMENT,
 } from "./Comments.queries";
 import { useRouter } from "next/router";
-import { ChangeEvent, MouseEvent, useState } from "react";
-import {
+import { useState } from "react";
+import type { ChangeEvent, MouseEvent } from "react";
+import type {
   IMutation,
   IMutationCreateBoardCommentArgs,
   IMutationDeleteBoardCommentArgs,
-  IMutationUpdateBoardCommentArgs,
 } from "../../../commons/types/generated/types";
 
-export default function CommentsContainer() {
+export default function CommentsContainer(): JSX.Element {
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [commentsLength, setCommentsLength] = useState(0);
-  const [commentsUpdateLength, setCommentsUpdateLength] = useState(0);
   const [comments, setComments] = useState("");
-  const [commentsUpdate, setCommentsUpdate] = useState("");
+  const [star, setStar] = useState(0);
   const [isEdit, setIsEdit] = useState(false);
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [boardCommentId, setBoardCommentId] = useState("");
 
   const router = useRouter();
   const { data } = useQuery(FETCH_BOARD_COMMENTS, {
@@ -38,30 +38,36 @@ export default function CommentsContainer() {
     Pick<IMutation, "deleteBoardComment">,
     IMutationDeleteBoardCommentArgs
   >(DELETE_BOARD_COMMENT);
-  const [updateBoardComment] = useMutation<
-    Pick<IMutation, "updateBoardComment">,
-    IMutationUpdateBoardCommentArgs
-  >(UPDATE_BOARD_COMMENT);
 
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
     setWriter(event.target.value);
   };
 
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
   };
 
-  const onChangeTextarea = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeTextarea = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     setComments(event.target.value.slice(0, 100));
     setCommentsLength(event.target.value.length);
   };
 
-  const onChangeUpdateTextarea = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setCommentsUpdate(event.target.value.slice(0, 100));
-    setCommentsUpdateLength(event.target.value.length);
+  const onClickOpenDeleteModal = (
+    event: MouseEvent<HTMLImageElement>,
+  ): void => {
+    setBoardCommentId(event.currentTarget.id);
+    setIsOpenDeleteModal(true);
   };
 
-  const onClickSubmit = async () => {
+  const onChangeDeletePassword = (
+    event: ChangeEvent<HTMLInputElement>,
+  ): void => {
+    setPassword(event.target.value);
+  };
+
+  const onClickSubmit = async (
+    event: MouseEvent<HTMLButtonElement>,
+  ): Promise<void> => {
     if (!comments) {
       alert("댓글을 입력해주세요.");
       return;
@@ -77,7 +83,7 @@ export default function CommentsContainer() {
             writer,
             password,
             contents: comments,
-            rating: 4.5,
+            rating: star,
           },
           boardId: router.query.id,
         },
@@ -88,46 +94,24 @@ export default function CommentsContainer() {
           },
         ],
       });
+      console.log(result);
       setComments("");
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
   };
-  const onClickEdit = () => {
+  const onClickEdit = (): void => {
     setIsEdit(true);
   };
 
-  // const onClickUpdate = async (boardCommentId: string) => {
-  //   try {
-  //     const result = updateBoardComment({
-  //       variables: {
-  //         boardCommentId,
-  //         updateBoardCommentInput: {
-  //           contents: "",
-  //           rating: 2,
-  //         },
-  //       },
-  //       refetchQueries: [
-  //         {
-  //           query: FETCH_BOARD_COMMENTS,
-  //           variables: { boardId: router.query.id },
-  //         },
-  //       ],
-  //     });
-  //   } catch (error) {
-  //     if (error instanceof Error) alert(error.message);
-  //   }
-  // };
-  const onClickDelete = async (event: MouseEvent<HTMLImageElement>) => {
+  const onClickDelete = async (
+    event: MouseEvent<HTMLButtonElement>,
+  ): Promise<void> => {
     try {
-      if (!(event.target instanceof HTMLImageElement)) {
-        alert("시스템에 문제가 있습니다.");
-        return;
-      }
-      const result = deleteBoardComment({
+      const result = await deleteBoardComment({
         variables: {
-          password: "tempPassword",
-          boardCommentId: event.target.id,
+          password,
+          boardCommentId,
         },
         refetchQueries: [
           {
@@ -136,6 +120,8 @@ export default function CommentsContainer() {
           },
         ],
       });
+      setIsOpenDeleteModal(false);
+      console.log(result);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -146,16 +132,17 @@ export default function CommentsContainer() {
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeTextarea={onChangeTextarea}
-      onChangeUpdateTextarea={onChangeUpdateTextarea}
       commentsLength={commentsLength}
-      commentsUpdateLength={commentsUpdateLength}
       comments={comments}
-      commentsUpdate={commentsUpdate}
       isEdit={isEdit}
       onClickSubmit={onClickSubmit}
       onClickEdit={onClickEdit}
       // onClickUpdate={onClickUpdate}
       onClickDelete={onClickDelete}
+      setStar={setStar}
+      isOpenDeleteModal={isOpenDeleteModal}
+      onClickOpenDeleteModal={onClickOpenDeleteModal}
+      onChangeDeletePassword={onChangeDeletePassword}
     />
   );
 }

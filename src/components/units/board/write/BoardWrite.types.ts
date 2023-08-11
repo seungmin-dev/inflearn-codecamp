@@ -1,5 +1,5 @@
-import { ChangeEvent } from "react";
-import { IQuery } from "../../../../commons/types/generated/types";
+import type { ChangeEvent } from "react";
+import type { IQuery } from "../../../../commons/types/generated/types";
 
 export interface IBoardWriteProps {
   isEdit: boolean;
@@ -20,6 +20,15 @@ export interface IBoardWriteUIProps {
   onClickUpdate: () => void;
   onClickSubmit: () => void;
   isActive: boolean;
+  onChangeZipcode: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeAddress: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeAddressDetail: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeYoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
+  isOpen: boolean;
+  onClickAddressSearch: () => void;
+  onCompleteAddressSearch: (data: any) => void;
+  zipcode: string;
+  address: string;
 }
 
 export interface ISubmitButtonProps {

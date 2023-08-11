@@ -2,22 +2,30 @@ import { useRouter } from "next/router";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { useMutation } from "@apollo/client";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { ChangeEvent, useState } from "react";
-import { IBoardWriteProps } from "./BoardWrite.types";
-import {
+import { useState } from "react";
+import type { ChangeEvent } from "react";
+import type { IBoardWriteProps } from "./BoardWrite.types";
+import type {
   IMutation,
   IMutationCreateBoardArgs,
   IMutationUpdateBoardArgs,
   IUpdateBoardInput,
 } from "../../../../commons/types/generated/types";
+import type { Address } from "react-daum-postcode";
 
-export default function BoardWriteContainer(props: IBoardWriteProps) {
+export default function BoardWriteContainer(
+  props: IBoardWriteProps,
+): JSX.Element {
   const router = useRouter();
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -25,6 +33,7 @@ export default function BoardWriteContainer(props: IBoardWriteProps) {
   const [contentsError, setContentsError] = useState("");
 
   const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [createBoard] = useMutation<
     Pick<IMutation, "createBoard">,
@@ -35,7 +44,7 @@ export default function BoardWriteContainer(props: IBoardWriteProps) {
     IMutationUpdateBoardArgs
   >(UPDATE_BOARD);
 
-  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeWriter = (event: ChangeEvent<HTMLInputElement>): void => {
     setWriter(event.target.value);
     if (event.target.value !== "") {
       setWriterError("");
@@ -45,7 +54,7 @@ export default function BoardWriteContainer(props: IBoardWriteProps) {
     }
   };
 
-  const onChangePassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangePassword = (event: ChangeEvent<HTMLInputElement>): void => {
     setPassword(event.target.value);
     if (event.target.value !== "") {
       setPasswordError("");
@@ -55,7 +64,7 @@ export default function BoardWriteContainer(props: IBoardWriteProps) {
     }
   };
 
-  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeTitle = (event: ChangeEvent<HTMLInputElement>): void => {
     setTitle(event.target.value);
     if (event.target.value !== "") {
       setTitleError("");
@@ -65,7 +74,7 @@ export default function BoardWriteContainer(props: IBoardWriteProps) {
     }
   };
 
-  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeContents = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     setContents(event.target.value);
     if (event.target.value !== "") {
       setContentsError("");
@@ -75,7 +84,35 @@ export default function BoardWriteContainer(props: IBoardWriteProps) {
     }
   };
 
-  const onClickSubmit = async () => {
+  const onChangeZipcode = (event: ChangeEvent<HTMLInputElement>): void => {
+    setZipcode(event.target.value);
+  };
+
+  const onChangeAddress = (event: ChangeEvent<HTMLInputElement>): void => {
+    setAddress(event.target.value);
+  };
+
+  const onChangeAddressDetail = (
+    event: ChangeEvent<HTMLInputElement>,
+  ): void => {
+    setAddressDetail(event.target.value);
+  };
+
+  const onChangeYoutubeUrl = (event: ChangeEvent<HTMLInputElement>): void => {
+    setYoutubeUrl(event.target.value);
+  };
+
+  const onClickAddressSearch = (): void => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const onCompleteAddressSearch = (data: Address): void => {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen((prev) => !prev);
+  };
+
+  const onClickSubmit = async (): Promise<void> => {
     if (!writer) {
       setWriterError("작성자를 입력해주세요.");
     }
@@ -97,17 +134,23 @@ export default function BoardWriteContainer(props: IBoardWriteProps) {
               password,
               title,
               contents,
+              boardAddress: {
+                zipcode,
+                address,
+                addressDetail,
+              },
+              youtubeUrl,
             },
           },
         });
-        router.push(`/boards/${result.data?.createBoard?._id}`);
+        void router.push(`/boards/${result.data?.createBoard?._id}`);
       } catch (error) {
         if (error instanceof Error) alert(error.message);
       }
     }
   };
 
-  const onClickUpdate = async () => {
+  const onClickUpdate = async (): Promise<void> => {
     // early-exit pattern - 오류를 먼저 잡아내고 함수 종료
     if (!title && !contents) {
       alert("수정한 내용이 없습니다.");
@@ -130,12 +173,13 @@ export default function BoardWriteContainer(props: IBoardWriteProps) {
 
       const result = await updateBoard({
         variables: {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           boardId: router.query.id!,
           password,
           updateBoardInput,
         },
       });
-      router.push(`/boards/${result.data?.updateBoard?._id}`);
+      void router.push(`/boards/${result.data?.updateBoard?._id}`);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }
@@ -151,11 +195,20 @@ export default function BoardWriteContainer(props: IBoardWriteProps) {
       onChangePassword={onChangePassword}
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}
+      onChangeZipcode={onChangeZipcode}
+      onChangeAddress={onChangeAddress}
+      onChangeAddressDetail={onChangeAddressDetail}
+      onChangeYoutubeUrl={onChangeYoutubeUrl}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}
+      isOpen={isOpen}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
+      zipcode={zipcode}
+      address={address}
     />
   );
 }

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Modal } from "antd";
 
 export const CommentsWrapper = styled.div`
   width: 800px;
@@ -120,4 +121,11 @@ export const CommentsText = styled.input`
 export const CommentsCreatedAt = styled.span`
   font-size: 0.7rem;
   color: #bdbdbd;
+`;
+
+export const PasswordModal = styled(Modal)``;
+
+export const PasswordInput = styled.input`
+  width: 100%;
+  margin-top: 10px;
 `;

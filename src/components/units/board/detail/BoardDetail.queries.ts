@@ -1,4 +1,4 @@
-const { gql } = require("@apollo/client");
+import { gql } from "@apollo/client";
 
 export const FETCH_BOARD = gql`
   query fetchBoard($boardId: ID!) {
@@ -7,6 +7,12 @@ export const FETCH_BOARD = gql`
       title
       contents
       createdAt
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;

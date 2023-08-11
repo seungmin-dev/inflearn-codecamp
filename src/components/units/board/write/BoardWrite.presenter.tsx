@@ -1,7 +1,9 @@
 import * as S from "./BoardWrite.styles";
-import { IBoardWriteUIProps } from "./BoardWrite.types";
+import type { IBoardWriteUIProps } from "./BoardWrite.types";
+import { Modal } from "antd";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
-export default function BoardWriteUI(props: IBoardWriteUIProps) {
+export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
   return (
     <S.Container>
       <S.Title>게시물 {props.isEdit ? "수정" : "등록"}</S.Title>
@@ -65,17 +67,49 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
         <S.Input
           type="text"
           placeholder="07250"
+          readOnly
+          value={
+            props.zipcode !== ""
+              ? props.zipcode
+              : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
+          }
           style={{ width: "60px", marginRight: "10px" }}
         />
-        <S.ZipCodeButton>우편번호 검색</S.ZipCodeButton>
+        <S.ZipCodeButton onClick={props.onClickAddressSearch}>
+          우편번호 검색
+        </S.ZipCodeButton>
+        {props.isOpen && (
+          <Modal open={true}>
+            <DaumPostcodeEmbed onComplete={props.onCompleteAddressSearch} />
+          </Modal>
+        )}
         <br />
-        <S.Input type="text" />
+        <S.Input
+          type="text"
+          readOnly
+          value={
+            props.address !== ""
+              ? props.address
+              : props.data?.fetchBoard.boardAddress?.address ?? ""
+          }
+        />
         <br />
-        <S.Input type="text" />
+        <S.Input
+          type="text"
+          onChange={props.onChangeAddressDetail}
+          defaultValue={
+            props.data?.fetchBoard.boardAddress?.addressDetail ?? ""
+          }
+        />
       </S.BoxWrapper>
       <S.BoxWrapper>
         <S.SmallTitle>유튜브</S.SmallTitle>
-        <S.Input type="text" placeholder="링크를 복사해주세요." />
+        <S.Input
+          type="text"
+          onChange={props.onChangeYoutubeUrl}
+          placeholder="링크를 복사해주세요."
+          defaultValue={props.data?.fetchBoard.youtubeUrl ?? ""}
+        />
       </S.BoxWrapper>
       <S.BoxWrapper>
         <S.SmallTitle>사진 첨부</S.SmallTitle>

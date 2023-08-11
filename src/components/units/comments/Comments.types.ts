@@ -1,18 +1,19 @@
-import { ChangeEvent, MouseEvent } from "react";
-import { IQuery } from "../../../commons/types/generated/types";
+import type { ChangeEvent, Dispatch, MouseEvent, SetStateAction } from "react";
+import type { IQuery } from "../../../commons/types/generated/types";
 
 export interface CommentsUIProps {
-  onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
+  data: Pick<IQuery, "fetchBoardComments">;
   comments: string;
   commentsLength: number;
-  onChangeTextarea: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  onClickSubmit: () => void;
-  data: Pick<IQuery, "fetchBoardComments">;
   isEdit: boolean;
-  onChangeUpdateTextarea: (event: ChangeEvent<HTMLTextAreaElement>) => void;
-  commentsUpdate: string;
-  commentsUpdateLength: number;
+  isOpenDeleteModal: boolean;
+  onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeTextarea: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
   onClickEdit: () => void;
-  onClickDelete: (event: MouseEvent<HTMLImageElement>) => void;
+  setStar: Dispatch<SetStateAction<number>>;
+  onClickDelete: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickOpenDeleteModal: (event: MouseEvent<HTMLImageElement>) => void;
+  onChangeDeletePassword: (event: ChangeEvent<HTMLInputElement>) => void;
 }

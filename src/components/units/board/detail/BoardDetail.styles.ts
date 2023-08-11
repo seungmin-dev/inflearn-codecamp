@@ -1,3 +1,4 @@
+import { EnvironmentOutlined, LinkOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
@@ -17,13 +18,25 @@ export const ProfileImg = styled.img`
   width: 40px;
   margin-right: 10px;
 `;
-export const WriterInfoWrapper = styled.div``;
+export const WriterInfoWrapper = styled.div`
+  flex-grow: 1;
+`;
 export const Writer = styled.h4`
   padding-bottom: 3px;
 `;
 export const CreatedAt = styled.p`
   color: #828282;
   font-size: 0.8rem;
+`;
+export const IconWrapper = styled.div``;
+export const LinkIcon = styled(LinkOutlined)`
+  color: #ffd600;
+  margin-right: 10px;
+  font-size: 1.3rem;
+`;
+export const LocationIcon = styled(EnvironmentOutlined)`
+  color: #ffd600;
+  font-size: 1.3rem;
 `;
 export const BoardWrapper = styled.div`
   padding: 20px;
@@ -47,4 +60,8 @@ export const Btn = styled.button`
   width: 140px;
   padding: 8px 0;
   cursor: pointer;
+  :hover {
+    background-color: #ffd600;
+    color: black;
+  }
 `;

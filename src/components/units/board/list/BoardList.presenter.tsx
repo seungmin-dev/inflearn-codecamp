@@ -1,8 +1,9 @@
 import Link from "next/link";
 import * as S from "./BoardList.styles";
-import { IBoardListUIProps } from "./BoardList.types";
+import type { IBoardListUIProps } from "./BoardList.types";
+import { LikeFilled, LikeOutlined } from "@ant-design/icons";
 
-export default function BoardListUI(props: IBoardListUIProps) {
+export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
   return (
     <S.Container>
       <S.Title>베스트 게시글</S.Title>
@@ -22,7 +23,17 @@ export default function BoardListUI(props: IBoardListUIProps) {
                   </S.CardCreatedAt>
                 </S.CardProfileWrapper>
                 <S.CardLikeWrapper>
-                  <S.CardThumbsUpImg src="/thumbsUp.png" />
+                  {props.isLike ? (
+                    <LikeFilled
+                      onClick={props.onClickLike}
+                      style={{ color: "#FFD600" }}
+                    />
+                  ) : (
+                    <LikeOutlined
+                      onClick={props.onClickLike}
+                      style={{ color: "#FFD600" }}
+                    />
+                  )}
                   <S.CardLike>{item.likeCount}</S.CardLike>
                 </S.CardLikeWrapper>
               </S.CardBelowWrapper>
