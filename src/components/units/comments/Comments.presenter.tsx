@@ -17,7 +17,7 @@ export default function CommentsUI(props: CommentsUIProps): JSX.Element {
       )}
       <S.CommentsWrapper>
         <S.SmallTitle>
-          <img src="/comment-icon.png" />
+          <img src="/images/icons/comment-icon.png" />
           &nbsp;댓글
         </S.SmallTitle>
         <S.StarWrapper>
@@ -48,7 +48,7 @@ export default function CommentsUI(props: CommentsUIProps): JSX.Element {
         <S.CommentsList>
           {props.data?.fetchBoardComments?.map((item) => (
             <S.CommentsRow key={item._id}>
-              <S.CommentsProfile src="/profile.png" />
+              <S.CommentsProfile src="/images/icons/profile.png" />
               <S.CommentsTextWrapper>
                 <S.CommentsWriter>
                   {item.writer}&nbsp;&nbsp;
@@ -60,13 +60,13 @@ export default function CommentsUI(props: CommentsUIProps): JSX.Element {
                     </S.CommentsStarWrapper>
                     <S.CommentsButtonWrapper>
                       <S.CommentsButtonImg
-                        src="/comment-edit.png"
+                        src="/images/icons/comment-edit.png"
                         onClick={props.onClickEdit}
                       />
                       <S.CommentsButtonImg
                         id={item._id}
                         onClick={props.onClickOpenDeleteModal}
-                        src="/comment-delete.png"
+                        src="/images/icons/comment-delete.png"
                       />
                     </S.CommentsButtonWrapper>
                   </S.CommentsEtcWrapper>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import * as S from "./BoardList.styles";
 import type { IBoardListUIProps } from "./BoardList.types";
 import { LikeFilled, LikeOutlined } from "@ant-design/icons";
+import { getDate } from "../../../commons/libraries/utils";
 
 export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
   return (
@@ -10,34 +11,37 @@ export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
       <div>
         <S.CardWrapper>
           {props.data?.fetchBoards?.slice(0, 4).map((item) => (
-            <S.CardInfo key={item._id}>
-              <S.CardTitle>{item.title}</S.CardTitle>
-              <S.CardBelowWrapper>
-                <S.CardProfileWrapper>
-                  <S.CardProfile>
-                    <S.CardProfileImg src="/profile.png" />
-                    <S.CardWriter>{item.writer}</S.CardWriter>
-                  </S.CardProfile>
-                  <S.CardCreatedAt>
-                    Date : {item.createdAt.slice(0, 10)}
-                  </S.CardCreatedAt>
-                </S.CardProfileWrapper>
-                <S.CardLikeWrapper>
-                  {props.isLike ? (
-                    <LikeFilled
-                      onClick={props.onClickLike}
-                      style={{ color: "#FFD600" }}
-                    />
-                  ) : (
-                    <LikeOutlined
-                      onClick={props.onClickLike}
-                      style={{ color: "#FFD600" }}
-                    />
-                  )}
-                  <S.CardLike>{item.likeCount}</S.CardLike>
-                </S.CardLikeWrapper>
-              </S.CardBelowWrapper>
-            </S.CardInfo>
+            <S.Card key={item._id}>
+              <S.CardImg />
+              <S.CardInfo>
+                <S.CardTitle>{item.title}</S.CardTitle>
+                <S.CardBelowWrapper>
+                  <S.CardProfileWrapper>
+                    <S.CardProfile>
+                      <S.CardProfileImg src="/images/icons/profile.png" />
+                      <S.CardWriter>{item.writer}</S.CardWriter>
+                    </S.CardProfile>
+                    <S.CardCreatedAt>
+                      Date : {getDate(item.createdAt)}
+                    </S.CardCreatedAt>
+                  </S.CardProfileWrapper>
+                  <S.CardLikeWrapper>
+                    {props.isLike ? (
+                      <LikeFilled
+                        onClick={props.onClickLike}
+                        style={{ color: "#FFD600" }}
+                      />
+                    ) : (
+                      <LikeOutlined
+                        onClick={props.onClickLike}
+                        style={{ color: "#FFD600" }}
+                      />
+                    )}
+                    <S.CardLike>{item.likeCount}</S.CardLike>
+                  </S.CardLikeWrapper>
+                </S.CardBelowWrapper>
+              </S.CardInfo>
+            </S.Card>
           ))}
         </S.CardWrapper>
       </div>

@@ -8,7 +8,7 @@ export default function BoardDetailUI(props: IBoardDetailUIProps): JSX.Element {
   return (
     <S.Container>
       <S.HeaderWrapper>
-        <S.ProfileImg src="/profile.png" />
+        <S.ProfileImg src="/images/icons/profile.png" />
         <S.WriterInfoWrapper>
           <S.Writer>{props.data?.fetchBoard?.writer}</S.Writer>
           <S.CreatedAt>
