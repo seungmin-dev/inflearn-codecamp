@@ -2,9 +2,9 @@ import { EnvironmentOutlined, LinkOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-  width: 800px;
+  width: 1200px;
   padding: 20px;
-  margin: 20px auto;
+  margin: 50px auto;
   padding: 20px;
   box-shadow: 5px 5px 20px #bdbdbd;
 `;

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { Modal } from "antd";
 
 export const CommentsWrapper = styled.div`
-  width: 800px;
+  width: 1200px;
   margin: 0 auto;
   padding-top: 30px;
 `;

@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div`
-  width: 800px;
+  width: 1200px;
   padding: 20px;
   margin: 20px auto;
   padding: 20px;
-  box-shadow: 5px 5px 20px #bdbdbd;
 `;
 export const Title = styled.h2`
   text-align: center;
@@ -15,20 +14,27 @@ export const CardWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-export const CardInfo = styled.div`
-  width: 170px;
-  height: 150px;
-  padding: 10px;
+export const Card = styled.div`
+  width: 282px;
+  height: 257px;
+  /* padding: 10px; */
   border-radius: 14px;
   box-shadow: 5px 5px 10px #bbb;
 `;
+export const CardInfo = styled.div`
+  padding: 10px 20px;
+`;
 export const CardTitle = styled.h2`
-  font-size: 1.1rem;
-  padding-bottom: 10px;
+  font-size: 1.3rem;
+  padding: 10px 0 12px;
 `;
 export const CardBelowWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+export const CardImg = styled.img`
+  width: 100%;
+  height: 50%;
 `;
 export const CardProfileWrapper = styled.div``;
 export const CardProfile = styled.div`
