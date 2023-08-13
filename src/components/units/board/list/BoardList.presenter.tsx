@@ -3,6 +3,7 @@ import * as S from "./BoardList.styles";
 import type { IBoardListUIProps } from "./BoardList.types";
 import { LikeFilled, LikeOutlined } from "@ant-design/icons";
 import { getDate } from "../../../commons/libraries/utils";
+import Pagination from "../../../commons/paginations/Pagination.container";
 
 export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
   return (
@@ -72,10 +73,12 @@ export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
           ))}
         </S.ListBody>
       </S.ListWrapper>
-      <S.Pagenation>1 2</S.Pagenation>
-      <Link href="/boards/new">
-        <S.NewButton>게시물 등록하기</S.NewButton>
-      </Link>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Pagination count={props.count} refetch={props.refetch} />
+        <Link href="/boards/new">
+          <S.NewButton>게시물 등록하기</S.NewButton>
+        </Link>
+      </div>
     </S.Container>
   );
 }
