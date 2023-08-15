@@ -14,7 +14,7 @@ import { DELETE_BOARD_COMMENT } from "../write/CommentWrite.queries";
 
 export default function CommentList(): JSX.Element {
   const router = useRouter();
-  if (typeof router.query.id !== "string") return <></>;
+  if (typeof router.query.boardId !== "string") return <></>;
 
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [boardCommentId, setBoardCommentId] = useState("");
@@ -24,7 +24,7 @@ export default function CommentList(): JSX.Element {
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENTS, {
-    variables: { boardId: String(router.query.id) },
+    variables: { boardId: String(router.query.boardId) },
   });
 
   const [deleteBoardComment] = useMutation<
@@ -44,7 +44,7 @@ export default function CommentList(): JSX.Element {
         refetchQueries: [
           {
             query: FETCH_BOARD_COMMENTS,
-            variables: { boardId: router.query.id },
+            variables: { boardId: router.query.boardId },
           },
         ],
       });

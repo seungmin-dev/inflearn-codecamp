@@ -166,7 +166,7 @@ export default function BoardWriteContainer(
     if (contents) updateBoardInput.contents = contents;
 
     try {
-      if (typeof router.query.id !== "string") {
+      if (typeof router.query.boardId !== "string") {
         alert("시스템에 문제가 있습니다.");
         return;
       }
@@ -174,7 +174,7 @@ export default function BoardWriteContainer(
       const result = await updateBoard({
         variables: {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          boardId: router.query.id!,
+          boardId: router.query.boardId!,
           password,
           updateBoardInput,
         },

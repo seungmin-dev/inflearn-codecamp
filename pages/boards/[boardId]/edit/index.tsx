@@ -16,11 +16,11 @@ const FETCH_BOARD = gql`
 export default function BoardEditPage(): JSX.Element {
   const router = useRouter();
   console.log(router);
-  if (!router || typeof router.query.id !== "string") return <></>;
+  if (!router || typeof router.query.boardId !== "string") return <></>;
 
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
-      boardId: router.query.id,
+      boardId: router.query.boardId,
     },
   });
   return <BoardWriteContainer isEdit={true} data={data} />;

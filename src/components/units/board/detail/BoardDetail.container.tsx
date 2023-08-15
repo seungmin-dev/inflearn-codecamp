@@ -9,9 +9,10 @@ import type {
 
 export default function BoardDetailContainer(): JSX.Element {
   const router = useRouter();
+  console.log(router.query);
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
-      boardId: router.query.id,
+      boardId: router.query.boardId,
     },
   });
   const [deleteBoard] = useMutation<
@@ -24,18 +25,18 @@ export default function BoardDetailContainer(): JSX.Element {
   };
 
   const onClickEdit = (): void => {
-    void router.push(`/boards/${router.query.id}/edit`);
+    void router.push(`/boards/${router.query.boardId}/edit`);
   };
 
   const onClickDelete = async (): Promise<void> => {
-    if (typeof router.query.id !== "string") {
+    if (typeof router.query.boardId !== "string") {
       alert("시스템에 문제가 있습니다.");
       return;
     }
     try {
       const result = await deleteBoard({
         variables: {
-          boardId: router.query.id,
+          boardId: router.query.boardId,
         },
       });
       console.log(result);

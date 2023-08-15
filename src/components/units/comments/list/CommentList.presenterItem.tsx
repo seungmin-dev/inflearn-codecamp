@@ -44,7 +44,7 @@ export default function CommentListUIItem(
         refetchQueries: [
           {
             query: FETCH_BOARD_COMMENTS,
-            variables: { boardId: router.query.id },
+            variables: { boardId: router.query.boardId },
           },
         ],
       });

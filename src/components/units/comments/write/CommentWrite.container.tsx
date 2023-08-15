@@ -53,7 +53,7 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
       return;
     }
     try {
-      if (typeof router.query.id !== "string") {
+      if (typeof router.query.boardId !== "string") {
         alert("시스템에 문제가 있습니다.");
         return;
       }
@@ -65,12 +65,12 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
             contents,
             rating: star,
           },
-          boardId: router.query.id,
+          boardId: router.query.boardId,
         },
         refetchQueries: [
           {
             query: FETCH_BOARD_COMMENTS,
-            variables: { boardId: router.query.id },
+            variables: { boardId: router.query.boardId },
           },
         ],
       });
