@@ -1,18 +1,5 @@
 import { gql } from "@apollo/client";
 
-export const FETCH_BOARD_COMMENTS = gql`
-  query fetchBoardComments($page: Int, $boardId: ID!) {
-    fetchBoardComments(page: $page, boardId: $boardId) {
-      _id
-      writer
-      contents
-      rating
-      createdAt
-      updatedAt
-    }
-  }
-`;
-
 export const CREATE_BOARD_COMMENT = gql`
   mutation createBoardComment(
     $createBoardCommentInput: CreateBoardCommentInput!
@@ -39,7 +26,7 @@ export const UPDATE_BOARD_COMMENT = gql`
     $boardCommentId: ID!
   ) {
     updateBoardComment(
-      updateBoardCommentInput: $updateBoardComment
+      updateBoardCommentInput: $updateBoardCommentInput
       password: $password
       boardCommentId: $boardCommentId
     ) {

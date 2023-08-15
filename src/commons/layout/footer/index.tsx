@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export default function LayoutFooter(): JSX.Element {
   const FooterWrapper = styled.div`
+    margin-top: 100px;
     width: 100%;
     height: 285px;
     background-color: #f2f2f2;
