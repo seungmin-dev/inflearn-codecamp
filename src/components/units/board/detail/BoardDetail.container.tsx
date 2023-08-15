@@ -33,7 +33,6 @@ export default function BoardDetailContainer(): JSX.Element {
       return;
     }
     try {
-      console.log(router.query.id);
       const result = await deleteBoard({
         variables: {
           boardId: router.query.id,

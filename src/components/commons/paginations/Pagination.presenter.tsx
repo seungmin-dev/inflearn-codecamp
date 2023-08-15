@@ -2,7 +2,6 @@ import { Arrow, Page } from "./Pagination.styles";
 import type { IPaginationUIProps } from "./Pagination.types";
 
 export default function PaginationUI(props: IPaginationUIProps): JSX.Element {
-  console.log("activedPage: ", props.activedPage);
   return (
     <div>
       <Arrow onClick={props.onClickPrevPage}>{`<`}</Arrow>
