@@ -20,7 +20,7 @@ export default function CommentList(): JSX.Element {
   const [boardCommentId, setBoardCommentId] = useState("");
   const [password, setPassword] = useState("");
 
-  const { data } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchBoardComments">,
     IQueryFetchBoardCommentsArgs
   >(FETCH_BOARD_COMMENTS, {
@@ -31,6 +31,29 @@ export default function CommentList(): JSX.Element {
     Pick<IMutation, "deleteBoardComment">,
     IMutationDeleteBoardCommentArgs
   >(DELETE_BOARD_COMMENT);
+
+  const onLoadMore = (): void => {
+    if (data === undefined) return;
+
+    void fetchMore({
+      variables: {
+        page: Math.ceil(data?.fetchBoardComments.length / 10) + 1,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (fetchMoreResult.fetchBoardComments === undefined) {
+          return {
+            fetchBoardComments: [...prev.fetchBoardComments],
+          };
+        }
+        return {
+          fetchBoardComments: [
+            ...prev.fetchBoardComments,
+            ...fetchMoreResult.fetchBoardComments,
+          ],
+        };
+      },
+    });
+  };
 
   const onClickDelete = async (
     event: MouseEvent<HTMLButtonElement>,
@@ -71,6 +94,7 @@ export default function CommentList(): JSX.Element {
     <>
       <CommentListUI
         data={data}
+        onLoadMore={onLoadMore}
         onClickDelete={onClickDelete}
         isOpenDeleteModal={isOpenDeleteModal}
         onClickOpenDeleteModal={onClickOpenDeleteModal}
