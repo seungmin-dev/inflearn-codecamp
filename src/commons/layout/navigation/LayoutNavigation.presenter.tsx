@@ -16,7 +16,11 @@ export default function LayoutNavigationUI(
       <S.Nav>
         {NAVIGATION_MENUS.map((item) => (
           <Fragment key={item.page}>
-            <S.MenuTitle id={item.page} onClick={props.onClickMenu}>
+            <S.MenuTitle
+              id={item.page}
+              onClick={props.onClickMenu}
+              isActive={item.page === props.currentPage}
+            >
               {item.name}
             </S.MenuTitle>
           </Fragment>
