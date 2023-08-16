@@ -7,14 +7,12 @@ export interface ICommentWriteProps {
   item?: IBoardComment;
 }
 export interface ICommentWriteUIProps {
-  onChangeWriter: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangePassword: (event: ChangeEvent<HTMLInputElement>) => void;
-  onChangeTextarea: (event: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChangeInputs: (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
   onClickSubmit: (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
   onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => Promise<void>;
-  writer: string;
-  password: string;
-  contents: string;
+  inputs: { writer: string; password: string; contents: string };
   setStar: Dispatch<SetStateAction<number>>;
   isEdit: boolean;
   item: IBoardComment;
