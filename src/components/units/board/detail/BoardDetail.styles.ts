@@ -46,6 +46,18 @@ export const Title = styled.h2`
   font-size: 1.8rem;
   padding-bottom: 30px;
 `;
+export const ImageWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  gap: 5px;
+  margin: 30px 0;
+`;
+export const Image = styled.img`
+  max-height: 100%;
+`;
 export const Contents = styled.p``;
 export const BtnWrapper = styled.div`
   width: 450px;

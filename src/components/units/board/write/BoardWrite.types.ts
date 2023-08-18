@@ -29,6 +29,8 @@ export interface IBoardWriteUIProps {
   onCompleteAddressSearch: (data: any) => void;
   zipcode: string;
   address: string;
+  onChangeFileUrls: () => void;
+  fileUrls: string[];
 }
 
 export interface ISubmitButtonProps {

@@ -17,9 +17,9 @@ export const CardWrapper = styled.div`
 export const Card = styled.div`
   width: 282px;
   height: 257px;
-  /* padding: 10px; */
   border-radius: 14px;
   box-shadow: 5px 5px 10px #bbb;
+  cursor: pointer;
 `;
 export const CardInfo = styled.div`
   padding: 10px 20px;
@@ -35,7 +35,17 @@ export const CardBelowWrapper = styled.div`
 export const CardImg = styled.img`
   width: 100%;
   height: 50%;
+  background: ${(props: ICardImg) =>
+    props.imageUrl
+      ? `url(https://storage.googleapis.com/${props.imageUrl})`
+      : "black"};
+  background-position: center;
+  background-size: cover;
+  border-radius: 14px 14px 0 0;
 `;
+interface ICardImg {
+  imageUrl: string;
+}
 export const CardProfileWrapper = styled.div``;
 export const CardProfile = styled.div`
   display: flex;

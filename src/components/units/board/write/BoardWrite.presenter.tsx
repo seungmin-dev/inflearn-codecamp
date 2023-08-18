@@ -1,3 +1,4 @@
+import Upload from "../../../commons/upload/Upload.container";
 import * as S from "./BoardWrite.styles";
 import type { IBoardWriteUIProps } from "./BoardWrite.types";
 import { Modal } from "antd";
@@ -68,7 +69,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
           type="text"
           placeholder="07250"
           readOnly
-          value={
+          defaultValue={
             props.zipcode !== ""
               ? props.zipcode
               : props.data?.fetchBoard.boardAddress?.zipcode ?? ""
@@ -87,7 +88,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
         <S.Input
           type="text"
           readOnly
-          value={
+          defaultValue={
             props.address !== ""
               ? props.address
               : props.data?.fetchBoard.boardAddress?.address ?? ""
@@ -113,36 +114,16 @@ export default function BoardWriteUI(props: IBoardWriteUIProps): JSX.Element {
       </S.BoxWrapper>
       <S.BoxWrapper>
         <S.SmallTitle>사진 첨부</S.SmallTitle>
-        <div style={{ display: "flex", marginBottom: "20px" }}>
-          {[1, 2, 3].map((item) => (
-            <div
-              key={item}
-              style={{
-                width: "45px",
-                height: "45px",
-                padding: "5px",
-                backgroundColor: "#BDBDBD",
-                textAlign: "center",
-                marginRight: "10px",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <span
-                style={{
-                  color: "#4F4F4F",
-                  padding: 0,
-                  margin: 0,
-                }}
-              >
-                +
-              </span>
-              <span style={{ color: "#4F4F4F", fontSize: "0.5rem" }}>
-                Upload
-              </span>
-            </div>
+        <S.ImageUploadWrapper>
+          {props.fileUrls.map((item, index) => (
+            <Upload
+              key={index}
+              index={index}
+              fileUrl={item}
+              onChangeFileUrls={props.onChangeFileUrls}
+            />
           ))}
-        </div>
+        </S.ImageUploadWrapper>
       </S.BoxWrapper>
       <S.BoxWrapper>
         <S.SmallTitle>메인 설정</S.SmallTitle>

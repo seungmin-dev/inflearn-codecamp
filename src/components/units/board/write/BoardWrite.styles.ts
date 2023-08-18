@@ -12,6 +12,10 @@ export const Title = styled.h2`
   text-align: center;
   padding-bottom: 40px;
 `;
+export const ImageUploadWrapper = styled.div`
+  display: flex;
+  margin-bottom: 20px;
+`;
 export const BoxWrapper = styled.div`
   padding-bottom: 10px;
 `;

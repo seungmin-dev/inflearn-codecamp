@@ -9,7 +9,6 @@ import type {
 
 export default function BoardDetailContainer(): JSX.Element {
   const router = useRouter();
-  console.log(router.query);
   const { data } = useQuery(FETCH_BOARD, {
     variables: {
       boardId: router.query.boardId,

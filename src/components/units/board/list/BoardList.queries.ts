@@ -8,6 +8,7 @@ export const FETCH_BOARDS = gql`
       writer
       createdAt
       likeCount
+      images
     }
   }
 `;

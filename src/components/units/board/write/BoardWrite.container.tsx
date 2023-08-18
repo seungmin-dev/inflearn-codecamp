@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { useMutation } from "@apollo/client";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ChangeEvent } from "react";
 import type { IBoardWriteProps } from "./BoardWrite.types";
 import type {
@@ -26,6 +26,7 @@ export default function BoardWriteContainer(
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -112,6 +113,17 @@ export default function BoardWriteContainer(
     setIsOpen((prev) => !prev);
   };
 
+  const onChangeFileUrls = (fileUrl: string, index: number): void => {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
+  };
+
+  useEffect(() => {
+    const images = props.data?.fetchBoard.images;
+    if (images !== undefined && images !== null) setFileUrls([...images]);
+  }, [props.data]);
+
   const onClickSubmit = async (): Promise<void> => {
     if (!writer) {
       setWriterError("작성자를 입력해주세요.");
@@ -140,6 +152,7 @@ export default function BoardWriteContainer(
                 addressDetail,
               },
               youtubeUrl,
+              images: [...fileUrls],
             },
           },
         });
@@ -152,7 +165,19 @@ export default function BoardWriteContainer(
 
   const onClickUpdate = async (): Promise<void> => {
     // early-exit pattern - 오류를 먼저 잡아내고 함수 종료
-    if (!title && !contents) {
+    const currentFiles = JSON.stringify(fileUrls);
+    const defaultFiles = JSON.stringify(props.data?.fetchBoard.images);
+    const isChangedFiles = currentFiles !== defaultFiles;
+
+    if (
+      title === "" &&
+      contents === "" &&
+      youtubeUrl === "" &&
+      address === "" &&
+      addressDetail === "" &&
+      zipcode === "" &&
+      !isChangedFiles
+    ) {
       alert("수정한 내용이 없습니다.");
       return;
     }
@@ -164,6 +189,15 @@ export default function BoardWriteContainer(
     const updateBoardInput: IUpdateBoardInput = {};
     if (title) updateBoardInput.title = title;
     if (contents) updateBoardInput.contents = contents;
+    if (youtubeUrl !== "") updateBoardInput.youtubeUrl = youtubeUrl;
+    if (zipcode !== "" || address !== "" || addressDetail !== "") {
+      updateBoardInput.boardAddress = {};
+      if (zipcode !== "") updateBoardInput.boardAddress.zipcode = zipcode;
+      if (address !== "") updateBoardInput.boardAddress.address = address;
+      if (addressDetail !== "")
+        updateBoardInput.boardAddress.addressDetail = addressDetail;
+    }
+    if (isChangedFiles) updateBoardInput.images = fileUrls;
 
     try {
       if (typeof router.query.boardId !== "string") {
@@ -199,6 +233,7 @@ export default function BoardWriteContainer(
       onChangeAddress={onChangeAddress}
       onChangeAddressDetail={onChangeAddressDetail}
       onChangeYoutubeUrl={onChangeYoutubeUrl}
+      onChangeFileUrls={onChangeFileUrls}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
       isActive={isActive}
@@ -209,6 +244,7 @@ export default function BoardWriteContainer(
       onCompleteAddressSearch={onCompleteAddressSearch}
       zipcode={zipcode}
       address={address}
+      fileUrls={fileUrls}
     />
   );
 }

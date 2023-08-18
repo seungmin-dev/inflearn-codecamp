@@ -12,37 +12,39 @@ export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
       <div>
         <S.CardWrapper>
           {props.data?.fetchBoards?.slice(0, 4).map((item) => (
-            <S.Card key={item._id}>
-              <S.CardImg />
-              <S.CardInfo>
-                <S.CardTitle>{item.title}</S.CardTitle>
-                <S.CardBelowWrapper>
-                  <S.CardProfileWrapper>
-                    <S.CardProfile>
-                      <S.CardProfileImg src="/images/icons/profile.png" />
-                      <S.CardWriter>{item.writer}</S.CardWriter>
-                    </S.CardProfile>
-                    <S.CardCreatedAt>
-                      Date : {getDate(item.createdAt)}
-                    </S.CardCreatedAt>
-                  </S.CardProfileWrapper>
-                  <S.CardLikeWrapper>
-                    {props.isLike ? (
-                      <LikeFilled
-                        onClick={props.onClickLike}
-                        style={{ color: "#FFD600" }}
-                      />
-                    ) : (
-                      <LikeOutlined
-                        onClick={props.onClickLike}
-                        style={{ color: "#FFD600" }}
-                      />
-                    )}
-                    <S.CardLike>{item.likeCount}</S.CardLike>
-                  </S.CardLikeWrapper>
-                </S.CardBelowWrapper>
-              </S.CardInfo>
-            </S.Card>
+            <Link href={`/boards/${item._id}`} key={item._id}>
+              <S.Card>
+                <S.CardImg imageUrl={item.images[0]} />
+                <S.CardInfo>
+                  <S.CardTitle>{item.title}</S.CardTitle>
+                  <S.CardBelowWrapper>
+                    <S.CardProfileWrapper>
+                      <S.CardProfile>
+                        <S.CardProfileImg src="/images/icons/profile.png" />
+                        <S.CardWriter>{item.writer}</S.CardWriter>
+                      </S.CardProfile>
+                      <S.CardCreatedAt>
+                        Date : {getDate(item.createdAt)}
+                      </S.CardCreatedAt>
+                    </S.CardProfileWrapper>
+                    <S.CardLikeWrapper>
+                      {props.isLike ? (
+                        <LikeFilled
+                          onClick={props.onClickLike}
+                          style={{ color: "#FFD600" }}
+                        />
+                      ) : (
+                        <LikeOutlined
+                          onClick={props.onClickLike}
+                          style={{ color: "#FFD600" }}
+                        />
+                      )}
+                      <S.CardLike>{item.likeCount}</S.CardLike>
+                    </S.CardLikeWrapper>
+                  </S.CardBelowWrapper>
+                </S.CardInfo>
+              </S.Card>
+            </Link>
           ))}
         </S.CardWrapper>
       </div>
