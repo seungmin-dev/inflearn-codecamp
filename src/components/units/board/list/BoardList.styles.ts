@@ -113,6 +113,7 @@ export const SearchButton = styled.button`
   padding: 5px;
   font-size: 0.8rem;
   border-radius: 4px;
+  cursor: pointer;
 `;
 export const ListWrapper = styled.div``;
 export const ListHeader = styled.div`

@@ -3,6 +3,7 @@ import type {
   IQuery,
   IQueryFetchBoardsArgs,
 } from "../../../../commons/types/generated/types";
+import type { ChangeEvent } from "react";
 
 export interface IBoardListUIProps {
   isLike: boolean;
@@ -12,4 +13,6 @@ export interface IBoardListUIProps {
     variables?: Partial<IQueryFetchBoardsArgs>,
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchBoards">>>;
   count?: number;
+  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
+  keyword: string;
 }

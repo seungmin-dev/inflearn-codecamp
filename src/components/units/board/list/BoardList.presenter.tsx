@@ -4,6 +4,7 @@ import type { IBoardListUIProps } from "./BoardList.types";
 import { LikeFilled, LikeOutlined } from "@ant-design/icons";
 import { getDate } from "../../../commons/libraries/utils";
 import Pagination from "../../../commons/paginations/Pagination.container";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
   return (
@@ -49,9 +50,12 @@ export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
         </S.CardWrapper>
       </div>
       <S.SearchWrapper>
-        <S.SearchInput placeholder="제목을 검색해주세요." />
-        <S.SearchDate placeholder="YYYY.MM.DD ~ YYYY.MM.DD" />
-        <S.SearchButton>검색하기</S.SearchButton>
+        <S.SearchInput
+          onChange={props.onChangeSearch}
+          placeholder="제목을 검색해주세요."
+        />
+        {/* <S.SearchDate placeholder="YYYY.MM.DD ~ YYYY.MM.DD" />
+        <S.SearchButton onClick={props.onClickSearch}>검색하기</S.SearchButton> */}
       </S.SearchWrapper>
       <S.ListWrapper>
         <S.ListHeader>
@@ -65,7 +69,21 @@ export default function BoardListUI(props: IBoardListUIProps): JSX.Element {
             <S.ListBodyLine key={item._id}>
               <S.ListBodyTextIndex>{index + 1}</S.ListBodyTextIndex>
               <Link href={`/boards/${item._id}`}>
-                <S.ListBodyTextTitle>{item.title}</S.ListBodyTextTitle>
+                <S.ListBodyTextTitle>
+                  {item.title
+                    .replaceAll(props.keyword, `!@#$${props.keyword}!@#$`)
+                    .split("!@#$")
+                    .map((el) => (
+                      <span
+                        key={uuidv4()}
+                        style={{
+                          color: props.keyword === el ? "#ffd600" : "black",
+                        }}
+                      >
+                        {el}
+                      </span>
+                    ))}
+                </S.ListBodyTextTitle>
               </Link>
               <S.ListBodyTextWriter>{item.writer}</S.ListBodyTextWriter>
               <S.ListBodyTextDate>
