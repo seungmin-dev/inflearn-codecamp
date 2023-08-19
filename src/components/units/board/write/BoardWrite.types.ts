@@ -29,7 +29,7 @@ export interface IBoardWriteUIProps {
   onCompleteAddressSearch: (data: any) => void;
   zipcode: string;
   address: string;
-  onChangeFileUrls: () => void;
+  onChangeFileUrls: (fileUrl: string, index: number) => void;
   fileUrls: string[];
 }
 
