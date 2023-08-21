@@ -6,10 +6,19 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps): JSX.Element {
     <S.HeaderWrapper>
       <S.Header>
         <S.Logo onClick={props.onClickLogo} src="/images/logo.png" />
-        <S.BtnWrapper>
-          <S.LoginButton onClick={props.onClickLogin}>로그인</S.LoginButton>
-          <S.SignupButton>회원가입</S.SignupButton>
-        </S.BtnWrapper>
+        {!props.userName ? (
+          <S.BtnWrapper>
+            <S.LoginButton onClick={props.onClickLogin}>로그인</S.LoginButton>
+            <S.SignupButton>회원가입</S.SignupButton>
+          </S.BtnWrapper>
+        ) : (
+          <span>
+            <span style={{ color: "#ffd600", fontWeight: "bold" }}>
+              {props.userName}
+            </span>
+            님, 안녕하세요
+          </span>
+        )}
       </S.Header>
     </S.HeaderWrapper>
   );

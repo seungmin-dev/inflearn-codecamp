@@ -32,6 +32,7 @@ module.exports = {
       },
     ],
     "@typescript-eslint/restrict-template-expressions": "off",
+    "react/display-name": "off",
   },
   ignorePatterns: [
     ".eslintrc.js",
@@ -41,9 +42,4 @@ module.exports = {
     "next-env.d.ts",
     "/src/commons/types/generated/types.ts",
   ],
-  //   settings: {
-  //     react: {
-  //       version: "detect",
-  //     },
-  //   },
 };
