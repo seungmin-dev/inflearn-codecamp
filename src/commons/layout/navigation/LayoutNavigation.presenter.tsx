@@ -5,9 +5,9 @@ export default function LayoutNavigationUI(
   props: ILayoutNavigationProps,
 ): JSX.Element {
   const NAVIGATION_MENUS = [
-    { name: "라이브강아지", page: "/dogs" },
-    { name: "라이브게시판", page: "/boards" },
-    { name: "라이브상품", page: "/markets" },
+    { name: "강아지", page: "/dogs" },
+    { name: "자유게시판", page: "/boards" },
+    { name: "중고마켓", page: "/markets" },
     { name: "마이페이지", page: "/mypages" },
   ];
 

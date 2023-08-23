@@ -5,3 +5,6 @@ export const getDate = (date) => {
   const dd = _date.getDate();
   return `${yyyy}-${mm}-${dd}`;
 };
+export const replaceNumberComma = (number) => {
+  return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+};
