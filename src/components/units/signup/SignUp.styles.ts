@@ -9,6 +9,9 @@ export const Title = styled.h2`
   margin-bottom: 40px;
   font-size: 2rem;
 `;
+export const InputTitle = styled.h4`
+  padding: 6px 10px;
+`;
 export const Input = styled.input`
   width: 100%;
   height: 44px;
@@ -35,4 +38,13 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 16px;
+`;
+export const Anchor = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+  color: #ffd600;
+  :hover {
+    color: black;
+  }
 `;

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import * as S from "./LayoutHeader.styles";
 import type { ILayoutHeaderProps } from "./LayoutHeader.types";
 
@@ -5,11 +6,23 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps): JSX.Element {
   return (
     <S.HeaderWrapper>
       <S.Header>
-        <S.Logo onClick={props.onClickLogo} src="/images/logo.png" />
+        <Link href="/">
+          <a>
+            <S.Logo src="/images/logo.png" />
+          </a>
+        </Link>
         {!props.userName ? (
           <S.BtnWrapper>
-            <S.LoginButton onClick={props.onClickLogin}>로그인</S.LoginButton>
-            <S.SignupButton>회원가입</S.SignupButton>
+            <Link href="/login">
+              <a>
+                <S.LoginButton>로그인</S.LoginButton>
+              </a>
+            </Link>
+            <Link href="/signup">
+              <a>
+                <S.SignupButton>회원가입</S.SignupButton>
+              </a>
+            </Link>
           </S.BtnWrapper>
         ) : (
           <span>

@@ -8,49 +8,22 @@ import type {
 } from "../../../commons/types/generated/types";
 import { LOGIN_USER } from "./Login.queries";
 import { useRouter } from "next/router";
-import type { ChangeEvent } from "react";
-import { useState } from "react";
+import type { ILoginFormProps } from "./Login.types";
 
 export default function Login(): JSX.Element {
   const router = useRouter();
   const [, setAccessToken] = useRecoilState(accessTokenState);
-
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-  });
-  const [errors, setErrors] = useState({
-    emailError: "",
-    passwordError: "",
-  });
 
   const [loginUser] = useMutation<
     Pick<IMutation, "loginUser">,
     IMutationLoginUserArgs
   >(LOGIN_USER);
 
-  const onChangeInputs = (event: ChangeEvent<HTMLInputElement>): void => {
-    setInputs({
-      ...inputs,
-      [event.currentTarget.id]: event.currentTarget.value,
-    });
-    if (inputs.email !== "") setErrors({ ...errors, emailError: "" });
-    if (inputs.password !== "") setErrors({ ...errors, passwordError: "" });
-  };
-
-  const onClickSubmit = async (): Promise<void> => {
-    if (inputs.email === "") {
-      setErrors({ ...errors, emailError: "이메일을 입력해주세요." });
-      return;
-    }
-    if (inputs.password === "") {
-      setErrors({ ...errors, passwordError: "비밀번호를 입력해주세요." });
-      return;
-    }
-
+  const onValid = async (data: ILoginFormProps): Promise<void> => {
+    console.log(data);
     try {
       const result = await loginUser({
-        variables: { email: inputs.email, password: inputs.password },
+        variables: { email: data.email, password: data.password },
       });
       const accessToken = result.data.loginUser.accessToken;
       if (accessToken === undefined) {
@@ -65,11 +38,5 @@ export default function Login(): JSX.Element {
       if (error instanceof Error) alert(error.message);
     }
   };
-  return (
-    <LoginUI
-      onChangeInputs={onChangeInputs}
-      onClickSubmit={onClickSubmit}
-      errors={errors}
-    />
-  );
+  return <LoginUI onValid={onValid} />;
 }
