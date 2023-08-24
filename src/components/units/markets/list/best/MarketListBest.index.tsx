@@ -1,11 +1,10 @@
-import { useQueryFetchUsedItemsBest } from "../../../../commons/hooks/queries/useQUeryFetchUsedItemsBest";
 import { v4 as uuidv4 } from "uuid";
 import * as S from "./MarketListBest.styles";
 import { replaceNumberComma } from "../../../../commons/libraries/utils";
+import { useQueryFetchUsedItemsBest } from "../../../../commons/hooks/queries/useQUeryFetchUsedItemsBest";
 
 export default function MarketListBest(): JSX.Element {
   const { data } = useQueryFetchUsedItemsBest();
-  console.log("bestItems: ", data);
   return (
     <S.Wrapper>
       {data?.fetchUseditemsOfTheBest?.slice(0, 4).map((el) => (

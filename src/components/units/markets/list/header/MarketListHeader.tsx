@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
   width: 1200px;
-  margin: 50px auto;
+  margin: 0 auto;
+  padding: 50px 0;
 `;
 const Title = styled.h1`
   text-align: center;
