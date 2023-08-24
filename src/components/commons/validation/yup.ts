@@ -20,3 +20,11 @@ export const signUpSchema = yup.object({
     .required("비밀번호를 입력해주세요."),
   name: yup.string().required("이름을 입력해주세요."),
 });
+
+export const ItemFormSchema = yup.object({
+  name: yup.string().required("상품이름을 입력해주세요."),
+  remarks: yup.string().required("상품 정보를 요약해주세요."),
+  contents: yup.string().required("상품 정보를 입력해주세요."),
+  price: yup.number().required("상품 가격을 입력해주세요."),
+  tags: yup.string(),
+});
