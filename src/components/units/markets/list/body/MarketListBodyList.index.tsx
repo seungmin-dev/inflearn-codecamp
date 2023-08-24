@@ -3,6 +3,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import { v4 as uuidv4 } from "uuid";
 import { replaceNumberComma } from "../../../../commons/libraries/utils";
 import type { IQuery } from "../../../../../commons/types/generated/types";
+import Link from "next/link";
 
 interface IMarketListProps {
   data: Pick<IQuery, "fetchUseditems">;
@@ -29,19 +30,23 @@ export const MarketListBodyList = (props: IMarketListProps): JSX.Element => {
               }
             />
             <S.Name>
-              {el.name
-                .replaceAll(props.search, `!@#$${props.search}!@#$`)
-                .split("!@#$")
-                .map((el) => (
-                  <span
-                    key={uuidv4()}
-                    style={{
-                      color: props.search === el ? "#ffd600" : "black",
-                    }}
-                  >
-                    {el}
-                  </span>
-                ))}
+              <Link href={`/markets/${el._id}`}>
+                <a>
+                  {el.name
+                    .replaceAll(props.search, `!@#$${props.search}!@#$`)
+                    .split("!@#$")
+                    .map((el) => (
+                      <span
+                        key={uuidv4()}
+                        style={{
+                          color: props.search === el ? "#ffd600" : "black",
+                        }}
+                      >
+                        {el}
+                      </span>
+                    ))}
+                </a>
+              </Link>
             </S.Name>
             <S.Remarks>{el.remarks}</S.Remarks>
             <S.Tags>{el.tags}</S.Tags>

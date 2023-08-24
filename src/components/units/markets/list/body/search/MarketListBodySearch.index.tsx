@@ -1,10 +1,10 @@
 import type { Dispatch, SetStateAction } from "react";
 import { useRef, useState } from "react";
-import * as S from "./MarketListBody.styles";
+import * as S from "./MarketListBodySearch.styles";
 import type {
   IQuery,
   IQueryFetchUseditemsArgs,
-} from "../../../../../commons/types/generated/types";
+} from "../../../../../../commons/types/generated/types";
 import type { ApolloQueryResult } from "@apollo/client";
 
 interface IMarketSearchProps {

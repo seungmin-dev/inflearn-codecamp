@@ -1,7 +1,7 @@
 import * as S from "./MarketListBody.styles";
 import { useQueryFetchUsedItems } from "../../../../commons/hooks/queries/useQueryFetchUseditems";
 import { useState } from "react";
-import { MarketListBodySearch } from "./MarketListBodySearch.index";
+import { MarketListBodySearch } from "./search/MarketListBodySearch.index";
 import { MarketListBodyList } from "./MarketListBodyList.index";
 
 export default function MarketListBody(): JSX.Element {
