@@ -19,7 +19,7 @@ export default function LayoutNavigationUI(
             <S.MenuTitle
               id={item.page}
               onClick={props.onClickMenu}
-              isActive={item.page === props.currentPage}
+              isActive={props.currentPage.includes(item.page)}
             >
               {item.name}
             </S.MenuTitle>
