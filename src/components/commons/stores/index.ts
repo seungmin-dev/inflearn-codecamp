@@ -5,6 +5,11 @@ export const accessTokenState = atom({
   default: "",
 });
 
+export const userEmailState = atom({
+  key: "userEmailState",
+  default: "",
+});
+
 export const pathState = atom({
   key: "pathState",
   default: "",

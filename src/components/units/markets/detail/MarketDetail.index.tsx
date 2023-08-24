@@ -15,7 +15,10 @@ export default function MarketDetail(): JSX.Element {
     <S.Wrapper>
       <MarketDetailHeader data={data} />
       <MarketDetailBody data={data} />
-      <MarketDetailFooter />
+      <MarketDetailFooter
+        sellerEmail={data?.fetchUseditem.seller.email}
+        useditemId={id}
+      />
     </S.Wrapper>
   );
 }

@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ItemFormSchema } from "../../../commons/validation/yup";
 import { useMutationCraeteUseditem } from "../../../commons/hooks/mutations/useMutationCreateUseditem";
 import { useRouter } from "next/router";
+import type { IQuery } from "../../../../commons/types/generated/types";
 
 interface IItemFormProps {
   name: string;
@@ -12,13 +13,16 @@ interface IItemFormProps {
   price: string;
   tags: string;
 }
-
-export default function MarketNew(): JSX.Element {
+interface IMarketNewProps {
+  isEdit?: boolean;
+  data: Pick<IQuery, "fetchUseditem">;
+}
+export default function MarketNew(props: IMarketNewProps): JSX.Element {
   const router = useRouter();
   const [createUseditem] = useMutationCraeteUseditem();
   const { register, handleSubmit, formState } = useForm<IItemFormProps>({
     resolver: yupResolver(ItemFormSchema),
-    mode: "onChange",
+    mode: "onSubmit",
   });
   const onValid = async (data: IItemFormProps): Promise<void> => {
     const tagsArr = [];
@@ -42,7 +46,7 @@ export default function MarketNew(): JSX.Element {
   };
   return (
     <S.Wrapper>
-      <S.Title>상품 등록하기</S.Title>
+      <S.Title>상품 {props.isEdit ? "수정" : "등록"}하기</S.Title>
       <S.Form onSubmit={handleSubmit(onValid)}>
         <S.InputSet>
           <S.SmallTitle>상품명</S.SmallTitle>
@@ -50,6 +54,7 @@ export default function MarketNew(): JSX.Element {
             type="text"
             {...register("name")}
             placeholder="상품명을 작성해주세요."
+            defaultValue={props.data?.fetchUseditem?.name}
           />
           <S.ErrorMessage>{formState.errors?.name?.message}</S.ErrorMessage>
         </S.InputSet>
@@ -59,6 +64,7 @@ export default function MarketNew(): JSX.Element {
             type="text"
             {...register("remarks")}
             placeholder="상품 정보를 요약해주세요."
+            defaultValue={props.data?.fetchUseditem?.remarks}
           />
           <S.ErrorMessage>{formState.errors?.remarks?.message}</S.ErrorMessage>
         </S.InputSet>
@@ -68,6 +74,7 @@ export default function MarketNew(): JSX.Element {
             type="text"
             {...register("contents")}
             placeholder="상품을 설명해주세요."
+            defaultValue={props.data?.fetchUseditem?.contents}
           />
           <S.ErrorMessage>{formState.errors?.contents?.message}</S.ErrorMessage>
         </S.InputSet>
@@ -77,6 +84,7 @@ export default function MarketNew(): JSX.Element {
             type="number"
             {...register("price")}
             placeholder="판매가격을 입력해주세요."
+            defaultValue={props.data?.fetchUseditem?.price}
           />
           <S.ErrorMessage>{formState.errors?.price?.message}</S.ErrorMessage>
         </S.InputSet>
@@ -86,6 +94,7 @@ export default function MarketNew(): JSX.Element {
             type="text"
             {...register("tags")}
             placeholder="#태그 #태그 #태그"
+            defaultValue={props.data?.fetchUseditem?.tags}
           />
           <S.ErrorMessage>{formState.errors?.tags?.message}</S.ErrorMessage>
         </S.InputSet>
