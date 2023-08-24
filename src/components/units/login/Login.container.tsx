@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
 import LoginUI from "./Login.presenter";
-import { accessTokenState } from "../../commons/stores";
+import { accessTokenState, pathState } from "../../commons/stores";
 import { useMutation } from "@apollo/client";
 import type {
   IMutation,
@@ -13,6 +13,7 @@ import type { ILoginFormProps } from "./Login.types";
 export default function Login(): JSX.Element {
   const router = useRouter();
   const [, setAccessToken] = useRecoilState(accessTokenState);
+  const [path] = useRecoilState(pathState);
 
   const [loginUser] = useMutation<
     Pick<IMutation, "loginUser">,
@@ -20,7 +21,6 @@ export default function Login(): JSX.Element {
   >(LOGIN_USER);
 
   const onValid = async (data: ILoginFormProps): Promise<void> => {
-    console.log(data);
     try {
       const result = await loginUser({
         variables: { email: data.email, password: data.password },
@@ -33,7 +33,7 @@ export default function Login(): JSX.Element {
       setAccessToken(accessToken);
       localStorage.setItem("accessToken", accessToken);
 
-      void router.push("/boards");
+      void router.push(path);
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

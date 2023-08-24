@@ -9,7 +9,7 @@ export default function SignUp(): JSX.Element {
   const [createUser] = useMutation(CREATE_USER);
   const onValid = async (data: ISignUpFormProps): Promise<void> => {
     try {
-      const result = await createUser({
+      await createUser({
         variables: {
           createUserInput: {
             email: data.email,
