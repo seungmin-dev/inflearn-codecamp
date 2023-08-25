@@ -2,7 +2,7 @@ import * as S from "./MarketDetailBody.styles";
 import type { IQuery } from "../../../../../commons/types/generated/types";
 import { replaceNumberComma } from "../../../../commons/libraries/utils";
 import { v4 as uuidv4 } from "uuid";
-import Map from "../../../../commons/hooks/map";
+import Map from "../../../../commons/map";
 
 interface IMarketDetailBodyProps {
   data: Pick<IQuery, "fetchUseditem">;
