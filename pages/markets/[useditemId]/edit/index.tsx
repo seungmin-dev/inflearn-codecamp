@@ -3,7 +3,7 @@ import MarketNew from "../../../../src/components/units/markets/new/MarketNew.in
 import { useQueryIdChecker } from "../../../../src/components/commons/hooks/cutoms/useQueryIdChecker";
 
 export default function MarketDetailEdit(): JSX.Element {
-  const { id } = useQueryIdChecker("useditemsId");
+  const { id } = useQueryIdChecker("useditemId");
   const { data } = useQueryFetchUseditem({
     useditemId: id,
   });

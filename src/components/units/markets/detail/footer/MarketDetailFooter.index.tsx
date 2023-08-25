@@ -18,7 +18,7 @@ export default function MarketDetailFooter(
         </a>
       </Link>
       {userEmail === props.sellerEmail ? (
-        <Link href={`/markets/${props.useditemId}/edit`}>
+        <Link href={`/markets/${props?.useditemId}/edit`}>
           <a>
             <S.BuyButton>수정하기</S.BuyButton>
           </a>
