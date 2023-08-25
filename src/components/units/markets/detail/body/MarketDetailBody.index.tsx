@@ -3,6 +3,7 @@ import type { IQuery } from "../../../../../commons/types/generated/types";
 import { replaceNumberComma } from "../../../../commons/libraries/utils";
 import { v4 as uuidv4 } from "uuid";
 import Map from "../../../../commons/map";
+import Dompurify from "dompurify";
 
 interface IMarketDetailBodyProps {
   data: Pick<IQuery, "fetchUseditem">;
@@ -29,7 +30,15 @@ export default function MarketDetailBody(
           </div>
         ))}
       </S.ItemCarousel>
-      <S.Contents>{props.data?.fetchUseditem.contents}</S.Contents>
+      {typeof window !== "undefined" ? (
+        <S.Contents
+          dangerouslySetInnerHTML={{
+            __html: Dompurify.sanitize(props.data?.fetchUseditem.contents),
+          }}
+        />
+      ) : (
+        <div></div>
+      )}
       <S.Tags>
         {props.data?.fetchUseditem.tags.map((el) => (
           <S.Tag key={uuidv4()}>#{el}</S.Tag>

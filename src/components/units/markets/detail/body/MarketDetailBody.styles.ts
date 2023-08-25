@@ -37,10 +37,10 @@ export const Price = styled.h3`
   grid-area: price;
   font-size: 36px;
 `;
-export const Contents = styled.p`
+export const Contents = styled.div`
   font-size: 18px;
   color: #4f4f4f;
-  margin: 30px auto;
+  margin: 40px auto;
 `;
 export const ItemCarousel = styled(Carousel)`
   width: 70%;

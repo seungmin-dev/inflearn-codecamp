@@ -5,6 +5,12 @@ import { ItemFormSchema } from "../../../commons/validation/yup";
 import { useMutationCraeteUseditem } from "../../../commons/hooks/mutations/useMutationCreateUseditem";
 import { useRouter } from "next/router";
 import type { IQuery } from "../../../../commons/types/generated/types";
+import "react-quill/dist/quill.snow.css";
+import dynamic from "next/dynamic";
+
+const ReactQuill = dynamic(async () => await import("react-quill"), {
+  ssr: false,
+});
 
 interface IItemFormProps {
   name: string;
@@ -20,10 +26,12 @@ interface IMarketNewProps {
 export default function MarketNew(props: IMarketNewProps): JSX.Element {
   const router = useRouter();
   const [createUseditem] = useMutationCraeteUseditem();
-  const { register, handleSubmit, formState } = useForm<IItemFormProps>({
-    resolver: yupResolver(ItemFormSchema),
-    mode: "onSubmit",
-  });
+  const { register, handleSubmit, formState, setValue, trigger } =
+    useForm<IItemFormProps>({
+      resolver: yupResolver(ItemFormSchema),
+      mode: "onSubmit",
+    });
+  const css = `.ql-editor {min-height: 250px;}`;
   const onValid = async (data: IItemFormProps): Promise<void> => {
     const tagsArr = [];
     data.tags.split(" ").forEach((el) => tagsArr.push(el));
@@ -44,8 +52,13 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
       if (error instanceof Error) alert(error.message);
     }
   };
+  const onChangeContents = (value: string): void => {
+    setValue("contents", value === "<p><br></p>" ? "" : value);
+    void trigger("contents");
+  };
   return (
     <S.Wrapper>
+      <style>{css}</style>
       <S.Title>상품 {props.isEdit ? "수정" : "등록"}하기</S.Title>
       <S.Form onSubmit={handleSubmit(onValid)}>
         <S.InputSet>
@@ -70,11 +83,11 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
         </S.InputSet>
         <S.InputSet>
           <S.SmallTitle>상품설명</S.SmallTitle>
-          <S.Input
-            type="text"
-            {...register("contents")}
+          <ReactQuill
+            onChange={onChangeContents}
             placeholder="상품을 설명해주세요."
             defaultValue={props.data?.fetchUseditem?.contents}
+            style={{ minHeight: "100px" }}
           />
           <S.ErrorMessage>{formState.errors?.contents?.message}</S.ErrorMessage>
         </S.InputSet>
