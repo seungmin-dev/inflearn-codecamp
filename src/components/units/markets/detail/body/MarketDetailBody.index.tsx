@@ -2,6 +2,7 @@ import * as S from "./MarketDetailBody.styles";
 import type { IQuery } from "../../../../../commons/types/generated/types";
 import { replaceNumberComma } from "../../../../commons/libraries/utils";
 import { v4 as uuidv4 } from "uuid";
+import Map from "../../../../commons/hooks/map";
 
 interface IMarketDetailBodyProps {
   data: Pick<IQuery, "fetchUseditem">;
@@ -34,6 +35,10 @@ export default function MarketDetailBody(
           <S.Tag key={uuidv4()}>#{el}</S.Tag>
         ))}
       </S.Tags>
+      <Map
+        lat={props.data?.fetchUseditem.useditemAddress?.lat}
+        lon={props.data?.fetchUseditem.useditemAddress?.lng}
+      />
     </S.Wrapper>
   );
 }

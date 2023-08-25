@@ -6,7 +6,7 @@ import { useQueryFetchUseditem } from "../../../commons/hooks/queries/useQueryFe
 import { useQueryIdChecker } from "../../../commons/hooks/cutoms/useQueryIdChecker";
 
 export default function MarketDetail(): JSX.Element {
-  const { id } = useQueryIdChecker("useditemsId");
+  const { id } = useQueryIdChecker("useditemId");
   const { data } = useQueryFetchUseditem({
     useditemId: id,
   });
