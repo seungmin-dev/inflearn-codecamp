@@ -5,8 +5,8 @@ export const accessTokenState = atom({
   default: "",
 });
 
-export const userEmailState = atom({
-  key: "userEmailState",
+export const userIdState = atom({
+  key: "userIdState",
   default: "",
 });
 

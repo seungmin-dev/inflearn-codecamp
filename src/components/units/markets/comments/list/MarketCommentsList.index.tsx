@@ -15,9 +15,7 @@ export const MarketCommentsList = (): JSX.Element => {
       <S.List>
         {data?.fetchUseditemQuestions?.map((el) => (
           <S.CommentWrapper key={uuidv4()}>
-            <S.Row>
-              <Comment data={el} />
-            </S.Row>
+            <Comment questionId={el._id} data={el} />
             <MarketCommentsAnswersList key={uuidv4()} questionId={el._id} />
           </S.CommentWrapper>
         ))}

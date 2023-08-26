@@ -17,10 +17,10 @@ export default function MarketDetail(): JSX.Element {
       <MarketDetailHeader data={data} />
       <MarketDetailBody data={data} />
       <MarketDetailFooter
-        sellerEmail={data?.fetchUseditem.seller.email}
         useditemId={id}
+        sellerId={data?.fetchUseditem.seller._id}
       />
-      <MarketComments />
+      <MarketComments useditemId={id} />
     </S.Wrapper>
   );
 }

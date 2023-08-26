@@ -12,6 +12,9 @@ const FETCH_USEDITEM_QUESTIONS = gql`
       contents
       useditem {
         _id
+        seller {
+          _id
+        }
       }
       user {
         _id

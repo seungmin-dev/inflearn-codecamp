@@ -1,15 +1,15 @@
 import Link from "next/link";
 import * as S from "./MarketDetailFooter.styles";
 import { useRecoilState } from "recoil";
-import { userEmailState } from "../../../../commons/stores";
+import { userIdState } from "../../../../commons/stores";
 interface IMarketDetailFooterProps {
-  sellerEmail: string;
+  sellerId: string;
   useditemId: string;
 }
 export default function MarketDetailFooter(
   props: IMarketDetailFooterProps,
 ): JSX.Element {
-  const [userEmail] = useRecoilState(userEmailState);
+  const [userId] = useRecoilState(userIdState);
   return (
     <S.Wrapper>
       <Link href="/markets">
@@ -17,7 +17,7 @@ export default function MarketDetailFooter(
           <S.ListButton>목록으로</S.ListButton>
         </a>
       </Link>
-      {userEmail === props.sellerEmail ? (
+      {userId === props.sellerId ? (
         <Link href={`/markets/${props?.useditemId}/edit`}>
           <a>
             <S.BuyButton>수정하기</S.BuyButton>

@@ -13,12 +13,12 @@ export default function MarketDetailHeader(
   return (
     <S.Wrapper>
       <S.SellerPic
-        src={`https://storage.googleapis.com/${props.data?.fetchUseditem.seller.picture}`}
+        src={`https://storage.googleapis.com/${props.data?.fetchUseditem?.seller?.picture}`}
         onError={(event) =>
           (event.currentTarget.src = "/images/icons/profile.png")
         }
       />
-      <S.SellerName>{props.data?.fetchUseditem?.seller.name}</S.SellerName>
+      <S.SellerName>{props.data?.fetchUseditem?.seller?.name}</S.SellerName>
       <S.Date>Date : {getDate(props.data?.fetchUseditem?.createdAt)}</S.Date>
       <S.LinkIcon />
       <Tooltip

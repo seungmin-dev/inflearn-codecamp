@@ -11,7 +11,9 @@ export const Wrapper = styled.div`
   border: 1px solid #bdbdbd;
 `;
 export const ReplyIcon = styled(EnterOutlined)`
-  width: 5%;
+  width: 10%;
+  text-align: left;
+  padding-left: 20px;
   font-size: 1.5rem;
   transform: scale(-1, 1);
 `;
@@ -47,8 +49,8 @@ export const Button = styled.button`
   width: 90px;
   height: 50px;
   border: none;
-  background-color: black;
-  color: white;
+  background-color: #ffd600;
+  color: "black";
   font-weight: bold;
   cursor: pointer;
 `;

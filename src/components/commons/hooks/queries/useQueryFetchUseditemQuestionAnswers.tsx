@@ -12,6 +12,12 @@ const FETCH_USEDITEM_QUESTION_ANSWERS = gql`
     ) {
       _id
       contents
+      useditemQuestion {
+        _id
+        # user {
+        #   _id
+        # }
+      }
       user {
         _id
         email
@@ -33,6 +39,5 @@ export const useQueryFetchUseditemQuestionAnswers = (
   >(FETCH_USEDITEM_QUESTION_ANSWERS, {
     variables: { useditemQuestionId: variables.useditemQuestionId },
   });
-  console.log(query);
   return query;
 };
