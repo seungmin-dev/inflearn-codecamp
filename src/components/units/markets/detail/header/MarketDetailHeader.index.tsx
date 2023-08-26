@@ -13,10 +13,9 @@ export default function MarketDetailHeader(
   return (
     <S.Wrapper>
       <S.SellerPic
-        src={
-          props.data?.fetchUseditem?.seller.picture
-            ? `https://storage.googleapis.com/${props.data?.fetchUseditem.seller.picture}`
-            : "/images/icons/profile.png"
+        src={`https://storage.googleapis.com/${props.data?.fetchUseditem.seller.picture}`}
+        onError={(event) =>
+          (event.currentTarget.src = "/images/icons/profile.png")
         }
       />
       <S.SellerName>{props.data?.fetchUseditem?.seller.name}</S.SellerName>

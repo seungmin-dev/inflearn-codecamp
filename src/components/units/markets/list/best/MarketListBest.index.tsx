@@ -12,7 +12,12 @@ export default function MarketListBest(): JSX.Element {
         <Link href={`/markets/${el._id}`} key={uuidv4()}>
           <a>
             <S.Card>
-              <S.Img src={`https://storage.googleapis.com/${el.images[0]}`} />
+              <S.Img
+                src={`https://storage.googleapis.com/${el.images[0]}`}
+                onError={(event) =>
+                  (event.currentTarget.src = "/images/photo-placeholder.png")
+                }
+              />
               <S.Info>
                 <S.Name>{el.name}</S.Name>
                 <S.Remarks>{el.remarks}</S.Remarks>

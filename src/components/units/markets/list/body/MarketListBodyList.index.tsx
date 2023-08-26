@@ -26,10 +26,9 @@ export const MarketListBodyList = (props: IMarketListProps): JSX.Element => {
           {props.data?.fetchUseditems?.map((el) => (
             <S.Row key={uuidv4()}>
               <S.ItemImg
-                src={
-                  el.images.length > 1
-                    ? `https://storage.googleapis.com/${el.images[0]}`
-                    : "/images/photo-placeholder.png"
+                src={`https://storage.googleapis.com/${el.images[0]}`}
+                onError={(event) =>
+                  (event.currentTarget.src = "/images/photo-placeholder.png")
                 }
               />
               <S.Name>
@@ -59,10 +58,9 @@ export const MarketListBodyList = (props: IMarketListProps): JSX.Element => {
               </S.Price>
               <S.Seller>
                 <S.SellerPic
-                  src={
-                    el.seller.picture
-                      ? `https://storage.googleapis.com/${el.seller.picture}`
-                      : "/images/icons/profile.png"
+                  src={`https://storage.googleapis.com/${el.seller.picture}`}
+                  onError={(event) =>
+                    (event.currentTarget.src = "/images/icons/profile.png")
                   }
                 />
                 {el.seller.name}

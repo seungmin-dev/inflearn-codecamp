@@ -26,7 +26,12 @@ export default function MarketDetailBody(
       <S.ItemCarousel>
         {props.data?.fetchUseditem.images.map((el) => (
           <div key={uuidv4()}>
-            <img src={`https://storage.googleapis.com/${el}`} />
+            <img
+              src={`https://storage.googleapis.com/${el}`}
+              onError={(event) =>
+                (event.currentTarget.src = "/images/photo-placeholder.png")
+              }
+            />
           </div>
         ))}
       </S.ItemCarousel>
