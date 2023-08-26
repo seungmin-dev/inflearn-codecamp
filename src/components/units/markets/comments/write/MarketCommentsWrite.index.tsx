@@ -8,6 +8,9 @@ import type {
   IUseditemQuestionAnswer,
 } from "../../../../../commons/types/generated/types";
 import { Modal } from "antd";
+import { useRecoilState } from "recoil";
+import { userIdState } from "../../../../commons/stores";
+import { useRouter } from "next/router";
 interface IMarketCommentsWriteProps {
   useditemId?: string;
   questionId?: string;
@@ -19,6 +22,8 @@ interface IMarketCommentsWriteProps {
 export const MarketCommentsWrite = (
   props: IMarketCommentsWriteProps,
 ): JSX.Element => {
+  const router = useRouter();
+  const [userId] = useRecoilState(userIdState);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [useCreate] = useMutationCreateUseditemQuestion();
   const [useEdit] = useMutationUpdateUseditemQuestion();
@@ -50,28 +55,33 @@ export const MarketCommentsWrite = (
     }
   };
   const onClickCreate = async (): Promise<void> => {
-    try {
-      await useCreate({
-        variables: {
-          createUseditemQuestionInput: {
-            contents: textareaRef.current.value,
-          },
-          useditemId: props.useditemId,
-        },
-        update(cache, { data }) {
-          cache.modify({
-            fields: {
-              fetchUseditemQuestions: (prev) => {
-                return [data.createUseditemQuestion, ...prev];
-              },
+    if (!userId) {
+      Modal.error({ content: "댓글 작성은 로그인 후 가능합니다." });
+      void router.push("/login");
+    } else {
+      try {
+        await useCreate({
+          variables: {
+            createUseditemQuestionInput: {
+              contents: textareaRef.current.value,
             },
-          });
-        },
-      });
-      textareaRef.current.value = "";
-      Modal.success({ content: "댓글이 정상적으로 등록되었습니다." });
-    } catch (error) {
-      if (error instanceof Error) Modal.error({ content: error.message });
+            useditemId: props.useditemId,
+          },
+          update(cache, { data }) {
+            cache.modify({
+              fields: {
+                fetchUseditemQuestions: (prev) => {
+                  return [data.createUseditemQuestion, ...prev];
+                },
+              },
+            });
+          },
+        });
+        textareaRef.current.value = "";
+        Modal.success({ content: "댓글이 정상적으로 등록되었습니다." });
+      } catch (error) {
+        if (error instanceof Error) Modal.error({ content: error.message });
+      }
     }
   };
   return (
