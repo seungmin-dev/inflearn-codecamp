@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import type { IQuery } from "../../../../commons/types/generated/types";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
+import { Modal } from "antd";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
@@ -49,7 +50,7 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
       });
       void router.push(`/markets/${result.data.createUseditem._id}`);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
   const onChangeContents = (value: string): void => {

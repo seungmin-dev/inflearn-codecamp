@@ -9,6 +9,7 @@ import type {
 import { LOGIN_USER } from "./Login.queries";
 import { useRouter } from "next/router";
 import type { ILoginFormProps } from "./Login.types";
+import { Modal } from "antd";
 
 export default function Login(): JSX.Element {
   const router = useRouter();
@@ -33,9 +34,10 @@ export default function Login(): JSX.Element {
       setAccessToken(accessToken);
       localStorage.setItem("accessToken", accessToken);
 
+      console.log(path);
       void router.push(path);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
   return <LoginUI onValid={onValid} />;

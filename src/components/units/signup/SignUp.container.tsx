@@ -3,6 +3,7 @@ import SignUpUI from "./SignUp.presenter";
 import type { ISignUpFormProps } from "./SignUp.types";
 import { CREATE_USER } from "./SignUp.queries";
 import { useRouter } from "next/router";
+import { Modal } from "antd";
 
 export default function SignUp(): JSX.Element {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function SignUp(): JSX.Element {
       alert("회원가입에 성공했습니다. 로그인 후 이용해주세요!");
       void router.push("/login");
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
   return <SignUpUI onValid={onValid} />;
