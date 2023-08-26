@@ -18,7 +18,7 @@ interface IMapProps {
 
 export default function Map(props: IMapProps): JSX.Element {
   useEffect(() => {
-    const script = document.createElement("script"); // <script></script>
+    const script = document.createElement("script");
     script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}`;
     document.head.appendChild(script);
 
@@ -27,11 +27,11 @@ export default function Map(props: IMapProps): JSX.Element {
         const container = document.getElementById("map");
 
         const options = {
-          center: new window.kakao.maps.LatLng(props.lat, props.lon), // 지도의 중심좌표.
+          center: new window.kakao.maps.LatLng(props.lat, props.lon),
           level: 1,
         };
 
-        const map = new window.kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
+        const map = new window.kakao.maps.Map(container, options);
 
         const markerPosition = new window.kakao.maps.LatLng(
           props.lat,
