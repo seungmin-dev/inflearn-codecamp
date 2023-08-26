@@ -12,22 +12,14 @@ const FETCH_USEDITEM_QUESTION_ANSWERS = gql`
     ) {
       _id
       contents
-      useditemQuestion {
+      user {
         _id
-        contents
-        useditem {
-          _id
-          name
-        }
-        user {
-          _id
-          email
-          name
-          picture
-        }
-        createdAt
-        updatedAt
+        email
+        name
+        picture
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -41,6 +33,6 @@ export const useQueryFetchUseditemQuestionAnswers = (
   >(FETCH_USEDITEM_QUESTION_ANSWERS, {
     variables: { useditemQuestionId: variables.useditemQuestionId },
   });
-
+  console.log(query);
   return query;
 };

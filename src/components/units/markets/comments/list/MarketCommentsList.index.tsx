@@ -1,6 +1,7 @@
+import { Comment } from "../../../../commons/comment";
 import { useQueryIdChecker } from "../../../../commons/hooks/cutoms/useQueryIdChecker";
 import { useQueryFetchUseditemQuestions } from "../../../../commons/hooks/queries/useQueryFetchUseditemQuestions";
-import { getDate } from "../../../../commons/libraries/utils";
+import { MarketCommentsAnswersList } from "../answers/list/MarketCommentsAnswersList.index";
 import * as S from "./MarketCommentsList.styles";
 import { v4 as uuidv4 } from "uuid";
 
@@ -13,12 +14,12 @@ export const MarketCommentsList = (): JSX.Element => {
     <S.Wrapper>
       <S.List>
         {data?.fetchUseditemQuestions?.map((el) => (
-          <S.Row key={uuidv4()}>
-            <S.UserPic src={`/images/icons/profile.png`} />
-            <S.UserName>{el.user.name}</S.UserName>
-            <S.Contents>{el.contents}</S.Contents>
-            <S.CommentDate>{getDate(el.createdAt)}</S.CommentDate>
-          </S.Row>
+          <S.CommentWrapper key={uuidv4()}>
+            <S.Row>
+              <Comment data={el} />
+            </S.Row>
+            <MarketCommentsAnswersList key={uuidv4()} questionId={el._id} />
+          </S.CommentWrapper>
         ))}
       </S.List>
     </S.Wrapper>
