@@ -27,6 +27,7 @@ export const Name = styled.p`
   display: grid;
   align-items: center;
   font-size: 18px;
+  text-wrap: nowrap;
 `;
 export const Remarks = styled.p`
   grid-area: remarks;

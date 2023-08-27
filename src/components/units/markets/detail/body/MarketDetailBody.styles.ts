@@ -28,6 +28,7 @@ export const HeartIcon = styled(HeartFilled)`
   grid-area: heart;
   color: #ffd600;
   font-size: 1.3rem;
+  margin: 0 auto;
 `;
 export const Count = styled.p`
   grid-area: count;
