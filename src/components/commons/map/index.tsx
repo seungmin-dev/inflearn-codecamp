@@ -2,9 +2,8 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 
 const Container = styled.div`
-  width: 800px;
-  height: 450px;
-  margin: 50px 0;
+  width: 100%;
+  height: 85%;
 `;
 
 declare const window: typeof globalThis & {

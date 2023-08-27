@@ -46,13 +46,15 @@ export default function MarketDetailBody(
       )}
       <S.Tags>
         {props.data?.fetchUseditem.tags.map((el) => (
-          <S.Tag key={uuidv4()}>#{el}</S.Tag>
+          <S.Tag key={uuidv4()}>{el.startsWith("#") ? el : "#" + el}</S.Tag>
         ))}
       </S.Tags>
-      <Map
-        lat={props.data?.fetchUseditem.useditemAddress?.lat}
-        lon={props.data?.fetchUseditem.useditemAddress?.lng}
-      />
+      <div style={{ width: "100%", height: "550px", marginTop: "70px" }}>
+        <Map
+          lat={props.data?.fetchUseditem.useditemAddress?.lat}
+          lon={props.data?.fetchUseditem.useditemAddress?.lng}
+        />
+      </div>
     </S.Wrapper>
   );
 }

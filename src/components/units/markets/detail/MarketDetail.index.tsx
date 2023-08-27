@@ -18,7 +18,7 @@ export default function MarketDetail(): JSX.Element {
       <MarketDetailBody data={data} />
       <MarketDetailFooter
         useditemId={id}
-        sellerId={data?.fetchUseditem.seller._id}
+        sellerId={data?.fetchUseditem.seller?._id}
       />
       <MarketComments useditemId={id} />
     </S.Wrapper>

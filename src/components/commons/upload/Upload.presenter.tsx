@@ -12,23 +12,8 @@ export default function UploadUI(props: IUploadUIProps): JSX.Element {
       ) : (
         <UploadButton onClick={props.onClickUpload}>
           <>
-            <span
-              style={{
-                color: "#4F4F4F",
-                padding: 0,
-                margin: 0,
-              }}
-            >
-              +
-            </span>
-            <span
-              style={{
-                color: "#4F4F4F",
-                fontSize: "0.5rem",
-              }}
-            >
-              Upload
-            </span>
+            <span>+</span>
+            <span>Upload</span>
           </>
         </UploadButton>
       )}

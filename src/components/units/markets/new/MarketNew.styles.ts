@@ -34,7 +34,67 @@ export const Input = styled.input`
   }
 `;
 export const ErrorMessage = styled.p`
+  padding-top: 10px;
   font-size: 14px;
+  color: #ffd600;
+`;
+export const MapWrapper = styled.div`
+  width: 100%;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template:
+    "map gps" 0.5fr
+    "map address" 1fr / 0.7fr 1fr;
+  gap: 20px;
+  div:first-child {
+    grid-area: map;
+  }
+  div:nth-child(2) {
+    grid-area: gps;
+    input {
+      margin-bottom: 0;
+    }
+  }
+  div:nth-child(3) {
+    grid-area: address;
+  }
+  div input {
+    margin-bottom: 10px;
+  }
+`;
+export const LocateInputs = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  input {
+    width: 100px;
+  }
+`;
+export const RadioInput = styled.input`
+  appearance: none;
+  vertical-align: middle;
+  border: 2px solid #ffd600;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-right: 10px;
+  transition: border 0.3s ease-in-out;
+  :active {
+    color: #ffd600;
+    border: 1px solid #ffd600;
+  }
+  :checked {
+    color: #ffd600;
+    border: 5px solid #ffd600;
+  }
+  :focus-visible {
+    outline: 2px solid #ffd600;
+    outline-offset: 2px;
+  }
+`;
+export const Label = styled.label`
+  padding-right: 20px;
+  cursor: pointer;
 `;
 export const Button = styled.button`
   margin: 40px auto;
