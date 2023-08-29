@@ -6,7 +6,7 @@ import type {
 
 const FETCH_USEDITEMS_ISOLD = gql`
   query fetchUseditemsISold($search: String, $page: Int) {
-    fetchUseditemsISold(search: $string, page: $page) {
+    fetchUseditemsISold(search: $search, page: $page) {
       _id
       name
       remarks

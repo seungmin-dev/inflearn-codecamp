@@ -16,7 +16,7 @@ export const Nav = styled.div`
 `;
 export const MenuTitle = styled.span`
   cursor: pointer;
-  color: ${(props: IMenuTitle) => (props.isActive ? "#fff" : "black")};
+  color: ${(props: IMenuTitle) => (props.isActive ? "black" : "#AB9000")};
 `;
 interface IMenuTitle {
   isActive: boolean;
