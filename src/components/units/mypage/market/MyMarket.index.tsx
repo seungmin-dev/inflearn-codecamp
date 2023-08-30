@@ -29,13 +29,12 @@ export const MyMarket = (): JSX.Element => {
   const { data: count } = useQueryFetchUseditemsCountISold();
   const { data: pickedCount } = useQueryFetchUseditemsCountIPicked();
 
-  console.log("count : ", count, "pickedCount : ", pickedCount);
   const pagenationArgs = usePagination({
     refetch: selectedOpt === "sold" ? refetch : pickedRefetch,
     count:
       selectedOpt === "sold"
-        ? count.fetchUseditemsCountISold
-        : pickedCount.fetchUseditemsCountIPicked,
+        ? count?.fetchUseditemsCountISold
+        : pickedCount?.fetchUseditemsCountIPicked,
   });
 
   useEffect(() => {
