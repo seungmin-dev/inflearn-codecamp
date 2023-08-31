@@ -10,7 +10,7 @@ export const MyPointSearch = (props: IMyMarketSearch): JSX.Element => {
   const searchRef = useRef<HTMLInputElement>(null);
   const onClickOpt = (id: string) => () => {
     props.setSearch("");
-    searchRef.current.value = "";
+    if (searchRef.current !== null) searchRef.current.value = "";
     props.setSelectedOpt(id);
   };
   const onClickSearch = (): void => {
