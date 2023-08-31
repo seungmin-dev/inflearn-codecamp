@@ -34,11 +34,12 @@ export default function Login(): JSX.Element {
       setAccessToken(accessToken);
       localStorage.setItem("accessToken", accessToken);
 
-      console.log(path);
+      if (path === "") void router.push("/");
       void router.push(path);
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
+
   return <LoginUI onValid={onValid} />;
 }

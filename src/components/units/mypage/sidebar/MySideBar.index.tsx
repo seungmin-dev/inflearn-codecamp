@@ -8,6 +8,8 @@ import { Modal } from "antd";
 import { useRef, useState } from "react";
 import { useMutationUpdateUser } from "../../../commons/hooks/mutations/useMutationUpdateUser";
 import { useMuatationUploadFile } from "../../../commons/hooks/mutations/useMutationUploadFile";
+import { useRecoilState } from "recoil";
+import { userInfoState } from "../../../commons/stores";
 
 export const MySideBar = (): JSX.Element => {
   const router = useRouter();
@@ -16,6 +18,7 @@ export const MySideBar = (): JSX.Element => {
   const nameRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [pictureUrl, setPictureUrl] = useState("");
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const { data } = useQueryFetchUserLoggedIn();
   const [updateUser] = useMutationUpdateUser();
   const [uploadFile] = useMuatationUploadFile();
@@ -37,6 +40,13 @@ export const MySideBar = (): JSX.Element => {
             picture: pictureUrl,
           },
         },
+      });
+      setUserInfo({
+        id: userInfo.id,
+        name: nameRef.current.value,
+        email: userInfo.email,
+        picture: pictureUrl,
+        amount: userInfo.amount,
       });
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
@@ -64,7 +74,7 @@ export const MySideBar = (): JSX.Element => {
           <S.ModalImg
             ref={pictureRef}
             src={`https://storage.googleapis.com/${
-              pictureUrl === "" ? data?.fetchUserLoggedIn?.picture : pictureUrl
+              pictureUrl === "" ? userInfo.picture : pictureUrl
             }`}
             onError={(event) =>
               (event.currentTarget.src = "/images/icons/profile.png")
@@ -79,7 +89,7 @@ export const MySideBar = (): JSX.Element => {
           />
           <S.ModalInput
             type="text"
-            defaultValue={data?.fetchUserLoggedIn.name}
+            defaultValue={userInfo.name}
             ref={nameRef}
           />
         </S.Modal>
@@ -95,10 +105,8 @@ export const MySideBar = (): JSX.Element => {
           />
           <S.SettingIcon isProfile={router.pathname === "/mypage/profile"} />
         </S.UserPicWrapper>
-        <S.UserName>{data?.fetchUserLoggedIn?.name}</S.UserName>
-        <S.UserPoint>
-          {replaceNumberComma(data?.fetchUserLoggedIn?.userPoint.amount)}
-        </S.UserPoint>
+        <S.UserName>{userInfo.name}</S.UserName>
+        <S.UserPoint>{replaceNumberComma(userInfo.amount)}</S.UserPoint>
       </S.InfoWrapper>
       <S.MenuWrapper>
         <ul>

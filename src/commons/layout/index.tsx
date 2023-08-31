@@ -1,3 +1,4 @@
+import { useUserInfo } from "../../components/commons/hooks/cutoms/useUserInfo";
 import LayoutBanner from "./banner";
 import LayoutFooter from "./footer";
 import LayoutHeader from "./header/LayoutHeader.container";
@@ -8,6 +9,7 @@ interface ILayoutProps {
 }
 
 export default function Layout(props: ILayoutProps): JSX.Element {
+  useUserInfo();
   return (
     <>
       <LayoutHeader />

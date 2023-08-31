@@ -1,3 +1,9 @@
 export interface ILayoutHeaderProps {
-  userName: string;
+  userInfo: {
+    name: string;
+    id: string;
+    email: string;
+    picture: string;
+    amount: number;
+  };
 }

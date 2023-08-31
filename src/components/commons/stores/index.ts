@@ -10,6 +10,17 @@ export const userIdState = atom({
   default: "",
 });
 
+export const userInfoState = atom({
+  key: "userInfo",
+  default: {
+    id: "",
+    name: "",
+    picture: "",
+    email: "",
+    amount: 0,
+  },
+});
+
 export const pathState = atom({
   key: "pathState",
   default: "",

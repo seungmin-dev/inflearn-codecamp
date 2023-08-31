@@ -20,12 +20,11 @@ export default function ApolloSettings(
 ): JSX.Element {
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  if (process.browser) {
-    useEffect(() => {
-      const result = localStorage.getItem("accessToken");
-      setAccessToken(result ?? "");
-    }, [accessToken]);
-  }
+  useEffect(() => {
+    const result = localStorage.getItem("accessToken");
+    setAccessToken(result ?? "");
+  }, []);
+
   const uploadLink = createUploadLink({
     uri: "http://backend-practice.codebootcamp.co.kr/graphql",
     headers: {

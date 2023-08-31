@@ -6,12 +6,19 @@ import { pathState } from "../../stores";
 export const useAuth = (): void => {
   const router = useRouter();
   const [, setPath] = useRecoilState(pathState);
-
   useEffect(() => {
-    setPath(router.asPath);
+    if (router.asPath !== "/login") setPath(router.asPath);
+
+    if (
+      localStorage.getItem("accessToken") !== null &&
+      router.asPath === "/login"
+    )
+      void router.push("/");
     if (localStorage.getItem("accessToken") === null) {
-      alert("로그인 후 이용 가능합니다.");
-      void router.push("/login");
+      if (router.asPath !== "/login") {
+        alert("로그인 후 이용 가능합니다.");
+        void router.push("/login");
+      }
     }
   }, []);
 };

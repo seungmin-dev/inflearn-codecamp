@@ -11,7 +11,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps): JSX.Element {
             <S.Logo src="/images/logo.png" />
           </a>
         </Link>
-        {!props.userName ? (
+        {!props.userInfo?.name ? (
           <S.BtnWrapper>
             <Link href="/login">
               <a>
@@ -27,7 +27,7 @@ export default function LayoutHeaderUI(props: ILayoutHeaderProps): JSX.Element {
         ) : (
           <span>
             <span style={{ color: "#ffd600", fontWeight: "bold" }}>
-              {props.userName}
+              {props.userInfo?.name}
             </span>
             님, 안녕하세요
           </span>
