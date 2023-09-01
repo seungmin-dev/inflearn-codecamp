@@ -42,12 +42,12 @@ export const ListBodyTextTitle = styled.div`
 export const ListBodyTextStatus = styled.div`
   font-weight: bold;
   color: ${(props: IListProps) =>
-    props.status === "판매" ? "#ffd600" : "#0031E0"};
+    props.status === "구매" ? "#0031E0" : "#ffd600"};
 `;
 export const ListBodyTextPrice = styled.div`
   font-weight: bold;
   color: ${(props: IListProps) =>
-    props.status === "판매" ? "#ffd600" : "#0031E0"};
+    props.status === "구매" ? "#0031E0" : "#ffd600"};
 `;
 interface IListProps {
   status: string;
