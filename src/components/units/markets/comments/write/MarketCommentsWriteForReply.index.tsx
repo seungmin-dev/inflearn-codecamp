@@ -52,7 +52,6 @@ export const MarketCommentsWriteForReply = (
     }
   };
   const onClickCreate = async (): Promise<void> => {
-    console.log(textareaRef.current.value);
     try {
       await useCreateReply({
         variables: {

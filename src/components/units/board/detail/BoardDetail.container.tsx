@@ -38,7 +38,6 @@ export default function BoardDetailContainer(): JSX.Element {
           boardId: router.query.boardId,
         },
       });
-      console.log(result);
       void router.push("/boards");
     } catch (error) {
       if (error instanceof Error) alert(error.message);

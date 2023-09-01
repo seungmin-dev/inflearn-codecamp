@@ -70,7 +70,6 @@ export default function CommentWrite(props: ICommentWriteProps): JSX.Element {
           },
         ],
       });
-      console.log(result);
       setInputs({ writer: "", password: "", contents: "" });
     } catch (error) {
       if (error instanceof Error) alert(error.message);
