@@ -4,6 +4,7 @@ import { replaceNumberComma } from "../../../../commons/libraries/utils";
 import { v4 as uuidv4 } from "uuid";
 import Map from "../../../../commons/map";
 import Dompurify from "dompurify";
+import { useMutationToggleUseditemPick } from "../../../../commons/hooks/mutations/useMutationToggleUseditemPick";
 
 interface IMarketDetailBodyProps {
   data: Pick<IQuery, "fetchUseditem">;
@@ -12,12 +13,26 @@ interface IMarketDetailBodyProps {
 export default function MarketDetailBody(
   props: IMarketDetailBodyProps,
 ): JSX.Element {
+  const [toggleHeart] = useMutationToggleUseditemPick();
+  const onClickHeart = async (): Promise<void> => {
+    await toggleHeart({
+      variables: { useditemId: props.data?.fetchUseditem._id },
+      update(cache) {
+        cache.modify({
+          fields: {
+            fetchUseditem: (prev, { readField }) => {},
+            fetchUseditems: (prev, { readField }) => {},
+          },
+        });
+      },
+    });
+  };
   return (
     <S.Wrapper>
       <S.ItemInfoWrapper>
         <S.Remarks>{props.data?.fetchUseditem.remarks}</S.Remarks>
         <S.Name>{props.data?.fetchUseditem.name}</S.Name>
-        <S.HeartIcon />
+        <S.HeartIcon onClick={onClickHeart} />
         <S.Count>{props.data?.fetchUseditem.pickedCount}</S.Count>
         <S.Price>
           {replaceNumberComma(props.data?.fetchUseditem.price)}원
