@@ -8,6 +8,7 @@ export default function LayoutNavigationUI(
     { name: "강아지", page: "/dogs" },
     { name: "자유게시판", page: "/boards" },
     { name: "중고마켓", page: "/markets" },
+    { name: "포인트충전", page: "/point" },
     { name: "마이페이지", page: "/mypage" },
   ];
 
@@ -19,7 +20,7 @@ export default function LayoutNavigationUI(
             <S.MenuTitle
               id={item.page}
               onClick={props.onClickMenu}
-              isActive={props.currentPage.includes(item.page)}
+              isActive={props.currentPage.startsWith(item.page)}
             >
               {item.name}
             </S.MenuTitle>
