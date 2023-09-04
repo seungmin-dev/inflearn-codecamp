@@ -5,6 +5,7 @@ import { useMutation } from "@apollo/client";
 import type {
   IMutation,
   IMutationLoginUserArgs,
+  IMutationLoginUserExampleArgs,
 } from "../../../commons/types/generated/types";
 import { LOGIN_USER } from "./Login.queries";
 import { useRouter } from "next/router";
@@ -27,7 +28,7 @@ export default function Login(): JSX.Element {
         variables: { email: data.email, password: data.password },
       });
 
-      const accessToken = result.data.loginUser.accessToken;
+      const accessToken = result.data?.loginUser.accessToken;
       if (accessToken === undefined) {
         alert("로그인에 실패했습니다. 다시 시도해 주세요.");
         return;

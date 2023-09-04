@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { useQueryFetchUserLoggedIn } from "../queries/useQueryFetchUserLoggedIn";
 import { useRecoilState } from "recoil";
-import { accessTokenState, userInfoState } from "../../stores";
+import { userInfoState } from "../../stores";
 
 export const useUserInfo = (): void => {
-  const [accessToken] = useRecoilState(accessTokenState);
   const [, setUserInfo] = useRecoilState(userInfoState);
   const { data: userInfoData } = useQueryFetchUserLoggedIn();
 
@@ -18,5 +17,5 @@ export const useUserInfo = (): void => {
         amount: userInfoData?.fetchUserLoggedIn.userPoint?.amount,
       });
     }
-  }, [accessToken, userInfoData]);
+  }, [userInfoData]);
 };

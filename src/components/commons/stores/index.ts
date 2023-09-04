@@ -1,4 +1,5 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
+import { getAccessToken } from "../libraries/getAccessToken";
 
 export const accessTokenState = atom({
   key: "accessTokenState",
@@ -24,4 +25,12 @@ export const userInfoState = atom({
 export const pathState = atom({
   key: "pathState",
   default: "",
+});
+
+export const restoreAccessTokenLoadable = selector({
+  key: "restoreAccessTokenLodable",
+  get: async () => {
+    const newAccessToken = await getAccessToken();
+    return newAccessToken;
+  },
 });

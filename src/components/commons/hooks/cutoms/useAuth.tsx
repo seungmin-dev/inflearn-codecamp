@@ -1,24 +1,27 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { pathState } from "../../stores";
+import { accessTokenState, pathState, userInfoState } from "../../stores";
+import { getAccessToken } from "../../libraries/getAccessToken";
+import { useUserInfo } from "./useUserInfo";
 
 export const useAuth = (): void => {
   const router = useRouter();
-  const [, setPath] = useRecoilState(pathState);
+  const [path, setPath] = useRecoilState(pathState);
+  const [accessToken] = useRecoilState(accessTokenState);
+
+  useUserInfo();
+
   useEffect(() => {
     if (router.asPath !== "/login") setPath(router.asPath);
 
-    if (
-      localStorage.getItem("accessToken") !== null &&
-      router.asPath === "/login"
-    )
-      void router.push("/");
-    if (localStorage.getItem("accessToken") === null) {
+    if (accessToken === "") {
       if (router.asPath !== "/login") {
         alert("로그인 후 이용 가능합니다.");
-        void router.push("/login");
+        void router.push(path);
       }
+    } else {
+      if (router.asPath === "/login") void router.push("/");
     }
-  }, []);
+  }, [accessToken]);
 };
