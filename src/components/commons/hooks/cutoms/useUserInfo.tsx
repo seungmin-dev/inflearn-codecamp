@@ -6,7 +6,6 @@ import { userInfoState } from "../../stores";
 export const useUserInfo = (): void => {
   const [, setUserInfo] = useRecoilState(userInfoState);
   const { data: userInfoData } = useQueryFetchUserLoggedIn();
-
   useEffect(() => {
     if (userInfoData !== undefined) {
       setUserInfo({

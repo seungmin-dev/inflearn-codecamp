@@ -5,7 +5,6 @@ import { useMutation } from "@apollo/client";
 import type {
   IMutation,
   IMutationLoginUserArgs,
-  IMutationLoginUserExampleArgs,
 } from "../../../commons/types/generated/types";
 import { LOGIN_USER } from "./Login.queries";
 import { useRouter } from "next/router";

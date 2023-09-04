@@ -1,6 +1,6 @@
 import LayoutBanner from "./banner";
 import LayoutFooter from "./footer";
-import LayoutHeader from "./header/LayoutHeader.container";
+import LayoutHeader from "./header/LayoutHeader.index";
 import LayoutNavigation from "./navigation/LayoutNavigation.container";
 
 interface ILayoutProps {

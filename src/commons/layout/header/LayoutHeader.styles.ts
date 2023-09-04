@@ -34,3 +34,22 @@ export const SignupButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
 `;
+export const UserInfoWrapper = styled.div`
+  width: 200px;
+  height: 50px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+`;
+export const UserPic = styled.img`
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  object-fit: cover;
+`;
+export const UserName = styled.span`
+  width: 100px;
+  height: 100%;
+  line-height: 48px;
+`;
