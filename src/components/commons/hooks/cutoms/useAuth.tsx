@@ -5,7 +5,7 @@ import { accessTokenState, pathState } from "../../stores";
 
 export const useAuth = (): void => {
   const router = useRouter();
-  const [path, setPath] = useRecoilState(pathState);
+  const [, setPath] = useRecoilState(pathState);
   const [accessToken] = useRecoilState(accessTokenState);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export const useAuth = (): void => {
     if (accessToken === "" || accessToken === undefined) {
       if (router.asPath !== "/login") {
         alert("로그인 후 이용 가능합니다.");
-        void router.push(path);
+        void router.push("/login");
       }
     } else {
       if (router.asPath === "/login") void router.push("/");
