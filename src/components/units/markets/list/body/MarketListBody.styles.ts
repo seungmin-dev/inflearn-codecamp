@@ -2,9 +2,21 @@ import { EuroOutlined, HeartFilled } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
+  width: 1420px;
+  /* height: auto; */
+  height: 1200px;
+  margin-top: 80px;
+  display: flex;
+  align-items: flex-start;
+`;
+export const LeftWrapper = styled.div`
   width: 1200px;
   height: auto;
-  margin-top: 80px;
+  margin-right: 20px;
+`;
+export const RightWrapper = styled.div`
+  width: 200px;
+  height: 505px;
 `;
 export const List = styled.div`
   width: 100%;

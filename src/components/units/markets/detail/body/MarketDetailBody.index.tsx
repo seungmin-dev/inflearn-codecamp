@@ -39,7 +39,7 @@ export default function MarketDetailBody(
         </S.Price>
       </S.ItemInfoWrapper>
       <S.ItemCarousel>
-        {props.data?.fetchUseditem.images.map((el) => (
+        {props.data?.fetchUseditem?.images.map((el) => (
           <div key={uuidv4()}>
             <img
               src={`https://storage.googleapis.com/${el}`}

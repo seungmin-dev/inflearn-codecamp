@@ -1,5 +1,8 @@
 import { atom, selector } from "recoil";
 import { getAccessToken } from "../libraries/getAccessToken";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 export const accessTokenState = atom({
   key: "accessTokenState",
@@ -25,6 +28,12 @@ export const userInfoState = atom({
 export const pathState = atom({
   key: "pathState",
   default: "",
+});
+
+export const todayViewState = atom({
+  key: "todayViewState",
+  default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const restoreAccessTokenLoadable = selector({

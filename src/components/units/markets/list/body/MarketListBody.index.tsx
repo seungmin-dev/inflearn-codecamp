@@ -3,6 +3,7 @@ import { useQueryFetchUsedItems } from "../../../../commons/hooks/queries/useQue
 import { useState } from "react";
 import { MarketListBodySearch } from "./search/MarketListBodySearch.index";
 import { MarketListBodyList } from "./MarketListBodyList.index";
+import { ViewItemList } from "../../../viewItem/ViewItemList.index";
 
 export default function MarketListBody(): JSX.Element {
   const { data, refetch, fetchMore } = useQueryFetchUsedItems();
@@ -30,8 +31,15 @@ export default function MarketListBody(): JSX.Element {
 
   return (
     <S.Wrapper>
-      <MarketListBodySearch refetch={refetch} setSearch={setSearch} />
-      <MarketListBodyList data={data} onLoadMore={onLoadMore} search={search} />
+      <S.LeftWrapper>
+        <MarketListBodySearch refetch={refetch} setSearch={setSearch} />
+        <MarketListBodyList
+          data={data}
+          onLoadMore={onLoadMore}
+          search={search}
+        />
+      </S.LeftWrapper>
+      <ViewItemList />
     </S.Wrapper>
   );
 }

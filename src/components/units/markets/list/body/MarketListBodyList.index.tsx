@@ -58,12 +58,12 @@ export const MarketListBodyList = (props: IMarketListProps): JSX.Element => {
               </S.Price>
               <S.Seller>
                 <S.SellerPic
-                  src={`https://storage.googleapis.com/${el.seller.picture}`}
+                  src={`https://storage.googleapis.com/${el.seller?.picture}`}
                   onError={(event) =>
                     (event.currentTarget.src = "/images/icons/profile.png")
                   }
                 />
-                {el.seller.name}
+                {el.seller?.name}
               </S.Seller>
               <S.Count>
                 <S.Heart />
