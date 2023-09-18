@@ -17,32 +17,34 @@ export default function BoardListBody(props: IBoardListBodyProps): JSX.Element {
         <S.ListHeaderTextDate>날짜</S.ListHeaderTextDate>
       </S.ListHeader>
       <S.ListBody>
-        {props.data?.fetchBoards?.map((item, index: number) => (
-          <S.ListBodyLine key={item._id}>
-            <S.ListBodyTextIndex>{index + 1}</S.ListBodyTextIndex>
-            <Link href={`/boards/${item._id}`}>
-              <S.ListBodyTextTitle>
-                {item.title
-                  .replaceAll(props.keyword, `!@#$${props.keyword}!@#$`)
-                  .split("!@#$")
-                  .map((el) => (
-                    <span
-                      key={uuidv4()}
-                      style={{
-                        color: props.keyword === el ? "#ffd600" : "black",
-                      }}
-                    >
-                      {el}
-                    </span>
-                  ))}
-              </S.ListBodyTextTitle>
-            </Link>
-            <S.ListBodyTextWriter>{item.writer}</S.ListBodyTextWriter>
-            <S.ListBodyTextDate>
-              {item.createdAt.slice(0, 10)}
-            </S.ListBodyTextDate>
-          </S.ListBodyLine>
-        ))}
+        {(props.data?.fetchBoards ?? new Array(10).fill("1")).map(
+          (item, index: number) => (
+            <S.ListBodyLine key={item._id}>
+              <S.ListBodyTextIndex>{index + 1}</S.ListBodyTextIndex>
+              <Link href={`/boards/${item._id}`}>
+                <S.ListBodyTextTitle>
+                  {item.title
+                    ?.replaceAll(props.keyword, `!@#$${props.keyword}!@#$`)
+                    .split("!@#$")
+                    .map((el) => (
+                      <span
+                        key={uuidv4()}
+                        style={{
+                          color: props.keyword === el ? "#ffd600" : "black",
+                        }}
+                      >
+                        {el}
+                      </span>
+                    ))}
+                </S.ListBodyTextTitle>
+              </Link>
+              <S.ListBodyTextWriter>{item.writer}</S.ListBodyTextWriter>
+              <S.ListBodyTextDate>
+                {item.createdAt?.slice(0, 10)}
+              </S.ListBodyTextDate>
+            </S.ListBodyLine>
+          ),
+        )}
       </S.ListBody>
     </S.ListWrapper>
   );

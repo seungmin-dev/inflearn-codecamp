@@ -8,14 +8,18 @@ import { usePagination } from "../../../commons/hooks/cutoms/usePagination";
 import { BoardListHeader } from "./header/BoardListHeader.index";
 import { BoardListFooter } from "./footer/BoardListFooter.index";
 import styled from "@emotion/styled";
+import type { IBoard } from "../../../../commons/types/generated/types";
 
+interface IBoardListInterface {
+  data: IBoard[];
+}
 export const Container = styled.div`
   width: 1200px;
   padding: 20px;
   margin: 20px auto;
   padding: 20px;
 `;
-export default function BoardList(): JSX.Element {
+export default function BoardList(props: IBoardListInterface): JSX.Element {
   const { data, refetch } = useQueryFetchBoards();
   const { data: boardsCount, refetch: refetchBoardsCount } =
     useQueryFetchBoardsCount();
@@ -31,7 +35,7 @@ export default function BoardList(): JSX.Element {
 
   return (
     <Container>
-      <BoardListHeader>
+      <BoardListHeader data={props.data}>
         <Searchbars onChangeSearch={onChangeSearch} />
       </BoardListHeader>
       <BoardListBody data={data} keyword={keyword} />

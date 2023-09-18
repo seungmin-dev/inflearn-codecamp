@@ -3,6 +3,8 @@ import styled from "@emotion/styled";
 export const ListWrapper = styled.div``;
 export const ListHeader = styled.div`
   display: flex;
+  width: 100%;
+  height: 40px;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 10px 0;
@@ -31,7 +33,10 @@ export const ListBody = styled.div`
 `;
 export const ListBodyLine = styled.div`
   display: flex;
+  width: 100%;
+  height: 40px;
   justify-content: space-between;
+  align-items: center;
   flex: 1 auto 1.5 1.5;
   padding: 7px 0;
   border-top: 0.5px solid #bdbdbd;
