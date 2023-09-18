@@ -2,12 +2,28 @@ import Link from "next/link";
 import * as S from "./BoardListBody.styles";
 import { v4 as uuidv4 } from "uuid";
 import type { IQuery } from "../../../../../commons/types/generated/types";
+import { useApolloClient } from "@apollo/client";
+import _ from "lodash";
+import { FETCH_BOARD } from "../../../../commons/hooks/queries/useQueryFetchBoard";
 
 interface IBoardListBodyProps {
   keyword: string;
   data: Pick<IQuery, "fetchBoards">;
 }
 export default function BoardListBody(props: IBoardListBodyProps): JSX.Element {
+  const client = useApolloClient();
+
+  const getDebounce = _.debounce((boardId) => {
+    void client.query({
+      query: FETCH_BOARD,
+      variables: { boardId },
+    });
+  }, 300);
+
+  const prefetchPage = (boardId: string) => async () => {
+    getDebounce(boardId);
+  };
+
   return (
     <S.ListWrapper>
       <S.ListHeader>
@@ -22,7 +38,7 @@ export default function BoardListBody(props: IBoardListBodyProps): JSX.Element {
             <S.ListBodyLine key={item._id}>
               <S.ListBodyTextIndex>{index + 1}</S.ListBodyTextIndex>
               <Link href={`/boards/${item._id}`}>
-                <S.ListBodyTextTitle>
+                <S.ListBodyTextTitle onMouseOver={prefetchPage(item._id)}>
                   {item.title
                     ?.replaceAll(props.keyword, `!@#$${props.keyword}!@#$`)
                     .split("!@#$")

@@ -3,16 +3,32 @@ import { LikeFilled } from "@ant-design/icons";
 import { getDate } from "../../../../commons/libraries/utils";
 import Link from "next/link";
 import type { IBoard } from "../../../../../commons/types/generated/types";
+import { useApolloClient } from "@apollo/client";
+import { FETCH_BOARD } from "../../../../commons/hooks/queries/useQueryFetchBoard";
+import _ from "lodash";
 
 interface IBestBoardListProps {
   data: IBoard[];
 }
 export const BestBoardList = (props: IBestBoardListProps): JSX.Element => {
+  const client = useApolloClient();
+
+  const getDebounce = _.debounce((boardId) => {
+    void client.query({
+      query: FETCH_BOARD,
+      variables: { boardId },
+    });
+  }, 300);
+
+  const prefetchPage = (boardId: string) => async () => {
+    getDebounce(boardId);
+  };
+
   return (
     <S.CardWrapper>
       {props.data?.map((item) => (
         <Link href={`/boards/${item._id}`} key={item._id}>
-          <S.Card>
+          <S.Card onMouseOver={prefetchPage(item._id)}>
             <S.CardImg>
               <img
                 src={`https://storage.googleapis.com/${item.images[0]}`}
