@@ -44,7 +44,7 @@ export const BoardWrapper = styled.div`
 `;
 export const Title = styled.h2`
   font-size: 1.8rem;
-  padding-bottom: 30px;
+  padding-bottom: 50px;
 `;
 export const ImageWrapper = styled.div`
   display: flex;
@@ -53,17 +53,20 @@ export const ImageWrapper = styled.div`
   width: 100%;
   height: 300px;
   gap: 5px;
-  margin: 30px 0;
+  margin: 30px 0 50px;
 `;
 export const Image = styled.img`
   max-height: 100%;
 `;
-export const Contents = styled.p``;
+export const Contents = styled.p`
+  padding-bottom: 50px;
+`;
 export const BtnWrapper = styled.div`
   width: 450px;
   display: flex;
   justify-content: space-around;
   margin: 0 auto;
+  padding-top: 50px;
 `;
 export const Btn = styled.button`
   background-color: #fff;

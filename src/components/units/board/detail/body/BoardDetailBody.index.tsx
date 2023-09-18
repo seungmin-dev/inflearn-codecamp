@@ -9,16 +9,17 @@ interface IBoardDetailBodyProps {
 }
 
 export const BoardDetailBody = (props: IBoardDetailBodyProps): JSX.Element => {
+  console.log(props);
   return (
     <S.BoardWrapper>
       <S.Title>
         {!props.data ? <Skeleton /> : props.data?.fetchBoard?.title}
       </S.Title>
-      <S.ImageWrapper>
-        {!props.data ? (
-          <Skeleton width={600} height={500} />
-        ) : (
-          props.data?.fetchBoard?.images.map(
+      {props.data?.fetchBoard?.images.length === 0 ? (
+        ""
+      ) : (
+        <S.ImageWrapper>
+          {props.data?.fetchBoard?.images.map(
             (item, index) =>
               item && (
                 <S.Image
@@ -26,9 +27,9 @@ export const BoardDetailBody = (props: IBoardDetailBodyProps): JSX.Element => {
                   src={`https://storage.googleapis.com/${item}`}
                 />
               ),
-          )
-        )}
-      </S.ImageWrapper>
+          )}
+        </S.ImageWrapper>
+      )}
       <S.Contents
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(
@@ -36,8 +37,8 @@ export const BoardDetailBody = (props: IBoardDetailBodyProps): JSX.Element => {
           ),
         }}
       />
-      {!props.data ? (
-        <Skeleton width={640} height={360} />
+      {!props.data?.fetchBoard?.youtubeUrl ? (
+        ""
       ) : (
         <ReactPlayer
           url={props.data?.fetchBoard?.youtubeUrl}
