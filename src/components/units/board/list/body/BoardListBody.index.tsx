@@ -5,10 +5,13 @@ import type { IQuery } from "../../../../../commons/types/generated/types";
 import { useApolloClient } from "@apollo/client";
 import _ from "lodash";
 import { FETCH_BOARD } from "../../../../commons/hooks/queries/useQueryFetchBoard";
+import Searchbars from "../../../../commons/searchbars/Searchbars.index";
+import type { ChangeEvent } from "react";
 
 interface IBoardListBodyProps {
   keyword: string;
   data: Pick<IQuery, "fetchBoards">;
+  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 export default function BoardListBody(props: IBoardListBodyProps): JSX.Element {
   const client = useApolloClient();
@@ -26,6 +29,7 @@ export default function BoardListBody(props: IBoardListBodyProps): JSX.Element {
 
   return (
     <S.ListWrapper>
+      <Searchbars onChangeSearch={props.onChangeSearch} />
       <S.ListHeader>
         <S.ListHeaderTextIndex>번호</S.ListHeaderTextIndex>
         <S.ListHeaderTextTitle>제목</S.ListHeaderTextTitle>

@@ -3,20 +3,22 @@ import { BestBoardList } from "../best/BestBoardList.index";
 import type { IBoard } from "../../../../../commons/types/generated/types";
 interface IBoardListHeaderProps {
   data: IBoard[];
-  children: JSX.Element;
 }
-
-export const Title = styled.h2`
+export const Wrapper = styled.div`
+  width: 1200px;
+  margin: 0 auto;
+  padding: 50px 0;
+`;
+export const Title = styled.h1`
   text-align: center;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
 `;
 
 export const BoardListHeader = (props: IBoardListHeaderProps): JSX.Element => {
   return (
-    <div>
+    <Wrapper>
       <Title>베스트 게시글</Title>
       <BestBoardList data={props.data} />
-      {props.children}
-    </div>
+    </Wrapper>
   );
 };

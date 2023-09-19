@@ -1,4 +1,3 @@
-import Searchbars from "../../../commons/searchbars/Searchbars.index";
 import { useSearchBar } from "../../../commons/hooks/cutoms/useSearchBar";
 import { useQueryFetchBoardsCount } from "../../../commons/hooks/queries/useQueryFetchBoardsCount";
 import BoardListBody from "./body/BoardListBody.index";
@@ -15,9 +14,7 @@ interface IBoardListInterface {
 }
 export const Container = styled.div`
   width: 1200px;
-  padding: 20px;
   margin: 20px auto;
-  padding: 20px;
 `;
 export default function BoardList(props: IBoardListInterface): JSX.Element {
   const { data, refetch } = useQueryFetchBoards();
@@ -35,10 +32,12 @@ export default function BoardList(props: IBoardListInterface): JSX.Element {
 
   return (
     <Container>
-      <BoardListHeader data={props.data}>
-        <Searchbars onChangeSearch={onChangeSearch} />
-      </BoardListHeader>
-      <BoardListBody data={data} keyword={keyword} />
+      <BoardListHeader data={props.data} />
+      <BoardListBody
+        data={data}
+        keyword={keyword}
+        onChangeSearch={onChangeSearch}
+      />
       <BoardListFooter>
         <Pagination {...pagenationArgs} />
       </BoardListFooter>
