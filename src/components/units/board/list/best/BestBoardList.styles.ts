@@ -1,23 +1,20 @@
 import styled from "@emotion/styled";
 
 export const CardWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 257px;
+  width: 1200px;
+  height: 350px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 `;
 export const Card = styled.div`
-  width: 282px;
-  height: 257px;
-  border-radius: 14px;
-  box-shadow: 5px 5px 10px #bbb;
+  height: 350px;
+  box-shadow: 2px 2px 10px #ddd;
   cursor: pointer;
 `;
 export const CardImg = styled.div`
   width: 100%;
-  height: 50%;
-  border-radius: 14px 14px 0 0;
-  overflow: hidden;
+  height: 70%;
   img {
     width: 100%;
     height: 100%;
@@ -27,13 +24,11 @@ export const CardImg = styled.div`
 export const CardInfo = styled.div`
   padding: 10px 20px;
   width: 100%;
-  height: 50%;
   background-color: white;
-  border-radius: 0 0 14px 14px;
 `;
 export const CardTitle = styled.h2`
   font-size: 1.3rem;
-  padding: 10px 0 12px;
+  padding: 5px 0 12px;
 `;
 export const CardBelowWrapper = styled.div`
   display: flex;
