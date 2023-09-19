@@ -4,15 +4,16 @@ export const FooterWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-export const Button = styled.button`
-  height: 36px;
-  border: none;
-  background-color: #fff;
-  color: black;
-  font-weight: bold;
-  padding: 5px 20px;
-  font-size: 0.8rem;
-  border-radius: 4px;
-  border: 0.5px solid #f2f2f2;
+export const Button = styled.a`
+  display: block;
+  width: 150px;
+  border: 1px solid #000;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
   cursor: pointer;
+  :hover {
+    background-color: black;
+    color: white;
+  }
 `;
