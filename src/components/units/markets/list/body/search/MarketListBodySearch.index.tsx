@@ -25,10 +25,10 @@ export const MarketListBodySearch = (
     setIsSelectedSold(boolean);
     void props.refetch({ isSoldout: boolean });
   };
-  const onClickSearch = (): void => {
-    props.setSearch(searchRef.current.value);
-    void props.refetch({ search: searchRef.current.value, page: 1 });
-  };
+  // const onClickSearch = (): void => {
+  //   props.setSearch(searchRef.current.value);
+  //   void props.refetch({ search: searchRef.current.value, page: 1 });
+  // };
   return (
     <S.SearchWrapper>
       <S.SearchTab>
@@ -45,18 +45,18 @@ export const MarketListBodySearch = (
           판매된 상품
         </S.SearchOpt>
       </S.SearchTab>
-      <S.SearchInputs>
-        <S.SearchInputBox>
-          <S.SearchIcon />
-          <S.SearchInput
-            type="text"
-            ref={searchRef}
-            placeholder="제품을 검색해주세요."
-          />
-        </S.SearchInputBox>
-        <S.SearchDate />
-        <S.SearchButton onClick={onClickSearch}>검색</S.SearchButton>
-      </S.SearchInputs>
+      {/* <S.SearchInputs> */}
+      <S.SearchInputBox>
+        <S.SearchIcon />
+        <S.SearchInput
+          type="text"
+          ref={searchRef}
+          placeholder="제품을 검색해주세요."
+        />
+      </S.SearchInputBox>
+      {/* <S.SearchDate /> */}
+      {/* <S.SearchButton onClick={onClickSearch}>검색</S.SearchButton> */}
+      {/* </S.SearchInputs> */}
     </S.SearchWrapper>
   );
 };

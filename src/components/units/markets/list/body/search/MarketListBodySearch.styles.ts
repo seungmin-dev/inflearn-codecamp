@@ -30,16 +30,17 @@ export const SearchInputs = styled.div`
 export const SearchInputBox = styled.div`
   display: flex;
   align-items: center;
-  width: 280px;
+  width: 350px;
   height: 50px;
   border: none;
   background: #f2f2f2;
-  margin-right: 20px;
+  /* margin-right: 20px; */
 `;
 export const SearchIcon = styled(SearchOutlined)`
   width: 40px;
   font-size: 1.3rem;
   text-align: center;
+  padding-left: 15px;
 `;
 export const SearchInput = styled.input`
   border: none;
