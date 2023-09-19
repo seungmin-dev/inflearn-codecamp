@@ -1,6 +1,7 @@
 import { Carousel } from "antd";
+import { memo } from "react";
 
-export default function LayoutBanner(): JSX.Element {
+const LayoutBanner = (): JSX.Element => {
   return (
     <Carousel>
       <div>
@@ -14,4 +15,6 @@ export default function LayoutBanner(): JSX.Element {
       </div>
     </Carousel>
   );
-}
+};
+
+export default memo(LayoutBanner);

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { memo } from "react";
 
-export default function LayoutFooter(): JSX.Element {
+const LayoutFooter = (): JSX.Element => {
   const FooterWrapper = styled.div`
     margin-top: 100px;
     width: 100%;
@@ -43,4 +44,5 @@ export default function LayoutFooter(): JSX.Element {
       </Footer>
     </FooterWrapper>
   );
-}
+};
+export default memo(LayoutFooter);
