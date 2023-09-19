@@ -1,13 +1,15 @@
 import * as S from "./MarketListBody.styles";
 import { useQueryFetchUsedItems } from "../../../../commons/hooks/queries/useQueryFetchUseditems";
-import { useState } from "react";
 import { MarketListBodySearch } from "./search/MarketListBodySearch.index";
 import { MarketListBodyList } from "./MarketListBodyList.index";
 import { ViewItemList } from "../../../viewItem/ViewItemList.index";
+import { useSearchBar } from "../../../../commons/hooks/cutoms/useSearchBar";
 
 export default function MarketListBody(): JSX.Element {
   const { data, refetch, fetchMore } = useQueryFetchUsedItems();
-  const [search, setSearch] = useState("");
+  const { keyword, onChangeSearch } = useSearchBar({
+    refetch,
+  });
 
   const onLoadMore = (): void => {
     if (data === undefined) return;
@@ -32,11 +34,14 @@ export default function MarketListBody(): JSX.Element {
   return (
     <S.Wrapper>
       <S.LeftWrapper>
-        <MarketListBodySearch refetch={refetch} setSearch={setSearch} />
+        <MarketListBodySearch
+          refetch={refetch}
+          onChangeSearch={onChangeSearch}
+        />
         <MarketListBodyList
           data={data}
           onLoadMore={onLoadMore}
-          search={search}
+          keyword={keyword}
         />
       </S.LeftWrapper>
       <ViewItemList />

@@ -34,10 +34,9 @@ export const SearchInputBox = styled.div`
   height: 50px;
   border: none;
   background: #f2f2f2;
-  /* margin-right: 20px; */
 `;
 export const SearchIcon = styled(SearchOutlined)`
-  width: 40px;
+  width: 50px;
   font-size: 1.3rem;
   text-align: center;
   padding-left: 15px;
@@ -45,7 +44,7 @@ export const SearchIcon = styled(SearchOutlined)`
 export const SearchInput = styled.input`
   border: none;
   background: transparent;
-  width: 240px;
+  flex-grow: 1;
   height: 40px;
   padding-left: 10px;
   margin-right: 10px;

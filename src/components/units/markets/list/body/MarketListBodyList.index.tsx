@@ -9,7 +9,7 @@ import Link from "next/link";
 interface IMarketListProps {
   data: Pick<IQuery, "fetchUseditems">;
   onLoadMore: () => void;
-  search: string;
+  keyword: string;
 }
 
 export const MarketListBodyList = (props: IMarketListProps): JSX.Element => {
@@ -48,13 +48,13 @@ export const MarketListBodyList = (props: IMarketListProps): JSX.Element => {
                       <Skeleton width={250} />
                     ) : (
                       el.name
-                        .replaceAll(props.search, `!@#$${props.search}!@#$`)
+                        .replaceAll(props.keyword, `!@#$${props.keyword}!@#$`)
                         .split("!@#$")
                         .map((el) => (
                           <span
                             key={uuidv4()}
                             style={{
-                              color: props.search === el ? "#ffd600" : "black",
+                              color: props.keyword === el ? "#ffd600" : "black",
                             }}
                           >
                             {el}

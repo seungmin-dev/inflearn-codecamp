@@ -1,5 +1,5 @@
-import type { Dispatch, SetStateAction } from "react";
-import { useRef, useState } from "react";
+import type { ChangeEvent } from "react";
+import { useState } from "react";
 import * as S from "./MarketListBodySearch.styles";
 import type {
   IQuery,
@@ -11,24 +11,20 @@ interface IMarketSearchProps {
   refetch: (
     variables?: Partial<IQueryFetchUseditemsArgs>,
   ) => Promise<ApolloQueryResult<Pick<IQuery, "fetchUseditems">>>;
-  setSearch: Dispatch<SetStateAction<string>>;
+  onChangeSearch: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 export const MarketListBodySearch = (
   props: IMarketSearchProps,
 ): JSX.Element => {
   const [isSelectedNotSold, setIsSelectedNotSold] = useState(true);
   const [isSelectedSold, setIsSelectedSold] = useState(false);
-  const searchRef = useRef<HTMLInputElement>(null);
 
   const onClickIsSoldout = (boolean: boolean) => () => {
     setIsSelectedNotSold(!boolean);
     setIsSelectedSold(boolean);
     void props.refetch({ isSoldout: boolean });
   };
-  // const onClickSearch = (): void => {
-  //   props.setSearch(searchRef.current.value);
-  //   void props.refetch({ search: searchRef.current.value, page: 1 });
-  // };
+
   return (
     <S.SearchWrapper>
       <S.SearchTab>
@@ -50,7 +46,7 @@ export const MarketListBodySearch = (
         <S.SearchIcon />
         <S.SearchInput
           type="text"
-          ref={searchRef}
+          onChange={props.onChangeSearch}
           placeholder="제품을 검색해주세요."
         />
       </S.SearchInputBox>
