@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import Map from "../../../../commons/map";
 import Dompurify from "dompurify";
 import { useMutationToggleUseditemPick } from "../../../../commons/hooks/mutations/useMutationToggleUseditemPick";
+import { Skeleton } from "@mui/material";
 
 interface IMarketDetailBodyProps {
   data: Pick<IQuery, "fetchUseditem">;
@@ -30,46 +31,101 @@ export default function MarketDetailBody(
   return (
     <S.Wrapper>
       <S.ItemInfoWrapper>
-        <S.Remarks>{props.data?.fetchUseditem.remarks}</S.Remarks>
-        <S.Name>{props.data?.fetchUseditem.name}</S.Name>
+        <S.Remarks>
+          {!props.data ? (
+            <Skeleton width={200} />
+          ) : (
+            props.data?.fetchUseditem.remarks
+          )}
+        </S.Remarks>
+        <S.Name>
+          {!props.data ? (
+            <Skeleton width={300} />
+          ) : (
+            props.data?.fetchUseditem.name
+          )}
+        </S.Name>
         <S.HeartIcon onClick={onClickHeart} />
-        <S.Count>{props.data?.fetchUseditem.pickedCount}</S.Count>
+        <S.Count>
+          {!props.data ? (
+            <Skeleton
+              width={50}
+              style={{ gridArea: "count", margin: "0 auto" }}
+            />
+          ) : (
+            props.data?.fetchUseditem.pickedCount
+          )}
+        </S.Count>
         <S.Price>
-          {replaceNumberComma(props.data?.fetchUseditem.price)}원
+          {!props.data ? (
+            <Skeleton width={150} />
+          ) : (
+            `${replaceNumberComma(props.data?.fetchUseditem.price)}원`
+          )}
         </S.Price>
       </S.ItemInfoWrapper>
-      <S.ItemCarousel>
-        {props.data?.fetchUseditem?.images.map((el) => (
-          <div key={uuidv4()}>
-            <img
-              src={`https://storage.googleapis.com/${el}`}
-              onError={(event) =>
-                (event.currentTarget.src = "/images/photo-placeholder.png")
-              }
-            />
-          </div>
-        ))}
-      </S.ItemCarousel>
-      {typeof window !== "undefined" ? (
-        <S.Contents
-          dangerouslySetInnerHTML={{
-            __html: Dompurify.sanitize(props.data?.fetchUseditem.contents),
-          }}
+      {!props.data ? (
+        <Skeleton
+          variant="rectangular"
+          width={600}
+          height={400}
+          style={{ margin: "50px auto" }}
         />
+      ) : (
+        <S.ItemCarousel>
+          {props.data?.fetchUseditem?.images.map((el) => (
+            <div key={uuidv4()}>
+              <img
+                src={`https://storage.googleapis.com/${el}`}
+                onError={(event) =>
+                  (event.currentTarget.src = "/images/photo-placeholder.png")
+                }
+              />
+            </div>
+          ))}
+        </S.ItemCarousel>
+      )}
+      {typeof window !== "undefined" ? (
+        !props.data ? (
+          <>
+            <Skeleton width={500} />
+            <Skeleton width={350} />
+            <Skeleton width={430} style={{ marginBottom: "40px" }} />
+          </>
+        ) : (
+          <S.Contents
+            dangerouslySetInnerHTML={{
+              __html: Dompurify.sanitize(props.data?.fetchUseditem.contents),
+            }}
+          />
+        )
       ) : (
         <div></div>
       )}
       <S.Tags>
-        {props.data?.fetchUseditem.tags.map((el) => (
-          <S.Tag key={uuidv4()}>{el.startsWith("#") ? el : "#" + el}</S.Tag>
-        ))}
+        {!props.data ? (
+          <Skeleton width={200} />
+        ) : (
+          props.data?.fetchUseditem.tags.map((el) => (
+            <S.Tag key={uuidv4()}>{el.startsWith("#") ? el : "#" + el}</S.Tag>
+          ))
+        )}
       </S.Tags>
-      <div style={{ width: "100%", height: "550px", marginTop: "70px" }}>
-        <Map
-          lat={props.data?.fetchUseditem.useditemAddress?.lat}
-          lon={props.data?.fetchUseditem.useditemAddress?.lng}
+      {!props.data ? (
+        <Skeleton
+          variant="rectangular"
+          width={800}
+          height={550}
+          style={{ marginTop: "70px" }}
         />
-      </div>
+      ) : (
+        <div style={{ width: "100%", height: "550px", marginTop: "70px" }}>
+          <Map
+            lat={props.data?.fetchUseditem.useditemAddress?.lat}
+            lon={props.data?.fetchUseditem.useditemAddress?.lng}
+          />
+        </div>
+      )}
     </S.Wrapper>
   );
 }

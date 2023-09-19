@@ -57,9 +57,11 @@ export const Tags = styled.div`
 `;
 export const EuroMark = styled(EuroOutlined)`
   color: #ffd600;
-  margin-right: 5px;
+  margin-right: 10px;
 `;
 export const Price = styled.h3`
+  display: flex;
+  flex-direction: row-reverse;
   grid-area: price;
   text-align: right;
   font-size: 24px;
@@ -85,6 +87,7 @@ export const Heart = styled(HeartFilled)`
 `;
 export const Count = styled.span`
   grid-area: count;
+  display: flex;
   font-size: 16px;
   color: #4f4f4f;
 `;
