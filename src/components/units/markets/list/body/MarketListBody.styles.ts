@@ -3,9 +3,7 @@ import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   width: 1420px;
-  /* height: auto; */
   height: 1200px;
-  margin-top: 80px;
   display: flex;
   align-items: flex-start;
 `;
@@ -20,7 +18,6 @@ export const RightWrapper = styled.div`
 `;
 export const List = styled.div`
   width: 100%;
-  /* height: auto; */
   height: 1000px;
   padding: 10px;
   overflow-y: scroll;

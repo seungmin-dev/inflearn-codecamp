@@ -3,7 +3,7 @@ import { HeartFilled } from "@ant-design/icons";
 
 export const Wrapper = styled.div`
   width: 100%;
-  height: 300px;
+  height: 350px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;

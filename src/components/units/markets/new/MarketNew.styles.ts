@@ -20,7 +20,7 @@ export const InputSet = styled.div`
 `;
 export const SmallTitle = styled.p`
   font-weight: bold;
-  color: 16px;
+  font-size: 16px;
   margin-bottom: 10px;
 `;
 export const Input = styled.input`

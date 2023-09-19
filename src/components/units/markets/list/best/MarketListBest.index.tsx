@@ -1,14 +1,17 @@
 import { v4 as uuidv4 } from "uuid";
 import * as S from "./MarketListBest.styles";
 import { replaceNumberComma } from "../../../../commons/libraries/utils";
-import { useQueryFetchUsedItemsBest } from "../../../../commons/hooks/queries/useQUeryFetchUseditemsBest";
 import Link from "next/link";
 
-export default function MarketListBest(): JSX.Element {
-  const { data } = useQueryFetchUsedItemsBest();
+interface IMarketListBestProps {
+  data: any;
+}
+export default function MarketListBest(
+  props: IMarketListBestProps,
+): JSX.Element {
   return (
     <S.Wrapper>
-      {data?.fetchUseditemsOfTheBest?.slice(0, 4).map((el) => (
+      {props.data.map((el) => (
         <Link href={`/markets/${el._id}`} key={uuidv4()}>
           <a>
             <S.Card>
