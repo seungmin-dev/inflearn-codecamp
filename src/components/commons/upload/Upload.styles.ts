@@ -23,7 +23,7 @@ export const UploadButton = styled.button`
     color: #4f4f4f;
     font-size: 2rem;
   }
-  span:first-child {
+  span:first-of-type {
     padding: 0;
     margin-bottom: 10px;
   }

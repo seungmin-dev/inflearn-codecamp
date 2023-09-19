@@ -9,7 +9,6 @@ interface IBoardDetailBodyProps {
 }
 
 export const BoardDetailBody = (props: IBoardDetailBodyProps): JSX.Element => {
-  console.log(props);
   return (
     <S.BoardWrapper>
       <S.Title>
