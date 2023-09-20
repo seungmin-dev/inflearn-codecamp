@@ -6,6 +6,10 @@ import Map from "../../../../commons/map";
 import Dompurify from "dompurify";
 import { useMutationToggleUseditemPick } from "../../../../commons/hooks/mutations/useMutationToggleUseditemPick";
 import { Skeleton } from "@mui/material";
+import { useRecoilState } from "recoil";
+import { userInfoState } from "../../../../commons/stores";
+import { Modal } from "antd";
+import { useRouter } from "next/router";
 
 interface IMarketDetailBodyProps {
   data: Pick<IQuery, "fetchUseditem">;
@@ -14,8 +18,14 @@ interface IMarketDetailBodyProps {
 export default function MarketDetailBody(
   props: IMarketDetailBodyProps,
 ): JSX.Element {
+  const router = useRouter();
+  const [userInfo] = useRecoilState(userInfoState);
   const [toggleHeart] = useMutationToggleUseditemPick();
   const onClickHeart = async (): Promise<void> => {
+    if (!userInfo.id) {
+      Modal.error({ content: "찜 기능은 로그인 후 이용 가능합니다." });
+      void router.push("/login");
+    }
     await toggleHeart({
       variables: { useditemId: props.data?.fetchUseditem._id },
       update(cache) {
