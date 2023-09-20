@@ -11,6 +11,9 @@ interface IMarketDetailHeaderProps {
 export default function MarketDetailHeader(
   props: IMarketDetailHeaderProps,
 ): JSX.Element {
+  const onClickLink = (): void => {
+    void navigator.clipboard.writeText(window.location.href);
+  };
   return (
     <S.Wrapper>
       {!props.data ? (
@@ -42,7 +45,9 @@ export default function MarketDetailHeader(
           `Date : ${getDate(props.data?.fetchUseditem?.createdAt)}`
         )}
       </S.Date>
-      <S.LinkIcon />
+      <Tooltip placement="top" trigger="click" title="copied!">
+        <S.LinkIcon onClick={onClickLink} />
+      </Tooltip>
       <Tooltip
         placement="topRight"
         title={`${props.data?.fetchUseditem?.useditemAddress?.address} ${props.data?.fetchUseditem?.useditemAddress?.addressDetail}`}

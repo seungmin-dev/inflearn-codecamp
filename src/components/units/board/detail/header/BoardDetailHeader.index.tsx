@@ -10,6 +10,9 @@ interface IBoardDetailHeaderProps {
 export const BoardDetailHeader = (
   props: IBoardDetailHeaderProps,
 ): JSX.Element => {
+  const onClickLink = (): void => {
+    void navigator.clipboard.writeText(window.location.href);
+  };
   return (
     <S.HeaderWrapper>
       {!props.data ? (
@@ -38,7 +41,9 @@ export const BoardDetailHeader = (
           getDate(props.data?.fetchBoard?.createdAt)
         )}
       </S.CreatedAt>
-      <S.LinkIcon />
+      <Tooltip placement="top" trigger="click" title="copied!">
+        <S.LinkIcon onClick={onClickLink} />
+      </Tooltip>
       <Tooltip
         placement="topRight"
         title={`${props.data?.fetchBoard?.boardAddress?.address} ${props.data?.fetchBoard?.boardAddress?.addressDetail}`}
