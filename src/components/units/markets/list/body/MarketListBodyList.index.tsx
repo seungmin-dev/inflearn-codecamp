@@ -5,6 +5,9 @@ import { v4 as uuidv4 } from "uuid";
 import { replaceNumberComma } from "../../../../commons/libraries/utils";
 import type { IQuery } from "../../../../../commons/types/generated/types";
 import Link from "next/link";
+import { useApolloClient } from "@apollo/client";
+import { FETCH_USEDITEM } from "../../../../commons/hooks/queries/useQueryFetchUseditem";
+import _ from "lodash";
 
 interface IMarketListProps {
   data: Pick<IQuery, "fetchUseditems">;
@@ -13,6 +16,18 @@ interface IMarketListProps {
 }
 
 export const MarketListBodyList = (props: IMarketListProps): JSX.Element => {
+  const client = useApolloClient();
+
+  const getDebounce = _.debounce((useditemId) => {
+    void client.query({
+      query: FETCH_USEDITEM,
+      variables: { useditemId },
+    });
+  }, 300);
+
+  const prefetchPage = (boardId: string) => async () => {
+    getDebounce(boardId);
+  };
   return (
     <S.List>
       {!props.data ? (
@@ -41,7 +56,7 @@ export const MarketListBodyList = (props: IMarketListProps): JSX.Element => {
                   }
                 />
               )}
-              <S.Name>
+              <S.Name onMouseOver={prefetchPage(el._id)}>
                 <Link href={`/markets/${el._id}`}>
                   <a>
                     {!el ? (

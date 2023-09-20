@@ -5,7 +5,7 @@ import type {
   IQueryFetchUseditemArgs,
 } from "../../../../commons/types/generated/types";
 
-const FETCH_USEDITEM = gql`
+export const FETCH_USEDITEM = gql`
   query fetchUseditem($useditemId: ID!) {
     fetchUseditem(useditemId: $useditemId) {
       _id
