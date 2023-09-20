@@ -15,9 +15,9 @@ export const BoardDetailHeader = (
       {!props.data ? (
         <Skeleton
           variant="circular"
-          width={40}
-          height={40}
-          style={{ marginRight: "10px" }}
+          width={48}
+          height={48}
+          style={{ gridArea: "image" }}
         />
       ) : (
         <S.ProfileImg
@@ -27,28 +27,24 @@ export const BoardDetailHeader = (
           }
         />
       )}
-      <S.WriterInfoWrapper>
-        <S.Writer>
-          {!props.data ? <Skeleton /> : props.data?.fetchBoard?.writer}
-        </S.Writer>
-        <S.CreatedAt>
-          Date :{" "}
-          {!props.data ? (
-            <Skeleton />
-          ) : (
-            getDate(props.data?.fetchBoard?.createdAt)
-          )}
-        </S.CreatedAt>
-      </S.WriterInfoWrapper>
-      <S.IconWrapper>
-        <S.LinkIcon />
-        <Tooltip
-          placement="topRight"
-          title={`${props.data?.fetchBoard?.boardAddress?.address} ${props.data?.fetchBoard?.boardAddress?.addressDetail}`}
-        >
-          <S.LocationIcon />
-        </Tooltip>
-      </S.IconWrapper>
+      <S.Writer>
+        {!props.data ? <Skeleton /> : props.data?.fetchBoard?.writer}
+      </S.Writer>
+      <S.CreatedAt>
+        Date :{" "}
+        {!props.data ? (
+          <Skeleton />
+        ) : (
+          getDate(props.data?.fetchBoard?.createdAt)
+        )}
+      </S.CreatedAt>
+      <S.LinkIcon />
+      <Tooltip
+        placement="topRight"
+        title={`${props.data?.fetchBoard?.boardAddress?.address} ${props.data?.fetchBoard?.boardAddress?.addressDetail}`}
+      >
+        <S.LocationIcon />
+      </Tooltip>
     </S.HeaderWrapper>
   );
 };

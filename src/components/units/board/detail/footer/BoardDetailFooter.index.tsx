@@ -33,10 +33,12 @@ export const BoardDetailFooter = (): JSX.Element => {
   };
 
   return (
-    <S.BtnWrapper>
-      <S.Btn onClick={onClickMoveToList}>목록으로</S.Btn>
-      <S.Btn onClick={onClickEdit}>수정하기</S.Btn>
-      <S.Btn onClick={onClickDelete}>삭제하기</S.Btn>
-    </S.BtnWrapper>
+    <S.FooterWrapper>
+      <S.BtnWrapper>
+        <S.Btn onClick={onClickMoveToList}>목록으로</S.Btn>
+        <S.Btn onClick={onClickEdit}>수정하기</S.Btn>
+        <S.Btn onClick={onClickDelete}>삭제하기</S.Btn>
+      </S.BtnWrapper>
+    </S.FooterWrapper>
   );
 };
