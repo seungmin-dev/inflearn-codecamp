@@ -1,6 +1,5 @@
 import { Skeleton } from "@mui/material";
 import * as S from "../BoardDetail.styles";
-import SkeletonAvatar from "antd/es/skeleton/Avatar";
 import { getDate } from "../../../../commons/libraries/utils";
 import { Tooltip } from "antd";
 import type { IQuery } from "../../../../../commons/types/generated/types";
@@ -14,7 +13,12 @@ export const BoardDetailHeader = (
   return (
     <S.HeaderWrapper>
       {!props.data ? (
-        <SkeletonAvatar />
+        <Skeleton
+          variant="circular"
+          width={40}
+          height={40}
+          style={{ marginRight: "10px" }}
+        />
       ) : (
         <S.ProfileImg
           src={`https://storage.googleapis.com/${props.data?.fetchBoard?.user?.picture}`}
