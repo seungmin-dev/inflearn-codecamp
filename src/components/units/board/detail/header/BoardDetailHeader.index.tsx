@@ -31,14 +31,17 @@ export const BoardDetailHeader = (
         />
       )}
       <S.Writer>
-        {!props.data ? <Skeleton /> : props.data?.fetchBoard?.writer}
+        {!props.data ? (
+          <Skeleton width={100} style={{ gridArea: "name" }} />
+        ) : (
+          props.data?.fetchBoard?.writer
+        )}
       </S.Writer>
       <S.CreatedAt>
-        Date :{" "}
         {!props.data ? (
-          <Skeleton />
+          <Skeleton width={140} style={{ gridArea: "date" }} />
         ) : (
-          getDate(props.data?.fetchBoard?.createdAt)
+          `Date : ${getDate(props.data?.fetchBoard?.createdAt)}`
         )}
       </S.CreatedAt>
       <Tooltip placement="top" trigger="click" title="copied!">

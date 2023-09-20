@@ -61,9 +61,16 @@ export const BoardDetailBody = (props: IBoardDetailBodyProps): JSX.Element => {
   return (
     <S.BoardWrapper>
       <S.Title>
-        {!props.data ? <Skeleton /> : props.data?.fetchBoard?.title}
+        {!props.data ? <Skeleton width={400} /> : props.data?.fetchBoard?.title}
       </S.Title>
-      {props.data?.fetchBoard?.images.length === 0 ? (
+      {!props.data?.fetchBoard?.images ? (
+        <Skeleton
+          variant="rectangular"
+          width={600}
+          height={400}
+          style={{ margin: "50px auto" }}
+        />
+      ) : props.data?.fetchBoard?.images.length === 0 ? (
         ""
       ) : (
         <S.ImageWrapper>
@@ -78,13 +85,21 @@ export const BoardDetailBody = (props: IBoardDetailBodyProps): JSX.Element => {
           )}
         </S.ImageWrapper>
       )}
-      <S.Contents
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(
-            !props.data ? <Skeleton /> : props.data?.fetchBoard.contents,
-          ),
-        }}
-      />
+      {!props.data ? (
+        <>
+          <Skeleton width={300} />
+          <Skeleton width={200} />
+          <Skeleton width={450} />
+        </>
+      ) : (
+        <S.Contents
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(
+              !!props.data ? <Skeleton /> : props.data?.fetchBoard.contents,
+            ),
+          }}
+        />
+      )}
       {!props.data?.fetchBoard?.youtubeUrl ? (
         ""
       ) : (
