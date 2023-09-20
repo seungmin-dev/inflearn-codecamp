@@ -1,46 +1,51 @@
-import { EnvironmentOutlined, LinkOutlined } from "@ant-design/icons";
+import {
+  DislikeOutlined,
+  EnvironmentOutlined,
+  LikeOutlined,
+  LinkOutlined,
+} from "@ant-design/icons";
 import styled from "@emotion/styled";
 
-export const Container = styled.div`
-  width: 1200px;
-  padding: 20px;
-  margin: 50px auto;
-  padding: 20px;
-  box-shadow: 5px 5px 20px #bdbdbd;
-`;
+export const Container = styled.div``;
 export const HeaderWrapper = styled.div`
-  display: flex;
+  width: 800px;
+  margin: 50px auto;
   align-items: center;
-  padding: 20px;
+  display: grid;
+  grid-template:
+    "image name link location" 1fr
+    "image date link location" 0.8fr / 0.35fr 4fr 0.2fr 0.2fr;
+  padding-bottom: 20px;
   border-bottom: 1px solid #bdbdbd;
 `;
 export const ProfileImg = styled.img`
-  width: 40px;
+  grid-area: image;
+  width: 48px;
   margin-right: 10px;
 `;
-export const WriterInfoWrapper = styled.div`
-  flex-grow: 1;
-`;
-export const Writer = styled.h4`
-  padding-bottom: 3px;
+export const Writer = styled.p`
+  font-size: 16px;
+  grid-area: name;
 `;
 export const CreatedAt = styled.p`
   color: #828282;
-  font-size: 0.8rem;
+  font-size: 12px;
+  grid-area: date;
 `;
 export const IconWrapper = styled.div``;
 export const LinkIcon = styled(LinkOutlined)`
+  grid-area: link;
   color: #ffd600;
-  margin-right: 10px;
   font-size: 1.3rem;
 `;
 export const LocationIcon = styled(EnvironmentOutlined)`
   color: #ffd600;
   font-size: 1.3rem;
+  grid-area: location;
 `;
 export const BoardWrapper = styled.div`
-  padding: 20px;
-  padding-top: 40px;
+  width: 800px;
+  margin: 0 auto;
 `;
 export const Title = styled.h2`
   font-size: 1.8rem;
@@ -60,6 +65,45 @@ export const Image = styled.img`
 `;
 export const Contents = styled.p`
   padding-bottom: 50px;
+`;
+export const LikeWrapper = styled.div`
+  display: grid;
+  margin: 70px auto 50px;
+  width: 180px;
+  height: 80px;
+  text-align: center;
+  grid-template:
+    "likeIcon dislikeIcon" 1fr
+    "likeCount dislikeCount" 0.8fr / 1fr 1fr;
+`;
+export const LikeIcon = styled(LikeOutlined)`
+  grid-area: likeIcon;
+  margin: 0 auto;
+  font-size: 24px;
+  color: #ffd600;
+  cursor: pointer;
+`;
+export const LikeCount = styled.span`
+  grid-area: likeCount;
+  font-size: 18px;
+  color: #ffd600;
+`;
+export const DislikeIcon = styled(DislikeOutlined)`
+  grid-area: dislikeIcon;
+  margin: 0 auto;
+  font-size: 24px;
+  color: #828282;
+  cursor: pointer;
+`;
+export const DislikeCount = styled.span`
+  grid-area: dislikeCount;
+  color: #828282;
+  font-size: 18px;
+`;
+export const FooterWrapper = styled.div`
+  padding-bottom: 60px;
+  border-bottom: 1px solid #bdbdbd;
+  margin: 0 auto 100px;
 `;
 export const BtnWrapper = styled.div`
   width: 450px;
