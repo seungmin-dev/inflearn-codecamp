@@ -8,6 +8,7 @@ import { useState } from "react";
 interface IMarketDetailFooterProps {
   sellerId: string;
   useditemId: string;
+  buyerId?: string;
 }
 export default function MarketDetailFooter(
   props: IMarketDetailFooterProps,
@@ -15,11 +16,14 @@ export default function MarketDetailFooter(
   const [isOpen, setIsOpen] = useState(false);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [buying] = useMutationCreatePointTransactionOfBuyingAndSelling();
-
   const onClickBuying = (): void => {
     setIsOpen((prev) => !prev);
   };
   const buyingItem = (useritemId: string) => async () => {
+    if (props.buyerId) {
+      Modal.error({ content: "이미 판매된 상품입니다." });
+      return;
+    }
     try {
       const result = await buying({
         variables: {
