@@ -9,7 +9,8 @@ const LayoutFooter = (): JSX.Element => {
     background-color: #f2f2f2;
   `;
   const Footer = styled.div`
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     height: 100%;
     margin: 0 auto;
     padding: 50px 0;

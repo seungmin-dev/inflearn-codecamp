@@ -5,7 +5,8 @@ export const HeaderWrapper = styled.div`
   height: 80px;
 `;
 export const Header = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   height: 100%;
   margin: 0 auto;
   display: flex;
