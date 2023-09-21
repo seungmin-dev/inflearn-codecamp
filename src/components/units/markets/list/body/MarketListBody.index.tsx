@@ -1,9 +1,9 @@
 import * as S from "./MarketListBody.styles";
-import { useQueryFetchUsedItems } from "../../../../commons/hooks/queries/useQueryFetchUseditems";
+import { useQueryFetchUsedItems } from "../../../../../commons/hooks/queries/useQueryFetchUseditems";
 import { MarketListBodySearch } from "./search/MarketListBodySearch.index";
 import { MarketListBodyList } from "./MarketListBodyList.index";
 import { ViewItemList } from "../../../viewItem/ViewItemList.index";
-import { useSearchBar } from "../../../../commons/hooks/cutoms/useSearchBar";
+import { useSearchBar } from "../../../../../commons/hooks/cutoms/useSearchBar";
 
 export default function MarketListBody(): JSX.Element {
   const { data, refetch, fetchMore } = useQueryFetchUsedItems();

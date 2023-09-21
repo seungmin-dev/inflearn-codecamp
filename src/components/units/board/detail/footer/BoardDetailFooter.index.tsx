@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import * as S from "../BoardDetail.styles";
 import { Modal } from "antd";
-import { useMutationDeleteBoard } from "../../../../commons/hooks/mutations/useMutationDeleteBoard";
+import { useMutationDeleteBoard } from "../../../../../commons/hooks/mutations/useMutationDeleteBoard";
 
 export const BoardDetailFooter = (): JSX.Element => {
   const router = useRouter();

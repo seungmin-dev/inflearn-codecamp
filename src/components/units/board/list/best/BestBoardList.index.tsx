@@ -1,8 +1,8 @@
 import * as S from "./BestBoardList.styles";
 import { LikeFilled } from "@ant-design/icons";
-import { getDate } from "../../../../commons/libraries/utils";
 import Link from "next/link";
 import type { IBoard } from "../../../../../commons/types/generated/types";
+import { getDate } from "../../../../../commons/libraries/utils";
 
 interface IBestBoardListProps {
   data: IBoard[];

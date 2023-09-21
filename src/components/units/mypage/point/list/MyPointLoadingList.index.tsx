@@ -1,13 +1,13 @@
-import { useQueryFetchPointTransactionsOfLoading } from "../../../../commons/hooks/queries/useQueryFetchPointTransactionsCountOfLoading";
+import { useQueryFetchPointTransactionsOfLoading } from "../../../../../commons/hooks/queries/useQueryFetchPointTransactionsCountOfLoading";
 import { v4 as uuidv4 } from "uuid";
 import * as S from "./MyPointList.styles";
+import { useQueryFetchPointTransactionsCountOfLoading } from "../../../../../commons/hooks/queries/useQueryFetchPointTransactionsCount";
+import { usePagination } from "../../../../../commons/hooks/cutoms/usePagination";
 import {
   getDate,
   replaceNumberComma,
-} from "../../../../commons/libraries/utils";
+} from "../../../../../commons/libraries/utils";
 import Pagination from "../../../../commons/paginations/Pagination.index";
-import { useQueryFetchPointTransactionsCountOfLoading } from "../../../../commons/hooks/queries/useQueryFetchPointTransactionsCount";
-import { usePagination } from "../../../../commons/hooks/cutoms/usePagination";
 
 export const MyPointLoadingList = (): JSX.Element => {
   const { data, refetch } = useQueryFetchPointTransactionsOfLoading();

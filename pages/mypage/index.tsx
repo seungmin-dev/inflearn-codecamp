@@ -1,4 +1,4 @@
-import { useAuth } from "../../src/components/commons/hooks/cutoms/useAuth";
+import { useAuth } from "../../src/commons/hooks/cutoms/useAuth";
 import { MyMarket } from "../../src/components/units/mypage/market/MyMarket.index";
 import { MySideBar } from "../../src/components/units/mypage/sidebar/MySideBar.index";
 import styled from "@emotion/styled";

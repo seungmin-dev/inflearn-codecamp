@@ -1,18 +1,19 @@
 import { useForm } from "react-hook-form";
 import * as S from "./MarketNew.styles";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ItemFormSchema } from "../../../commons/validation/yup";
-import { useMutationCraeteUseditem } from "../../../commons/hooks/mutations/useMutationCreateUseditem";
+import { useMutationCraeteUseditem } from "../../../../commons/hooks/mutations/useMutationCreateUseditem";
 import { useRouter } from "next/router";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import { Modal } from "antd";
 import type { IItemFormProps, IMarketNewProps } from "./MarketNew.types";
-import Map from "../../../commons/map";
 import { LocationIcon } from "../detail/header/MarketDetailHeader.styles";
 import { useEffect, useState } from "react";
-import Upload from "../../../commons/upload/Upload.container";
-import { useMutationUpdateUseditem } from "../../../commons/hooks/mutations/useMutationUpdateUseditem";
+import { useMutationUpdateUseditem } from "../../../../commons/hooks/mutations/useMutationUpdateUseditem";
+import { ItemFormSchema } from "../../../../commons/validation/yup";
+import Map from "../../../commons/map";
+import { Upload } from "../../../commons/upload/Upload.index";
+import { useMuatationUploadFile } from "../../../../commons/hooks/mutations/useMutationUploadFile";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
@@ -22,6 +23,8 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
   const router = useRouter();
   const [createUseditem] = useMutationCraeteUseditem();
   const [updateUseditem] = useMutationUpdateUseditem();
+  const [uploadFile] = useMuatationUploadFile();
+
   const { register, handleSubmit, formState, setValue, trigger } =
     useForm<IItemFormProps>({
       resolver: yupResolver(ItemFormSchema),
@@ -35,6 +38,10 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
       .split(" ")
       .forEach((el) => tagsArr.push(el));
     try {
+      const results = await Promise.all(
+        files.map(async (el) => await uploadFile({ variables: { file: el } })),
+      );
+      const resultUrls = results.map((el) => el.data?.uploadFile.url);
       if (props.isEdit) {
         const result = await updateUseditem({
           variables: {
@@ -44,7 +51,7 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
               contents: data.contents,
               price: Number(data.price),
               tags: tagsArr,
-              images: [...fileUrls],
+              images: resultUrls,
               useditemAddress: {
                 address: data.useditemAddress.address,
                 addressDetail: data.useditemAddress.addressDetail,
@@ -74,7 +81,7 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
               contents: data.contents,
               price: Number(data.price),
               tags: tagsArr,
-              images: [...fileUrls],
+              images: resultUrls,
               useditemAddress: {
                 address: data.useditemAddress.address,
                 addressDetail: data.useditemAddress.addressDetail,
@@ -109,15 +116,23 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
     void trigger("contents");
   };
 
-  const [fileUrls, setFileUrls] = useState(["", ""]);
-  const onChangeFileUrls = (fileUrl: string, index: number): void => {
-    const newFileUrls = [...fileUrls];
-    newFileUrls[index] = fileUrl;
-    setFileUrls(newFileUrls);
+  const [urls, setUrls] = useState(["", "", ""]);
+  const [files, setFiles] = useState<File[]>([]);
+  const onChangeFileUrls = (url: string, file: File, index: number): void => {
+    const tempUrls = [...urls];
+    tempUrls[index] = url;
+    setUrls(tempUrls);
+
+    const tempFiles = [...files];
+    tempFiles[index] = file;
+    setFiles(tempFiles);
   };
   useEffect(() => {
     const images = props.data?.fetchUseditem.images;
-    if (images !== undefined && images !== null) setFileUrls([...images]);
+    if (images !== undefined && images !== null) {
+      urls.splice(0, images.length);
+      setUrls([...images, ...urls]);
+    }
   }, [props.data]);
 
   return (
@@ -217,11 +232,12 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
         <S.InputSet>
           <S.SmallTitle>사진 첨부</S.SmallTitle>
           <div style={{ display: "flex" }}>
-            {fileUrls.map((item, index) => (
+            {urls.map((el, index) => (
               <Upload
                 key={index}
                 index={index}
-                fileUrl={item}
+                el={el}
+                isEdit={props.isEdit}
                 onChangeFileUrls={onChangeFileUrls}
               />
             ))}

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useQueryFetchBoard } from "../../../commons/hooks/queries/useQueryFetchBoard";
+import { useQueryFetchBoard } from "../../../../commons/hooks/queries/useQueryFetchBoard";
 import * as S from "./BoardDetail.styles";
 import { BoardDetailHeader } from "./header/BoardDetailHeader.index";
 import { BoardDetailFooter } from "./footer/BoardDetailFooter.index";

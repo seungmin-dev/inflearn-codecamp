@@ -1,5 +1,5 @@
 import * as S from "./MarketCommentsAnswersList.styles";
-import { useQueryFetchUseditemQuestionAnswers } from "../../../../../commons/hooks/queries/useQueryFetchUseditemQuestionAnswers";
+import { useQueryFetchUseditemQuestionAnswers } from "../../../../../../commons/hooks/queries/useQueryFetchUseditemQuestionAnswers";
 import { v4 as uuidv4 } from "uuid";
 import { Comment } from "../../../../../commons/comment";
 

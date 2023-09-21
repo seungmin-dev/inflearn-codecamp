@@ -1,4 +1,4 @@
-import { useTodayView } from "../../../src/components/commons/hooks/cutoms/useTodayView";
+import { useTodayView } from "../../../src/commons/hooks/cutoms/useTodayView";
 import MarketDetail from "../../../src/components/units/markets/detail/MarketDetail.index";
 
 export default function MarketDetailPage(): JSX.Element {

@@ -1,10 +1,10 @@
-import { useQueryFetchPointTransactions } from "../../../../commons/hooks/queries/useQueryFetchPointTransactions";
+import { useQueryFetchPointTransactions } from "../../../../../commons/hooks/queries/useQueryFetchPointTransactions";
 import { v4 as uuidv4 } from "uuid";
 import * as S from "./MyPointList.styles";
 import {
   getDate,
   replaceNumberComma,
-} from "../../../../commons/libraries/utils";
+} from "../../../../../commons/libraries/utils";
 
 export const MyPointList = (): JSX.Element => {
   const { data } = useQueryFetchPointTransactions();

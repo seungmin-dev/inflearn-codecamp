@@ -1,7 +1,7 @@
-import { replaceNumberComma } from "../../commons/libraries/utils";
 import { v4 as uuidv4 } from "uuid";
 import * as S from "./ViewItemList.styles";
 import Link from "next/link";
+import { replaceNumberComma } from "../../../commons/libraries/utils";
 
 interface IViewItemProps {
   el: {

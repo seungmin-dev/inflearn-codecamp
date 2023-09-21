@@ -3,7 +3,7 @@ import * as S from "./SignUp.styles";
 import { useForm } from "react-hook-form";
 import type { ISignUpFormProps, ISignUpUIProps } from "./SignUp.types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "../../commons/validation/yup";
+import { signUpSchema } from "../../../commons/validation/yup";
 
 export default function SignUpUI(props: ISignUpUIProps): JSX.Element {
   const { register, handleSubmit, formState } = useForm<ISignUpFormProps>({

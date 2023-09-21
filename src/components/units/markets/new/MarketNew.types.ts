@@ -15,5 +15,5 @@ export interface IItemFormProps {
 }
 export interface IMarketNewProps {
   isEdit?: boolean;
-  data: Pick<IQuery, "fetchUseditem">;
+  data?: Pick<IQuery, "fetchUseditem">;
 }

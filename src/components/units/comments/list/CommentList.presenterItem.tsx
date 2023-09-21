@@ -1,5 +1,4 @@
 import { Rate } from "antd";
-import { getDate } from "../../../commons/libraries/utils";
 import * as S from "./CommentList.styles";
 import type { ICommentListUIItemProps } from "./CommentList.types";
 import { useRouter } from "next/router";
@@ -13,6 +12,7 @@ import type {
 import { DELETE_BOARD_COMMENT } from "../write/CommentWrite.queries";
 import { FETCH_BOARD_COMMENTS } from "./CommentList.queries";
 import CommentWrite from "../write/CommentWrite.container";
+import { getDate } from "../../../../commons/libraries/utils";
 
 export default function CommentListUIItem(
   props: ICommentListUIItemProps,

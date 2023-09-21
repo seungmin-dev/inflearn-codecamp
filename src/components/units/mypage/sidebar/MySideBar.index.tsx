@@ -1,15 +1,15 @@
 import Link from "next/link";
-import { useQueryFetchUserLoggedIn } from "../../../commons/hooks/queries/useQueryFetchUserLoggedIn";
-import { replaceNumberComma } from "../../../commons/libraries/utils";
+import { useQueryFetchUserLoggedIn } from "../../../../commons/hooks/queries/useQueryFetchUserLoggedIn";
 import * as S from "./MySideBar.styles";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/router";
 import { Modal } from "antd";
 import { useRef, useState } from "react";
-import { useMutationUpdateUser } from "../../../commons/hooks/mutations/useMutationUpdateUser";
-import { useMuatationUploadFile } from "../../../commons/hooks/mutations/useMutationUploadFile";
+import { useMutationUpdateUser } from "../../../../commons/hooks/mutations/useMutationUpdateUser";
+import { useMuatationUploadFile } from "../../../../commons/hooks/mutations/useMutationUploadFile";
 import { useRecoilState } from "recoil";
-import { userInfoState } from "../../../commons/stores";
+import { userInfoState } from "../../../../commons/stores";
+import { replaceNumberComma } from "../../../../commons/libraries/utils";
 
 export const MySideBar = (): JSX.Element => {
   const router = useRouter();

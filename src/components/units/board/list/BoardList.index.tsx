@@ -1,13 +1,13 @@
-import { useSearchBar } from "../../../commons/hooks/cutoms/useSearchBar";
-import { useQueryFetchBoardsCount } from "../../../commons/hooks/queries/useQueryFetchBoardsCount";
+import { useSearchBar } from "../../../../commons/hooks/cutoms/useSearchBar";
+import { useQueryFetchBoardsCount } from "../../../../commons/hooks/queries/useQueryFetchBoardsCount";
 import BoardListBody from "./body/BoardListBody.index";
-import { useQueryFetchBoards } from "../../../commons/hooks/queries/useQueryFetchBoards";
-import Pagination from "../../../commons/paginations/Pagination.index";
-import { usePagination } from "../../../commons/hooks/cutoms/usePagination";
+import { useQueryFetchBoards } from "../../../../commons/hooks/queries/useQueryFetchBoards";
+import { usePagination } from "../../../../commons/hooks/cutoms/usePagination";
 import { BoardListHeader } from "./header/BoardListHeader.index";
 import { BoardListFooter } from "./footer/BoardListFooter.index";
 import styled from "@emotion/styled";
 import type { IBoard } from "../../../../commons/types/generated/types";
+import Pagination from "../../../commons/paginations/Pagination.index";
 
 interface IBoardListInterface {
   data: IBoard[];

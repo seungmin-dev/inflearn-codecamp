@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import * as S from "./MarketListBest.styles";
-import { replaceNumberComma } from "../../../../commons/libraries/utils";
 import Link from "next/link";
 import { useApolloClient } from "@apollo/client";
-import { FETCH_USEDITEM } from "../../../../commons/hooks/queries/useQueryFetchUseditem";
+import { FETCH_USEDITEM } from "../../../../../commons/hooks/queries/useQueryFetchUseditem";
 import _ from "lodash";
+import { replaceNumberComma } from "../../../../../commons/libraries/utils";
 
 interface IMarketListBestProps {
   data: any;

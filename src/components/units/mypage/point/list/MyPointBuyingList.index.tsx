@@ -1,14 +1,14 @@
-import { useQueryFetchPointTransactionsOfBuying } from "../../../../commons/hooks/queries/useQueryFetchPointTransactionsOfBuying";
+import { useQueryFetchPointTransactionsOfBuying } from "../../../../../commons/hooks/queries/useQueryFetchPointTransactionsOfBuying";
 import { v4 as uuidv4 } from "uuid";
 import * as S from "./MyPointList.styles";
+import { useQueryFetchPointTransactionsCountOfBuying } from "../../../../../commons/hooks/queries/useQueryFetchPointTransactionsCount";
+import { usePagination } from "../../../../../commons/hooks/cutoms/usePagination";
+import { useEffect } from "react";
 import {
   getDate,
   replaceNumberComma,
-} from "../../../../commons/libraries/utils";
-import { useQueryFetchPointTransactionsCountOfBuying } from "../../../../commons/hooks/queries/useQueryFetchPointTransactionsCount";
-import { usePagination } from "../../../../commons/hooks/cutoms/usePagination";
+} from "../../../../../commons/libraries/utils";
 import Pagination from "../../../../commons/paginations/Pagination.index";
-import { useEffect } from "react";
 
 interface IMyPointBuyingListProps {
   search: string;

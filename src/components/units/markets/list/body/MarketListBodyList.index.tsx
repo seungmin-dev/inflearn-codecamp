@@ -2,12 +2,12 @@ import { Skeleton } from "@mui/material";
 import * as S from "./MarketListBody.styles";
 import InfiniteScroll from "react-infinite-scroller";
 import { v4 as uuidv4 } from "uuid";
-import { replaceNumberComma } from "../../../../commons/libraries/utils";
 import type { IQuery } from "../../../../../commons/types/generated/types";
 import Link from "next/link";
 import { useApolloClient } from "@apollo/client";
-import { FETCH_USEDITEM } from "../../../../commons/hooks/queries/useQueryFetchUseditem";
+import { FETCH_USEDITEM } from "../../../../../commons/hooks/queries/useQueryFetchUseditem";
 import _ from "lodash";
+import { replaceNumberComma } from "../../../../../commons/libraries/utils";
 
 interface IMarketListProps {
   data: Pick<IQuery, "fetchUseditems">;

@@ -1,8 +1,8 @@
 import { Skeleton } from "@mui/material";
 import * as S from "../BoardDetail.styles";
-import { getDate } from "../../../../commons/libraries/utils";
 import { Tooltip } from "antd";
 import type { IQuery } from "../../../../../commons/types/generated/types";
+import { getDate } from "../../../../../commons/libraries/utils";
 
 interface IBoardDetailHeaderProps {
   data: Pick<IQuery, "fetchBoard">;

@@ -1,9 +1,9 @@
 import type { ApolloQueryResult } from "@apollo/client";
+import type { MouseEvent } from "react";
 import type {
   IQuery,
   IQueryFetchBoardsArgs,
 } from "../../../commons/types/generated/types";
-import type { MouseEvent } from "react";
 
 export interface IPaginationProps {
   count: number;

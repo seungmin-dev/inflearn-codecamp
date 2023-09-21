@@ -1,19 +1,19 @@
 import { useRouter } from "next/router";
 import * as S from "./BoardWrite.styles";
 import { useEffect, useState } from "react";
-import { useMutationCreateBoard } from "../../../commons/hooks/mutations/useMutationCreateBoard";
-import { useMutationUpdateBoard } from "../../../commons/hooks/mutations/useMutationUpdateBoard";
+import { useMutationCreateBoard } from "../../../../commons/hooks/mutations/useMutationCreateBoard";
+import { useMutationUpdateBoard } from "../../../../commons/hooks/mutations/useMutationUpdateBoard";
 import { useForm } from "react-hook-form";
 import "react-quill/dist/quill.snow.css";
 import type { Address } from "react-daum-postcode";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { Modal } from "antd";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { BoardFormSchema } from "../../../commons/validation/yup";
 import type { IQuery } from "../../../../commons/types/generated/types";
 import dynamic from "next/dynamic";
+import { useMuatationUploadFile } from "../../../../commons/hooks/mutations/useMutationUploadFile";
+import { BoardFormSchema } from "../../../../commons/validation/yup";
 import { Upload } from "../../../commons/upload/Upload.index";
-import { useMuatationUploadFile } from "../../../commons/hooks/mutations/useMutationUploadFile";
 
 interface IBoardFormProps {
   writer: string;

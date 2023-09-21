@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useQueryFetchBoard } from "../../../../src/components/commons/hooks/queries/useQueryFetchBoard";
+import { useQueryFetchBoard } from "../../../../src/commons/hooks/queries/useQueryFetchBoard";
 import { BoardWrite } from "../../../../src/components/units/board/write/BoardWrite.index";
 
 export default function BoardEditPage(): JSX.Element {

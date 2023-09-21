@@ -3,9 +3,9 @@ import type { IQuery } from "../../../../../commons/types/generated/types";
 import * as S from "../BoardDetail.styles";
 import DOMPurify from "dompurify";
 import ReactPlayer from "react-player";
-import { useMutationLikeBoard } from "../../../../commons/hooks/mutations/useMutationLikeBoard";
-import { useMutationDislikeBoard } from "../../../../commons/hooks/mutations/useMutationDisikeBoard";
-import { FETCH_BOARD } from "../../../../commons/hooks/queries/useQueryFetchBoard";
+import { useMutationLikeBoard } from "../../../../../commons/hooks/mutations/useMutationLikeBoard";
+import { useMutationDislikeBoard } from "../../../../../commons/hooks/mutations/useMutationDisikeBoard";
+import { FETCH_BOARD } from "../../../../../commons/hooks/queries/useQueryFetchBoard";
 
 interface IBoardDetailBodyProps {
   data: Pick<IQuery, "fetchBoard">;

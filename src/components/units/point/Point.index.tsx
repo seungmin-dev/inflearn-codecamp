@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
-import { useMutationCreatePointTransactionOfLoading } from "../../commons/hooks/mutations/useMutationCreatePointTransactionOfLoading";
-import { userInfoState } from "../../commons/stores";
+import { useMutationCreatePointTransactionOfLoading } from "../../../commons/hooks/mutations/useMutationCreatePointTransactionOfLoading";
+import { userInfoState } from "../../../commons/commons/stores";
 import { Modal } from "antd";
 import * as S from "./Point.styles";
 

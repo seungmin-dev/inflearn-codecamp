@@ -1,6 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 import BoardList from "../../src/components/units/board/list/BoardList.index";
-import { FETCH_BOARDS_OF_THE_BEST } from "../../src/components/commons/hooks/queries/useQueryFetchBoardsOfTheBest";
+import { FETCH_BOARDS_OF_THE_BEST } from "../../src/commons/hooks/queries/useQueryFetchBoardsOfTheBest";
 import type { IBoard, IQuery } from "../../src/commons/types/generated/types";
 
 export default function BoardListPage(props: { data: IBoard[] }): JSX.Element {

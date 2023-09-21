@@ -2,14 +2,11 @@ import Link from "next/link";
 import * as S from "./LayoutHeader.styles";
 import { Dropdown, Modal } from "antd";
 import type { MenuProps } from "antd";
-import { useMutationLogoutUser } from "../../../components/commons/hooks/mutations/useMutationLogoutUser";
+import { useMutationLogoutUser } from "../../hooks/mutations/useMutationLogoutUser";
 import { useRecoilState, useResetRecoilState } from "recoil";
-import {
-  accessTokenState,
-  userInfoState,
-} from "../../../components/commons/stores";
-import { useUserInfo } from "../../../components/commons/hooks/cutoms/useUserInfo";
+import { useUserInfo } from "../../hooks/cutoms/useUserInfo";
 import { useApolloClient } from "@apollo/client";
+import { accessTokenState, userInfoState } from "../../stores";
 
 export default function LayoutHeader(): JSX.Element {
   useUserInfo();

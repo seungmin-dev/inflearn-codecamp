@@ -2,16 +2,16 @@ import type {
   IUseditemQuestion,
   IUseditemQuestionAnswer,
 } from "../../../commons/types/generated/types";
-import { getDate } from "../libraries/utils";
 import * as S from "./styles";
 import { useState } from "react";
 import { MarketCommentsWrite } from "../../units/markets/comments/write/MarketCommentsWrite.index";
 import { MarketCommentsWriteForReply } from "../../units/markets/comments/write/MarketCommentsWriteForReply.index";
-import { useMutationDeleteUseditemQuestion } from "../hooks/mutations/useMutationDeleteUseditemQuestion";
-import { useMutationDeleteUseditemQuestionAnswer } from "../hooks/mutations/useMutationDeleteUseditemQuestionAnswer";
+import { useMutationDeleteUseditemQuestion } from "../../../commons/hooks/mutations/useMutationDeleteUseditemQuestion";
+import { useMutationDeleteUseditemQuestionAnswer } from "../../../commons/hooks/mutations/useMutationDeleteUseditemQuestionAnswer";
 import { Modal } from "antd";
 import { useRecoilState } from "recoil";
-import { userIdState } from "../stores";
+import { getDate } from "../../../commons/libraries/utils";
+import { userIdState } from "../../../commons/stores";
 
 interface ICommentProps {
   questionId: string;

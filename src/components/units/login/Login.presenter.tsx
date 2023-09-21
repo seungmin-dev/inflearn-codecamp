@@ -2,7 +2,7 @@ import * as S from "./Login.styles";
 import { useForm } from "react-hook-form";
 import type { ILoginFormProps, ILoginUIProps } from "./Login.types";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema } from "../../commons/validation/yup";
+import { loginSchema } from "../../../commons/validation/yup";
 
 export default function LoginUI(props: ILoginUIProps): JSX.Element {
   const { register, handleSubmit, formState } = useForm<ILoginFormProps>({

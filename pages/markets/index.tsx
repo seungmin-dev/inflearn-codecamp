@@ -4,7 +4,7 @@ import type {
   IQuery,
   IUseditem,
 } from "../../src/commons/types/generated/types";
-import { FETCH_USEDITEMS_OF_THE_BEST } from "../../src/components/commons/hooks/queries/useQUeryFetchUseditemsBest";
+import { FETCH_USEDITEMS_OF_THE_BEST } from "../../src/commons/hooks/queries/useQUeryFetchUseditemsBest";
 
 export default function MarketsPage(props: { data: IUseditem[] }): JSX.Element {
   return <Markets data={props.data} />;

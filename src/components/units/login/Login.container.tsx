@@ -1,6 +1,5 @@
 import { useRecoilState } from "recoil";
 import LoginUI from "./Login.presenter";
-import { accessTokenState, pathState } from "../../commons/stores";
 import { useMutation } from "@apollo/client";
 import type {
   IMutation,
@@ -10,6 +9,7 @@ import { LOGIN_USER } from "./Login.queries";
 import { useRouter } from "next/router";
 import type { ILoginFormProps } from "./Login.types";
 import { Modal } from "antd";
+import { accessTokenState, pathState } from "../../../commons/stores";
 
 export default function Login(): JSX.Element {
   const router = useRouter();

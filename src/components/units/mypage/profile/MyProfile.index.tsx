@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 import * as S from "./MyProfile.styles";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ChangePasswordFormSchema } from "../../../commons/validation/yup";
 import { Modal } from "antd";
-import { useMutationResetUserPassword } from "../../../commons/hooks/mutations/useMutationResetUserPassword";
+import { useMutationResetUserPassword } from "../../../../commons/hooks/mutations/useMutationResetUserPassword";
+import { ChangePasswordFormSchema } from "../../../../commons/validation/yup";
 // import { useState } from "react";
 
 interface IChangePasswordFormProps {

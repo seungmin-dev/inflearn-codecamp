@@ -1,10 +1,10 @@
 import Link from "next/link";
 import * as S from "./MyMarketList.styles";
+import type { IQuery } from "../../../../../commons/types/generated/types";
 import {
   getDate,
   replaceNumberComma,
-} from "../../../../commons/libraries/utils";
-import type { IQuery } from "../../../../../commons/types/generated/types";
+} from "../../../../../commons/libraries/utils";
 interface IMyMarketListProps {
   data: Pick<IQuery, "fetchUseditemsISold">;
 }

@@ -1,16 +1,16 @@
 import { useRef } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import * as S from "./MarketCommentsWrite.styles";
-import { useMutationCreateUseditemQuestion } from "../../../../commons/hooks/mutations/useMutationCreateUseditemQuestion";
-import { useMutationUpdateUseditemQuestion } from "../../../../commons/hooks/mutations/useMutationUpdateUseditemQuestion";
+import { useMutationCreateUseditemQuestion } from "../../../../../commons/hooks/mutations/useMutationCreateUseditemQuestion";
+import { useMutationUpdateUseditemQuestion } from "../../../../../commons/hooks/mutations/useMutationUpdateUseditemQuestion";
 import type {
   IUseditemQuestion,
   IUseditemQuestionAnswer,
 } from "../../../../../commons/types/generated/types";
 import { Modal } from "antd";
 import { useRecoilState } from "recoil";
-import { userIdState } from "../../../../commons/stores";
 import { useRouter } from "next/router";
+import { userInfoState } from "../../../../../commons/stores";
 interface IMarketCommentsWriteProps {
   useditemId?: string;
   questionId?: string;
@@ -23,7 +23,7 @@ export const MarketCommentsWrite = (
   props: IMarketCommentsWriteProps,
 ): JSX.Element => {
   const router = useRouter();
-  const [userId] = useRecoilState(userIdState);
+  const [userInfo] = useRecoilState(userInfoState);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [useCreate] = useMutationCreateUseditemQuestion();
   const [useEdit] = useMutationUpdateUseditemQuestion();
@@ -55,7 +55,7 @@ export const MarketCommentsWrite = (
     }
   };
   const onClickCreate = async (): Promise<void> => {
-    if (!userId) {
+    if (!userInfo.id) {
       Modal.error({ content: "댓글 작성은 로그인 후 가능합니다." });
       void router.push("/login");
     } else {

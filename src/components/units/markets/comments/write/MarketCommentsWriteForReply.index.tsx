@@ -1,6 +1,6 @@
 import * as S from "./MarketCommentsWriteForReply.styles";
-import { useMutationCreateUseditemQuestionAnswer } from "../../../../commons/hooks/mutations/useMutationCreateUseditemQuestionAnswer";
-import { useMutationUpdateUseditemQuestionAnswer } from "../../../../commons/hooks/mutations/useMutationUpdateUseditemQuestionAnswer";
+import { useMutationCreateUseditemQuestionAnswer } from "../../../../../commons/hooks/mutations/useMutationCreateUseditemQuestionAnswer";
+import { useMutationUpdateUseditemQuestionAnswer } from "../../../../../commons/hooks/mutations/useMutationUpdateUseditemQuestionAnswer";
 import { useRef } from "react";
 import type { Dispatch, SetStateAction } from "react";
 import type {

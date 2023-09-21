@@ -4,9 +4,9 @@ import { v4 as uuidv4 } from "uuid";
 import type { IQuery } from "../../../../../commons/types/generated/types";
 import { useApolloClient } from "@apollo/client";
 import _ from "lodash";
-import { FETCH_BOARD } from "../../../../commons/hooks/queries/useQueryFetchBoard";
-import Searchbars from "../../../../commons/searchbars/Searchbars.index";
+import { FETCH_BOARD } from "../../../../../commons/hooks/queries/useQueryFetchBoard";
 import type { ChangeEvent } from "react";
+import Searchbars from "../../../../commons/searchbars/Searchbars.index";
 
 interface IBoardListBodyProps {
   keyword: string;

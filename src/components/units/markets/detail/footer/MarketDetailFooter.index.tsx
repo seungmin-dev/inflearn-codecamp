@@ -1,10 +1,10 @@
 import Link from "next/link";
 import * as S from "./MarketDetailFooter.styles";
 import { useRecoilState } from "recoil";
-import { userInfoState } from "../../../../commons/stores";
-import { useMutationCreatePointTransactionOfBuyingAndSelling } from "../../../../commons/hooks/mutations/useMutationCreatePointTransactionOfBuyingAndSelling";
+import { useMutationCreatePointTransactionOfBuyingAndSelling } from "../../../../../commons/hooks/mutations/useMutationCreatePointTransactionOfBuyingAndSelling";
 import { Modal } from "antd";
 import { useState } from "react";
+import { userInfoState } from "../../../../../commons/stores";
 interface IMarketDetailFooterProps {
   sellerId: string;
   useditemId: string;

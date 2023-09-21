@@ -1,6 +1,6 @@
 import { Comment } from "../../../../commons/comment";
-import { useQueryIdChecker } from "../../../../commons/hooks/cutoms/useQueryIdChecker";
-import { useQueryFetchUseditemQuestions } from "../../../../commons/hooks/queries/useQueryFetchUseditemQuestions";
+import { useQueryIdChecker } from "../../../../../commons/hooks/cutoms/useQueryIdChecker";
+import { useQueryFetchUseditemQuestions } from "../../../../../commons/hooks/queries/useQueryFetchUseditemQuestions";
 import { MarketCommentsAnswersList } from "../answers/list/MarketCommentsAnswersList.index";
 import * as S from "./MarketCommentsList.styles";
 import { v4 as uuidv4 } from "uuid";
