@@ -1,8 +1,8 @@
 import { Tooltip } from "antd";
 import * as S from "./MarketDetailHeader.styles";
 import type { IQuery } from "../../../../../commons/types/generated/types";
-import { getDate } from "../../../../../commons/commons/libraries/utils";
 import { Skeleton } from "@mui/material";
+import { getDate } from "../../../../../commons/libraries/utils";
 
 interface IMarketDetailHeaderProps {
   data: Pick<IQuery, "fetchUseditem">;

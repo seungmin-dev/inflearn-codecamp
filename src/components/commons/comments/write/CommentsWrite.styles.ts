@@ -5,6 +5,28 @@ export const ReplyWrapper = styled.div`
   display: flex;
   padding-bottom: 20px;
 `;
+export const CommentForm = styled.form`
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  margin: 30px auto 0;
+`;
+export const CommentsHeaderWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+export const GuestInfoWrapper = styled.div``;
+export const GuestInfoInput = styled.input`
+  border: none;
+  height: 50px;
+  width: 150px;
+  padding: 10px;
+  border: 1px solid #bdbdbd;
+  margin-right: 10px;
+  :last-child {
+    margin-right: 20px;
+  }
+`;
 export const Wrapper = styled.div`
   width: 100%;
   margin-top: 10px;
