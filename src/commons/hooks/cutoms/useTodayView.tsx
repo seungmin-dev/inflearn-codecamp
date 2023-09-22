@@ -7,7 +7,7 @@ import { todayViewState } from "../../stores";
 export const useTodayView = (): void => {
   const router = useRouter();
   const [todayView, setTodayView] = useRecoilState(todayViewState);
-  const curItemId = router.query.useditemId.toString();
+  const curItemId = String(router.query.useditemId);
 
   const { data } = useQueryFetchUseditem({ useditemId: curItemId });
   const viewItem = [
