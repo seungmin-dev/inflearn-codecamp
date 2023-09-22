@@ -1,14 +1,13 @@
 import { Modal, Rate } from "antd";
 import * as S from "./Comments.styles";
 import { getDate } from "../../../commons/libraries/utils";
-import { useRecoilState } from "recoil";
-import { userInfoState } from "../../../commons/stores";
 import { useState, useRef } from "react";
 import { useMutationDeleteBoardComment } from "../../../commons/hooks/mutations/useMutationDeleteBoardComment";
 import { BoardCommentsWrite } from "../../units/board/comments/write/BoardCommentsWrite.index";
 import { MarketCommentsWrite } from "../../units/markets/comments/write/MarketCommentsWrite.index";
 import type { IcommentBoardProps, IcommentMarketProps } from "./Comments.types";
 import { useMutationDeleteUseditemQuestion } from "../../../commons/hooks/mutations/useMutationDeleteUseditemQuestion";
+import { useCommentAuth } from "../../../commons/hooks/cutoms/useCommentAuth";
 
 interface ICommentsProps {
   kind: string;
@@ -16,12 +15,15 @@ interface ICommentsProps {
 }
 
 export const Comments = (props: ICommentsProps): JSX.Element => {
-  const [userInfo] = useRecoilState(userInfoState);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [deleteBoardComment] = useMutationDeleteBoardComment();
   const [deleteMarketComment] = useMutationDeleteUseditemQuestion();
   const passwordRef = useRef(null);
+  const { owner, guest } = useCommentAuth({
+    kind: props.kind,
+    userId: props.data?.user?._id,
+  });
 
   const onClickEdit = (): void => {
     setIsEdit(true);
@@ -113,10 +115,8 @@ export const Comments = (props: ICommentsProps): JSX.Element => {
             }
           />
           <S.CommentWriter>
-            {props.kind === "board"
-              ? props.data.user
-                ? props.data.user.name
-                : "writer" in props.data && props.data.writer
+            {guest && "writer" in props.data && props.data.writer
+              ? props.data.writer
               : props.data.user.name}
           </S.CommentWriter>
           {props.kind === "board" && "rating" in props.data && (
@@ -124,25 +124,14 @@ export const Comments = (props: ICommentsProps): JSX.Element => {
               <Rate disabled defaultValue={props.data.rating} />
             </S.CommentStarWrapper>
           )}
-          {/* 회원일 때 아이디 비교해서 조건부 노출 */}
-          {/* 비회원이면 일단 버튼 노출, 비밀번호 입력창 */}
-          {(props.kind === "board" &&
-            (userInfo.id === "" || userInfo.id === props.data?.user?._id)) ||
-          (props.kind !== "board" &&
-            userInfo.id !== "" &&
-            userInfo.id === props.data?.user?._id) ? (
+          {owner ? (
             <>
               <S.CommentEditButton
                 onClick={onClickEdit}
                 src="/images/icons/comment-edit.png"
               />
               <S.CommentDeleteButton
-                onClick={
-                  props.kind === "board" &&
-                  (userInfo.id === "" || userInfo.id === props.data?.user?._id)
-                    ? onClickToggleDeleteModal
-                    : onClickDelete
-                }
+                onClick={guest ? onClickToggleDeleteModal : onClickDelete}
                 src="/images/icons/comment-delete.png"
               />
             </>

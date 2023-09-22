@@ -3,31 +3,20 @@ import * as S from "./CommentsWrite.styles";
 import { useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 import type {
-  ICommentFormProps,
+  ICommentsWriteProps,
   IcommentBoardProps,
-  IcommentMarketProps,
 } from "../Comments.types";
+import { useCommentAuth } from "../../../../commons/hooks/cutoms/useCommentAuth";
 
-interface ICommentsWriteProps {
-  isEdit?: boolean;
-  onValid?: (data: ICommentFormProps) => void;
-  data?: IcommentBoardProps | IcommentMarketProps;
-  kind?: string;
-  isComplete?: boolean;
-  prevRating?: number;
-}
-export const CommentsWrite = ({
-  data,
-  isEdit,
-  isComplete,
-  onValid,
-  kind,
-  prevRating,
-}: ICommentsWriteProps): JSX.Element => {
-  const { handleSubmit, register, setValue, trigger, reset } = useForm();
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+export const CommentsWrite = (props: ICommentsWriteProps): JSX.Element => {
   const [textleng, setTextleng] = useState(0);
   const [rating, setRating] = useState(0);
+  const { handleSubmit, register, setValue, trigger, reset } = useForm();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { guest } = useCommentAuth({
+    kind: props.kind,
+    userId: props.data?.user?._id,
+  });
 
   useEffect(() => {
     setValue("rating", rating);
@@ -36,15 +25,15 @@ export const CommentsWrite = ({
 
   useEffect(() => {
     reset();
-  }, [isEdit]);
+  }, [props.isEdit]);
 
   useEffect(() => {
-    if (isComplete) {
+    if (props.isComplete) {
       reset();
       setTextleng(0);
       textareaRef.current.value = "";
     }
-  }, [isComplete]);
+  }, [props.isComplete]);
 
   const onChangeTextarea = (): void => {
     setValue("contents", textareaRef.current.value);
@@ -53,17 +42,19 @@ export const CommentsWrite = ({
   };
 
   return (
-    <S.CommentForm onSubmit={handleSubmit(onValid)}>
+    <S.CommentForm onSubmit={handleSubmit(props.onValid)}>
       <S.CommentsHeaderWrapper>
-        {kind === "board" ? (
+        {guest ? (
           <>
             <S.GuestInfoWrapper>
               <S.GuestInfoInput
                 type="text"
                 {...register("writer")}
                 placeholder="작성자"
-                defaultValue={(data as IcommentBoardProps) && data?.writer}
-                readOnly={isEdit}
+                defaultValue={
+                  (props.data as IcommentBoardProps) && data?.writer
+                }
+                readOnly={props.isEdit}
               />
               <S.GuestInfoInput
                 type="password"
@@ -71,19 +62,19 @@ export const CommentsWrite = ({
                 placeholder="비밀번호"
               />
             </S.GuestInfoWrapper>
-            <Rate
-              onChange={setRating}
-              defaultValue={
-                ((data as IcommentBoardProps) && data?.rating) ?? prevRating
-              }
-            />
           </>
         ) : (
           ""
         )}
+        <Rate
+          onChange={setRating}
+          defaultValue={
+            ((props.data as IcommentBoardProps) && props.data?.rating) ??
+            props.prevRating
+          }
+        />
       </S.CommentsHeaderWrapper>
       <S.Wrapper>
-        {/* {data?.contents} */}
         <S.TextArea
           ref={textareaRef}
           maxLength={100}
@@ -91,11 +82,11 @@ export const CommentsWrite = ({
           placeholder={
             "개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
           }
-          defaultValue={data?.contents}
+          defaultValue={props.data?.contents}
         ></S.TextArea>
         <S.Bottom>
-          <S.Length>{data?.contents.length ?? textleng} / 100</S.Length>
-          {isEdit ? (
+          <S.Length>{props.data?.contents.length ?? textleng} / 100</S.Length>
+          {props.isEdit ? (
             <S.Button>수정하기</S.Button>
           ) : (
             <S.Button>문의하기</S.Button>
