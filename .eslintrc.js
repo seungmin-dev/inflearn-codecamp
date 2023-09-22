@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ["standard-with-typescript", "plugin:react/recommended", "prettier"],
+  extends: [
+    "standard-with-typescript",
+    "plugin:react/recommended",
+    "prettier",
+    "next/core-web-vitals",
+  ],
   overrides: [
     {
       env: {
@@ -42,4 +47,9 @@ module.exports = {
     "next-env.d.ts",
     "/src/commons/types/generated/types.ts",
   ],
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
 };
