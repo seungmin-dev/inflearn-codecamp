@@ -21,7 +21,7 @@ export const BoardDetailFooter = (): JSX.Element => {
       return;
     }
     try {
-      const result = await deleteBoard({
+      await deleteBoard({
         variables: {
           boardId: router.query.boardId,
         },

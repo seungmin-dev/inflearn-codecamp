@@ -3,11 +3,20 @@ import * as S from "./CommentsWrite.styles";
 import { useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
 import type {
-  ICommentsWriteProps,
+  ICommentFormProps,
   IcommentBoardProps,
+  IcommentMarketProps,
 } from "../Comments.types";
 import { useCommentAuth } from "../../../../commons/hooks/cutoms/useCommentAuth";
 
+interface ICommentsWriteProps {
+  isEdit?: boolean;
+  onValid: (data: ICommentFormProps) => void;
+  data?: IcommentBoardProps | IcommentMarketProps;
+  kind?: string;
+  isComplete?: boolean;
+  prevRating?: number;
+}
 export const CommentsWrite = (props: ICommentsWriteProps): JSX.Element => {
   const [textleng, setTextleng] = useState(0);
   const [rating, setRating] = useState(0);
@@ -52,7 +61,9 @@ export const CommentsWrite = (props: ICommentsWriteProps): JSX.Element => {
                 {...register("writer")}
                 placeholder="작성자"
                 defaultValue={
-                  (props.data as IcommentBoardProps) && data?.writer
+                  (props.data as IcommentBoardProps) && "writer" in props.data
+                    ? props.data?.writer
+                    : props.data?.user?.name
                 }
                 readOnly={props.isEdit}
               />
@@ -69,7 +80,7 @@ export const CommentsWrite = (props: ICommentsWriteProps): JSX.Element => {
         <Rate
           onChange={setRating}
           defaultValue={
-            ((props.data as IcommentBoardProps) && props.data?.rating) ??
+            // ("rating" in props.data && props.data?.rating) ?? props.prevRating
             props.prevRating
           }
         />

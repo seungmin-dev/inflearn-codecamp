@@ -115,9 +115,9 @@ export const Comments = (props: ICommentsProps): JSX.Element => {
             }
           />
           <S.CommentWriter>
-            {guest && "writer" in props.data && props.data.writer
-              ? props.data.writer
-              : props.data.user.name}
+            {(props.data as IcommentBoardProps) && "writer" in props.data
+              ? props.data?.writer
+              : props.data?.user?.name}
           </S.CommentWriter>
           {props.kind === "board" && "rating" in props.data && (
             <S.CommentStarWrapper>

@@ -9,6 +9,7 @@ import type { Address } from "react-daum-postcode";
 import DaumPostcodeEmbed from "react-daum-postcode";
 import { Modal } from "antd";
 import { yupResolver } from "@hookform/resolvers/yup";
+import type * as yup from "yup";
 import type { IQuery } from "../../../../commons/types/generated/types";
 import dynamic from "next/dynamic";
 import { useMuatationUploadFile } from "../../../../commons/hooks/mutations/useMutationUploadFile";
@@ -38,6 +39,7 @@ export const BoardWrite = (props: IBoardWriteProps): JSX.Element => {
   const [updateBoard] = useMutationUpdateBoard();
   const [uploadFile] = useMuatationUploadFile();
 
+  type BoardFormData = yup.InferType<typeof BoardFormSchema>;
   const {
     register,
     handleSubmit,
@@ -45,7 +47,7 @@ export const BoardWrite = (props: IBoardWriteProps): JSX.Element => {
     setValue,
     getFieldState,
     trigger,
-  } = useForm<IBoardFormProps>({
+  } = useForm<BoardFormData>({
     resolver: yupResolver(BoardFormSchema),
     mode: "onSubmit",
   });

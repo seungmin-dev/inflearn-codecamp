@@ -7,7 +7,9 @@ import { BoardDetailBody } from "./body/BoardDetailBody.index";
 
 export const BoardDetail = (): JSX.Element => {
   const router = useRouter();
-  const { data } = useQueryFetchBoard({ boardId: router.query.boardId });
+  const { data } = useQueryFetchBoard({
+    boardId: String(router.query.boardId),
+  });
 
   return (
     <S.Container>

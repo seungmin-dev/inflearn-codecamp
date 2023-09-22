@@ -94,9 +94,7 @@ export const BoardDetailBody = (props: IBoardDetailBodyProps): JSX.Element => {
       ) : (
         <S.Contents
           dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(
-              !props.data ? <Skeleton /> : props.data?.fetchBoard.contents,
-            ),
+            __html: DOMPurify.sanitize(props.data?.fetchBoard.contents),
           }}
         />
       )}

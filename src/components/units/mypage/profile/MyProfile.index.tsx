@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
 import * as S from "./MyProfile.styles";
+import type * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Modal } from "antd";
 import { useMutationResetUserPassword } from "../../../../commons/hooks/mutations/useMutationResetUserPassword";
 import { ChangePasswordFormSchema } from "../../../../commons/validation/yup";
-// import { useState } from "react";
 
 interface IChangePasswordFormProps {
   curPassword: any;
@@ -14,8 +14,9 @@ interface IChangePasswordFormProps {
 
 export const MyProfile = (): JSX.Element => {
   const [resetPassword] = useMutationResetUserPassword();
+  type ChangePasswordData = yup.InferType<typeof ChangePasswordFormSchema>;
   const { handleSubmit, register, formState, reset } =
-    useForm<IChangePasswordFormProps>({
+    useForm<ChangePasswordData>({
       resolver: yupResolver(ChangePasswordFormSchema),
       mode: "onChange",
     });

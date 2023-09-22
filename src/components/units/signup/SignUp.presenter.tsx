@@ -1,12 +1,14 @@
 import Link from "next/link";
 import * as S from "./SignUp.styles";
 import { useForm } from "react-hook-form";
-import type { ISignUpFormProps, ISignUpUIProps } from "./SignUp.types";
+import type { ISignUpUIProps } from "./SignUp.types";
+import type * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../../../commons/validation/yup";
 
 export default function SignUpUI(props: ISignUpUIProps): JSX.Element {
-  const { register, handleSubmit, formState } = useForm<ISignUpFormProps>({
+  type SignUpData = yup.InferType<typeof signUpSchema>;
+  const { register, handleSubmit, formState } = useForm<SignUpData>({
     resolver: yupResolver(signUpSchema),
     mode: "onSubmit",
   });

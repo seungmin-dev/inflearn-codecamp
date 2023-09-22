@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import * as S from "./MarketNew.styles";
+import type * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutationCraeteUseditem } from "../../../../commons/hooks/mutations/useMutationCreateUseditem";
 import { useRouter } from "next/router";
@@ -25,8 +26,9 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
   const [updateUseditem] = useMutationUpdateUseditem();
   const [uploadFile] = useMuatationUploadFile();
 
+  type ItemData = yup.InferType<typeof ItemFormSchema>;
   const { register, handleSubmit, formState, setValue, trigger } =
-    useForm<IItemFormProps>({
+    useForm<ItemData>({
       resolver: yupResolver(ItemFormSchema),
       mode: "onSubmit",
     });
@@ -200,14 +202,14 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
             <S.LocateInputs>
               <S.Input
                 type="number"
-                {...register("useditemAddress.lat")}
+                {...register("lat")}
                 placeholder="위도(LAT)"
                 defaultValue={props.data?.fetchUseditem?.useditemAddress?.lat}
               />
               <LocationIcon />
               <S.Input
                 type="number"
-                {...register("useditemAddress.lng")}
+                {...register("lng")}
                 placeholder="경도(LNG)"
                 defaultValue={props.data?.fetchUseditem?.useditemAddress?.lng}
               />
@@ -217,12 +219,12 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
             <S.SmallTitle>주소</S.SmallTitle>
             <S.Input
               type="text"
-              {...register("useditemAddress.address")}
+              {...register("address")}
               defaultValue={props.data?.fetchUseditem?.useditemAddress?.address}
             />
             <S.Input
               type="text"
-              {...register("useditemAddress.addressDetail")}
+              {...register("addressDetail")}
               defaultValue={
                 props.data?.fetchUseditem?.useditemAddress?.addressDetail
               }
