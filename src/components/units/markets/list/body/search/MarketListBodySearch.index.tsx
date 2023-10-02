@@ -32,16 +32,17 @@ export const MarketListBodySearch = (
           onClick={onClickIsSoldout(false)}
           isSelected={isSelectedNotSold}
         >
-          판매 중인 상품
+          <img src="/images/icons/3d-discount.png" />
+          <S.SearchOptText>판매 중인 상품</S.SearchOptText>
         </S.SearchOpt>
         <S.SearchOpt
           onClick={onClickIsSoldout(true)}
           isSelected={isSelectedSold}
         >
-          판매된 상품
+          <img src="/images/icons/3d-target.png" />
+          <S.SearchOptText>판매된 상품</S.SearchOptText>
         </S.SearchOpt>
       </S.SearchTab>
-      {/* <S.SearchInputs> */}
       <S.SearchInputBox>
         <S.SearchIcon />
         <S.SearchInput
@@ -50,9 +51,6 @@ export const MarketListBodySearch = (
           placeholder="제품을 검색해주세요."
         />
       </S.SearchInputBox>
-      {/* <S.SearchDate /> */}
-      {/* <S.SearchButton onClick={onClickSearch}>검색</S.SearchButton> */}
-      {/* </S.SearchInputs> */}
     </S.SearchWrapper>
   );
 };

@@ -6,7 +6,7 @@ const LayoutFooter = (): JSX.Element => {
     margin-top: 100px;
     width: 100%;
     height: 285px;
-    background-color: #f2f2f2;
+    background-color: #fcfcfc;
   `;
   const Footer = styled.div`
     width: 100%;
@@ -41,7 +41,7 @@ const LayoutFooter = (): JSX.Element => {
           <SocialIcon src="/images/social/instagram.png" />
           <SocialIcon src="/images/social/youtube.png" />
         </SocialWrapper>
-        <Copyright>@2021 codecamp notice board</Copyright>
+        <Copyright>@2023 ssummer second hand market</Copyright>
       </Footer>
     </FooterWrapper>
   );

@@ -19,11 +19,7 @@ export const LayoutNavigation = (): JSX.Element => {
       <S.Nav>
         {NAVIGATION_MENUS.map((item) => (
           <Fragment key={item.page}>
-            <S.MenuTitle
-              id={item.page}
-              onClick={onClickMenu}
-              isActive={router.pathname.startsWith(item.page)}
-            >
+            <S.MenuTitle id={item.page} onClick={onClickMenu}>
               {item.name}
             </S.MenuTitle>
           </Fragment>

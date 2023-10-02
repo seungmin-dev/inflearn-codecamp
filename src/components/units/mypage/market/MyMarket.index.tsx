@@ -11,9 +11,10 @@ import { useQueryFetchUseditemsCountIPicked } from "../../../../commons/hooks/qu
 import Pagination from "../../../commons/paginations/Pagination.index";
 
 export const Wrapper = styled.div`
-  width: 900px;
+  width: 1200px;
   margin: 0 auto;
-  padding-top: 50px;
+  min-height: 70vh;
+  padding-top: 30px;
 `;
 export const Footer = styled.div`
   display: flex;

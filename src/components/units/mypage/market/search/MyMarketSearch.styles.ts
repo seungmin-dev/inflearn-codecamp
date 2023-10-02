@@ -10,16 +10,31 @@ export const SearchWrapper = styled.div`
 `;
 export const SearchTab = styled.div`
   padding-left: 20px;
-  height: 50px;
+  height: 40px;
+  display: flex;
+  gap: 20px;
 `;
 export const SearchOpt = styled.span`
-  line-height: 50px;
-  font-size: 18px;
-  color: ${(props: IIsSold) => (props.isSelected ? "#000" : "#4F4F4F")};
-  text-decoration: ${(props: IIsSold) =>
-    props.isSelected ? "underline #ffd600" : ""};
-  margin-right: 30px;
+  font-size: 16px;
+  background: ${(props: IIsSold) =>
+    props.isSelected
+      ? "radial-gradient(circle, rgba(245,245,245,1) 0%, rgba(205,205,205,1) 100%)"
+      : "white"};
   cursor: pointer;
+  border: 1px solid;
+  border-color: #e5e8eb;
+  border-radius: 20px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease 0s;
+  :hover {
+    border-color: #8b95a1;
+  }
+  img {
+    width: 25px;
+    margin-right: 10px;
+  }
 `;
 interface IIsSold {
   isSelected: boolean;
@@ -34,12 +49,11 @@ export const SearchInputBox = styled.div`
   height: 50px;
   border: none;
   background: #f2f2f2;
-  margin-right: 20px;
+  margin-right: 10px;
+  border-radius: 20px;
 `;
 export const SearchIcon = styled(SearchOutlined)`
-  width: 40px;
-  font-size: 1.3rem;
-  text-align: center;
+  margin: 0 10px 0 15px;
 `;
 export const SearchInput = styled.input`
   border: none;
@@ -62,5 +76,10 @@ export const SearchButton = styled.button`
   color: white;
   border: none;
   font-weight: bold;
+  border-radius: 20px;
+  transition: background-color ease 0.2s all 0s;
   cursor: pointer;
+  :hover {
+    background-color: #484848;
+  }
 `;

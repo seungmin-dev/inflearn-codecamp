@@ -11,7 +11,7 @@ export default function Markets(props: IMarketsProps): JSX.Element {
     <S.Wrapper>
       <MarketListHeader data={props.data} />
       <MarketListBody />
-      <MarketListFooter />
+      {/* <MarketListFooter /> */}
     </S.Wrapper>
   );
 }

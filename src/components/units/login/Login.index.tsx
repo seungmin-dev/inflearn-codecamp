@@ -1,5 +1,10 @@
+import * as S from "./Login.styles";
+import { useForm } from "react-hook-form";
+import type * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { loginSchema } from "../../../commons/validation/yup";
+import Link from "next/link";
 import { useRecoilState } from "recoil";
-import LoginUI from "./Login.presenter";
 import { useMutation } from "@apollo/client";
 import type {
   IMutation,
@@ -10,8 +15,15 @@ import { useRouter } from "next/router";
 import type { ILoginFormProps } from "./Login.types";
 import { Modal } from "antd";
 import { accessTokenState, pathState } from "../../../commons/stores";
+import { useUserInfo } from "../../../commons/hooks/cutoms/useUserInfo";
+import { useAuth } from "../../../commons/hooks/cutoms/useAuth";
 
-export default function Login(): JSX.Element {
+export const Login = (): JSX.Element => {
+  type LoginData = yup.InferType<typeof loginSchema>;
+  const { register, handleSubmit, formState } = useForm<LoginData>({
+    resolver: yupResolver(loginSchema),
+    mode: "onSubmit",
+  });
   const router = useRouter();
   const [, setAccessToken] = useRecoilState(accessTokenState);
   const [path] = useRecoilState(pathState);
@@ -40,6 +52,26 @@ export default function Login(): JSX.Element {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
+  useAuth();
+  useUserInfo();
 
-  return <LoginUI onValid={onValid} />;
-}
+  return (
+    <S.Wrapper>
+      <S.Title>로그인</S.Title>
+      <form onSubmit={handleSubmit(onValid)}>
+        <S.Input {...register("email")} type="text" placeholder="이메일" />
+        <S.ErrorText>{formState.errors.email?.message}</S.ErrorText>
+        <S.Input
+          {...register("password")}
+          type="password"
+          placeholder="비밀번호"
+        />
+        <S.ErrorText>{formState.errors.password?.message}</S.ErrorText>
+        <S.Button>LOGIN</S.Button>
+      </form>
+      <Link href="/signup">
+        <S.Signup>회원가입</S.Signup>
+      </Link>
+    </S.Wrapper>
+  );
+};

@@ -64,12 +64,38 @@ export const Point = (): JSX.Element => {
       <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
       <S.Wrapper>
-        <S.Title>포인트 충전</S.Title>
+        <S.Banner>
+          <S.TextWrapper>
+            <S.Title>포인트 충전</S.Title>
+            <S.Text>
+              카카오페이로 간편하게 포인트를 충전하고
+              <br />
+              상품을 구매하세요
+            </S.Text>
+          </S.TextWrapper>
+          <img src="/images/point-image.jpg" />
+        </S.Banner>
         <S.ButtonWrapper>
-          <S.Button onClick={onClickPayment(10000)}>10,000원</S.Button>
-          <S.Button onClick={onClickPayment(50000)}>50,000원</S.Button>
-          <S.Button onClick={onClickPayment(100000)}>100,000원</S.Button>
-          <S.Button onClick={onClickPayment(200000)}>200,000원</S.Button>
+          <S.Button onClick={onClickPayment(10000)}>
+            <img src="/images/icons/3d-leaf.png" />
+            <S.Point>10,000원</S.Point>
+            <S.Gradient />
+          </S.Button>
+          <S.Button onClick={onClickPayment(50000)}>
+            <img src="/images/icons/3d-star.png" />
+            <S.Point>50,000원</S.Point>
+            <S.Gradient />
+          </S.Button>
+          <S.Button onClick={onClickPayment(100000)}>
+            <img src="/images/icons/3d-lamp.png" />
+            <S.Point>100,000원</S.Point>
+            <S.Gradient />
+          </S.Button>
+          <S.Button onClick={onClickPayment(200000)}>
+            <img src="/images/icons/3d-key.png" />
+            <S.Point>200,000원</S.Point>
+            <S.Gradient />
+          </S.Button>
         </S.ButtonWrapper>
       </S.Wrapper>
     </>

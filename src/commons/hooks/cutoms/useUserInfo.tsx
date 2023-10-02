@@ -4,8 +4,9 @@ import { useRecoilState } from "recoil";
 import { userInfoState } from "../../stores";
 
 export const useUserInfo = (): void => {
-  const [, setUserInfo] = useRecoilState(userInfoState);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const { data: userInfoData } = useQueryFetchUserLoggedIn();
+
   useEffect(() => {
     if (userInfoData !== undefined) {
       setUserInfo({

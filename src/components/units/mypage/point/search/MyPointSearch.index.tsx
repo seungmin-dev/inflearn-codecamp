@@ -23,24 +23,28 @@ export const MyPointSearch = (props: IMyMarketSearch): JSX.Element => {
           onClick={onClickOpt("all")}
           isSelected={props.selectedOpt === "all"}
         >
+          <img src="/images/icons/3d-folder.png" />
           전체내역
         </S.SearchOpt>
         <S.SearchOpt
           onClick={onClickOpt("loading")}
           isSelected={props.selectedOpt === "loading"}
         >
+          <img src="/images/icons/3d-fire.png" />
           충전내역
         </S.SearchOpt>
         <S.SearchOpt
           onClick={onClickOpt("buying")}
           isSelected={props.selectedOpt === "buying"}
         >
+          <img src="/images/icons/3d-report.png" />
           구매내역
         </S.SearchOpt>
         <S.SearchOpt
           onClick={onClickOpt("selling")}
           isSelected={props.selectedOpt === "selling"}
         >
+          <img src="/images/icons/3d-calculator.png" />
           판매내역
         </S.SearchOpt>
       </S.SearchTab>

@@ -12,12 +12,19 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
   text-align: center;
   padding-bottom: 50px;
+  img {
+    width: 30px;
+    margin-right: 10px;
+  }
 `;
 
 export const BoardListHeader = (props: IBoardListHeaderProps): JSX.Element => {
   return (
     <Wrapper>
-      <Title>베스트 게시글</Title>
+      <Title>
+        <img src="/images/icons/3d-trophy.png" />
+        베스트 게시글
+      </Title>
       <BestBoardList data={props.data} />
     </Wrapper>
   );

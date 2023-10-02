@@ -4,17 +4,18 @@ import { Dropdown, Modal } from "antd";
 import type { MenuProps } from "antd";
 import { useMutationLogoutUser } from "../../hooks/mutations/useMutationLogoutUser";
 import { useRecoilState, useResetRecoilState } from "recoil";
-import { useUserInfo } from "../../hooks/cutoms/useUserInfo";
 import { useApolloClient } from "@apollo/client";
 import { accessTokenState, userInfoState } from "../../stores";
+import { LayoutNavigation } from "../navigation/LayoutNavigation.index";
+import { usePath } from "../../hooks/cutoms/usePath";
 
 export default function LayoutHeader(): JSX.Element {
-  useUserInfo();
+  usePath();
+
   const [userInfo] = useRecoilState(userInfoState);
   const [, setAccessToken] = useRecoilState(accessTokenState);
   const resetUserInfo = useResetRecoilState(userInfoState);
   const client = useApolloClient();
-
   const [logout] = useMutationLogoutUser();
   const onClickLogout = async (): Promise<void> => {
     try {
@@ -41,34 +42,30 @@ export default function LayoutHeader(): JSX.Element {
             <S.Logo src="/images/logo.png" />
           </a>
         </Link>
-        {!userInfo?.name ? (
-          <S.BtnWrapper>
+        <LayoutNavigation />
+        <S.SessionWrapper>
+          {!userInfo?.name ? (
             <Link href="/login">
               <a>
                 <S.LoginButton>로그인</S.LoginButton>
               </a>
             </Link>
-            <Link href="/signup">
-              <a>
-                <S.SignupButton>회원가입</S.SignupButton>
-              </a>
-            </Link>
-          </S.BtnWrapper>
-        ) : (
-          <S.UserInfoWrapper>
-            <S.UserPic
-              src={`https://storage.googleapis.com/${userInfo?.picture}`}
-              onError={(event) =>
-                (event.currentTarget.src = "/images/icons/profile.png")
-              }
-            />
-            <Dropdown menu={{ items }} placement="bottomLeft">
-              <S.UserName style={{ color: "#ffd600", fontWeight: "bold" }}>
-                {userInfo?.name}
-              </S.UserName>
-            </Dropdown>
-          </S.UserInfoWrapper>
-        )}
+          ) : (
+            <S.UserInfoWrapper>
+              <S.UserPic
+                src={`https://storage.googleapis.com/${userInfo?.picture}`}
+                onError={(event) =>
+                  (event.currentTarget.src = "/images/icons/profile.png")
+                }
+              />
+              <Dropdown menu={{ items }} placement="bottomLeft">
+                <S.UserName style={{ color: "#ffd600", fontWeight: "bold" }}>
+                  {userInfo?.name}
+                </S.UserName>
+              </Dropdown>
+            </S.UserInfoWrapper>
+          )}
+        </S.SessionWrapper>
       </S.Header>
     </S.HeaderWrapper>
   );

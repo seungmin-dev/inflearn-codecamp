@@ -46,16 +46,16 @@ export const MapWrapper = styled.div`
     "map gps" 0.5fr
     "map address" 1fr / 0.7fr 1fr;
   gap: 20px;
-  div:first-child {
+  div:first-of-type {
     grid-area: map;
   }
-  div:nth-child(2) {
+  div:nth-of-type(2) {
     grid-area: gps;
     input {
       margin-bottom: 0;
     }
   }
-  div:nth-child(3) {
+  div:nth-of-type(3) {
     grid-area: address;
   }
   div input {

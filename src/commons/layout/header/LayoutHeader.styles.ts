@@ -3,36 +3,36 @@ import styled from "@emotion/styled";
 export const HeaderWrapper = styled.div`
   width: 100%;
   height: 80px;
+  position: fixed;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
 `;
 export const Header = styled.div`
   width: 100%;
   max-width: 1200px;
   height: 100%;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
   align-items: center;
+  gap: 20px;
 `;
 export const Logo = styled.img`
-  width: 180px;
+  width: 130px;
   height: auto;
   cursor: pointer;
 `;
+export const SessionWrapper = styled.div``;
 export const BtnWrapper = styled.div``;
 export const LoginButton = styled.button`
   border: none;
-  background-color: transparent;
+  background-color: black;
+  color: white;
   height: 40px;
   padding: 0 15px;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-export const SignupButton = styled.button`
-  border: none;
-  background-color: #ffd600;
-  height: 40px;
-  padding: 0 15px;
-  border-radius: 5px;
+  border-radius: 10px;
+  font-weight: bold;
   cursor: pointer;
 `;
 export const UserInfoWrapper = styled.div`

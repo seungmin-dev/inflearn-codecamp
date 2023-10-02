@@ -1,7 +1,5 @@
-import { useAuth } from "../../src/commons/hooks/cutoms/useAuth";
-import Login from "../../src/components/units/login/Login.container";
+import { Login } from "../../src/components/units/login/Login.index";
 
 export default function LoginPage(): JSX.Element {
-  useAuth();
   return <Login />;
 }

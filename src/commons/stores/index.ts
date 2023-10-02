@@ -23,11 +23,13 @@ export const userInfoState = atom({
     email: "",
     amount: 0,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const pathState = atom({
   key: "pathState",
   default: "",
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const todayViewState = atom({

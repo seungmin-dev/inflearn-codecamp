@@ -25,9 +25,11 @@ export const MyMarketSearch = (props: IMyMarketSearch): JSX.Element => {
     <S.SearchWrapper>
       <S.SearchTab>
         <S.SearchOpt onClick={onClickOpt(false)} isSelected={isSelectedISold}>
+          <img src="/images/icons/3d-truck.png" />
           나의상품
         </S.SearchOpt>
         <S.SearchOpt onClick={onClickOpt(true)} isSelected={isSelectedIPick}>
+          <img src="/images/icons/3d-box.png" />
           마이찜
         </S.SearchOpt>
       </S.SearchTab>

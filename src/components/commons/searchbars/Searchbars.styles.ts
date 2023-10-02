@@ -7,6 +7,7 @@ export const SearchWrapper = styled.div`
   align-items: center;
   width: 100%;
   padding-bottom: 30px;
+  border-radius: 20px;
 `;
 export const SearchInputBox = styled.div`
   display: flex;
@@ -14,6 +15,8 @@ export const SearchInputBox = styled.div`
   height: 50px;
   border: none;
   background: #f2f2f2;
+  border-radius: 20px;
+  overflow: hidden;
 `;
 export const SearchIcon = styled(SearchOutlined)`
   width: 40px;

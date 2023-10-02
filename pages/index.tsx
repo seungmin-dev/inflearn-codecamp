@@ -1,34 +1,53 @@
 import Head from "next/head";
 import styled from "@emotion/styled";
 import Link from "next/link";
+import LayoutBanner from "../src/commons/layout/banner";
 
 const Wrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
+  height: 250px;
   margin: 0 auto;
-  padding: 100px 50px 200px 50px;
-  /* text-align: center; */
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 20px;
 `;
-const Title = styled.h1`
-  margin-bottom: 40px;
-  font-size: 48px;
-`;
-const SmallTitle = styled.h2`
-  font-size: 24px;
-  margin-bottom: 20px;
-`;
-const Button = styled.button`
-  width: 150px;
-  height: 50px;
-  margin-top: 50px;
-  border: none;
-  background-color: #ffd600;
-  font-size: 16px;
-  font-weight: bold;
+const Menu = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow:
+    0 0 2px rgba(0, 0, 0, 0.08),
+    4px 12px 36px rgba(0, 0, 0, 0.09);
+  padding-top: 50px;
+  padding-left: 30px;
+  overflow: hidden;
+  position: relative;
   cursor: pointer;
+  transition: transform 0.2s ease 0s;
   :hover {
-    background-color: black;
-    color: white;
+    transform: translateY(-5px);
+    img {
+      transform: scale(120%);
+    }
   }
+`;
+const TextWrapper = styled.div`
+  position: absolute;
+  z-index: 10;
+`;
+const Title = styled.h2`
+  margin-bottom: 15px;
+`;
+const Text = styled.p``;
+const Img = styled.img`
+  display: block;
+  position: absolute;
+  right: -25px;
+  bottom: -10px;
+  width: 150px;
+  transition: transform 0.2s ease 0s;
 `;
 
 export default function Home(): JSX.Element {
@@ -40,16 +59,48 @@ export default function Home(): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <LayoutBanner />
       <Wrapper>
-        <Title>Welcome to Ssummer Store</Title>
-        <SmallTitle>
-          There&apos;re plenty of wonderful second hand things to get
-        </SmallTitle>
-        <SmallTitle>You can also sell them</SmallTitle>
-        <SmallTitle>Do not hesitate!</SmallTitle>
-        <Link href="/login">
-          <Button>Join us now!</Button>
-        </Link>
+        <Menu
+          style={{
+            background:
+              "linear-gradient(220deg, rgba(194,255,135,1) 0%, rgba(159,222,255,1) 100%)",
+          }}
+        >
+          <TextWrapper>
+            <Title>중고마켓</Title>
+            <Text>중고 물품을 간편하게 사고 팔아보세요</Text>
+          </TextWrapper>
+          <Img src="/images/icons/shopping-cart.png" />
+        </Menu>
+        <Menu
+          style={{
+            background:
+              "linear-gradient(220deg, rgba(137,222,255,1) 0%, rgba(167,159,255,1) 100%)",
+          }}
+        >
+          <TextWrapper>
+            <Title>자유게시판</Title>
+            <Text>
+              사람 사는 이야기
+              <br />
+              해볼까요?
+            </Text>
+          </TextWrapper>
+          <Img src="/images/icons/3d-notes.png" />
+        </Menu>
+        <Menu
+          style={{
+            background:
+              "linear-gradient(220deg, rgba(255,252,137,1) 0%, rgba(255,159,159,1) 100%)",
+          }}
+        >
+          <TextWrapper>
+            <Title>포인트 충전</Title>
+            <Text>포인트로 거래해요</Text>
+          </TextWrapper>
+          <Img src="/images/icons/3d-piggy-bank.png" />
+        </Menu>
       </Wrapper>
     </>
   );
