@@ -7,12 +7,20 @@ export const SearchWrapper = styled.div`
   align-items: center;
   padding-bottom: 30px;
   border-bottom: 1px solid #bdbdbd;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 `;
 export const SearchTab = styled.div`
   padding-left: 20px;
   height: 40px;
   display: flex;
   gap: 20px;
+  @media (max-width: 600px) {
+    padding-left: 0;
+  }
 `;
 export const SearchOpt = styled.div`
   font-size: 16px;
@@ -54,6 +62,9 @@ export const SearchInputBox = styled.div`
   background: #f2f2f2;
   margin-right: 10px;
   border-radius: 20px;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 export const SearchIcon = styled(SearchOutlined)`
   margin: 0 10px 0 15px;

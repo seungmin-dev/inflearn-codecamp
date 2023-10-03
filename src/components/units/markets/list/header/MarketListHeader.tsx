@@ -2,7 +2,8 @@ import MarketListBest from "../best/MarketListBest.index";
 import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 50px 0;
 `;

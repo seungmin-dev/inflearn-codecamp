@@ -2,15 +2,20 @@ import { EuroOutlined, HeartFilled } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 1420px;
+  width: 100%;
+  max-width: 1420px;
   height: 1200px;
   display: flex;
   align-items: flex-start;
 `;
 export const LeftWrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   height: auto;
   margin-right: 20px;
+  @media (max-width: 600px) {
+    margin-right: 0;
+  }
 `;
 export const RightWrapper = styled.div`
   width: 200px;
@@ -35,11 +40,21 @@ export const Row = styled.div`
   padding-bottom: 10px;
   align-items: center;
   border-bottom: 1px solid #bdbdbd;
+  @media (max-width: 600px) {
+    grid-template:
+      "image name name price" 0.9fr
+      "image remarks remarks price" 0.5fr
+      "image tags tags price" 0.5fr
+      "image seller count price" 1fr / 0.27fr 0.3fr 0.9fr 0.3fr;
+  }
 `;
 export const ItemImg = styled.img`
   grid-area: image;
   width: 160px;
   height: 160px;
+  @media (max-width: 600px) {
+    margin-right: 10px;
+  }
 `;
 export const Name = styled.p`
   grid-area: name;

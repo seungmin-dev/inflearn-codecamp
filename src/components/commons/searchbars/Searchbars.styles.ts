@@ -17,6 +17,9 @@ export const SearchInputBox = styled.div`
   background: #f2f2f2;
   border-radius: 20px;
   overflow: hidden;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 export const SearchIcon = styled(SearchOutlined)`
   width: 40px;

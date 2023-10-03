@@ -8,8 +8,14 @@ import { useApolloClient } from "@apollo/client";
 import { accessTokenState, userInfoState } from "../../stores";
 import { LayoutNavigation } from "../navigation/LayoutNavigation.index";
 import { usePath } from "../../hooks/cutoms/usePath";
+import { Dispatch, SetStateAction } from "react";
 
-export default function LayoutHeader(): JSX.Element {
+interface ILayoutHeaderProps {
+  setNav: Dispatch<SetStateAction<boolean>>;
+}
+export default function LayoutHeader({
+  setNav,
+}: ILayoutHeaderProps): JSX.Element {
   usePath();
 
   const [userInfo] = useRecoilState(userInfoState);
@@ -33,6 +39,9 @@ export default function LayoutHeader(): JSX.Element {
       label: <a onClick={onClickLogout}>로그아웃</a>,
     },
   ];
+  const onClickMobNav = (): void => {
+    setNav((prev) => !prev);
+  };
 
   return (
     <S.HeaderWrapper>
@@ -66,6 +75,23 @@ export default function LayoutHeader(): JSX.Element {
             </S.UserInfoWrapper>
           )}
         </S.SessionWrapper>
+        <S.MobileNav onClick={onClickMobNav}>
+          <svg
+            style={{ width: "40px" }}
+            fill="none"
+            stroke="black"
+            strokeWidth={1.5}
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </S.MobileNav>
       </S.Header>
     </S.HeaderWrapper>
   );

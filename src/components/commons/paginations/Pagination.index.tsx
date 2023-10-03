@@ -1,9 +1,13 @@
+import styled from "@emotion/styled";
 import { Arrow, Page } from "./Pagination.styles";
 import type { IPaginationUIProps } from "./Pagination.types";
 
+const Wrapper = styled.div`
+  text-align: center;
+`;
 export default function Pagination(props: IPaginationUIProps): JSX.Element {
   return (
-    <div>
+    <Wrapper>
       <Arrow onClick={props.onClickPrevPage}>{`<`}</Arrow>
       {new Array(10).fill("1").map(
         (_, index) =>
@@ -20,6 +24,6 @@ export default function Pagination(props: IPaginationUIProps): JSX.Element {
           ),
       )}
       <Arrow onClick={props.onClickNextPage}>{`>`}</Arrow>
-    </div>
+    </Wrapper>
   );
 }

@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   min-height: 70vh;
   margin: 0 auto;
   padding: 70px 0;
@@ -20,6 +21,11 @@ export const Banner = styled.div`
     top: -240px;
     right: -320px;
     object-fit: contain;
+    @media (max-width: 600px) {
+      width: 170%;
+      top: 0;
+      right: -300px;
+    }
   }
 `;
 export const TextWrapper = styled.div`
@@ -39,6 +45,10 @@ export const ButtonWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+    height: 280px;
+  }
 `;
 export const Button = styled.div`
   width: 100%;

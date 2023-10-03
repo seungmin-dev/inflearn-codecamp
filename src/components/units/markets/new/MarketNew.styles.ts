@@ -1,10 +1,14 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   margin: 80px auto;
   padding: 80px 100px;
   box-shadow: 0 0 10px #ddd;
+  @media (max-width: 600px) {
+    padding: 80px 20px;
+  }
 `;
 export const Title = styled.h2`
   text-align: center;

@@ -5,7 +5,7 @@ export const ListHeader = styled.div`
   display: grid;
   align-items: center;
   text-align: center;
-  grid-template-columns: 80px 380px 80px 140px 100px 120px;
+  grid-template-columns: 0.5fr 5fr 1fr 1fr 1fr 1fr;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 10px 0;
@@ -26,9 +26,8 @@ export const ListBodyLine = styled.div`
   display: grid;
   align-items: center;
   text-align: center;
-  grid-template-columns: 80px 380px 80px 140px 100px 120px;
+  grid-template-columns: 0.5fr 5fr 1fr 1fr 1fr 1fr;
   justify-content: space-between;
-  flex: 1 auto 1.5 1.5;
   padding: 7px 0;
   border-top: 0.5px solid #bdbdbd;
   text-align: center;

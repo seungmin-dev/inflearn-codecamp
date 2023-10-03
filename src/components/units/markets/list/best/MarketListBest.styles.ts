@@ -2,11 +2,17 @@ import styled from "@emotion/styled";
 import { HeartFilled } from "@ant-design/icons";
 
 export const Wrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   height: 300px;
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 20px;
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+  }
 `;
 export const CarouselWrapper = styled.div`
   width: 100%;
@@ -23,24 +29,39 @@ export const Card = styled.div`
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   overflow: hidden;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 export const ImgWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  @media (max-width: 600px) {
+    height: 300px;
+  }
 `;
 export const Img = styled.img`
   width: 100%;
   height: auto;
   object-fit: contain;
+  @media (max-width: 600px) {
+    /* width: auto; */
+    height: 300px;
+    object-fit: cover;
+  }
 `;
 export const Info = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template: "name name name" 1.3fr "remarks remarks remarks" 1fr "price heart count" 1fr / 1fr 0.1fr 0.2fr;
-  padding: 40px 40px 40px 30px;
+  grid-template: "name name name" 1fr "remarks remarks remarks" 1fr "price heart count" 1fr "button button button" 1fr / 1fr 0.1fr 0.2fr;
+  padding: 30px 40px 40px 30px;
   align-items: center;
+  @media (max-width: 600px) {
+    grid-template: "name name name" 0.8fr "remarks remarks remarks" 0.6fr "price heart count" 0.6fr "button button button" 1fr / 1fr 0.1fr 0.2fr;
+    padding: 20px 40px 40px 30px;
+  }
 `;
 export const Name = styled.p`
   grid-area: name;
@@ -68,6 +89,7 @@ export const Count = styled.p`
   font-size: 18px;
 `;
 export const Button = styled.div`
+  grid-area: button;
   width: 120px;
   padding: 10px 20px;
   background-color: black;
@@ -75,7 +97,6 @@ export const Button = styled.div`
   text-align: center;
   font-weight: bold;
   border-radius: 10px;
-  margin-top: 20px;
   transition: transform 0.2s ease 0s;
   cursor: pointer;
   :hover {
@@ -88,6 +109,9 @@ export const NewWrapper = styled.div`
   position: relative;
   border-radius: 30px;
   padding: 50px 0 0 30px;
+  @media (max-width: 600px) {
+    height: 180px;
+  }
   overflow: hidden;
   background: linear-gradient(
     220deg,

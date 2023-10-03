@@ -7,6 +7,9 @@ export const Container = styled.div`
   height: auto;
   border: 1px solid #bdbdbd;
   padding: 20px;
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 export const Title = styled.h2`
   font-size: 18px;

@@ -3,7 +3,8 @@ import { Carousel } from "antd";
 import { memo } from "react";
 
 const Wrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   height: 400px;
   border-radius: 30px;
   overflow: hidden;
@@ -16,6 +17,7 @@ const Wrapper = styled.div`
 `;
 const Img = styled.img`
   width: 100%;
+  max-width: 1200px;
   height: 400px;
   object-fit: cover;
   overflow: hidden;

@@ -8,7 +8,8 @@ import styled from "@emotion/styled";
 
 export const Container = styled.div``;
 export const HeaderWrapper = styled.div`
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   margin: 50px auto;
   align-items: center;
   display: grid;
@@ -44,7 +45,8 @@ export const LocationIcon = styled(EnvironmentOutlined)`
   grid-area: location;
 `;
 export const BoardWrapper = styled.div`
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
 `;
 export const Title = styled.h2`
@@ -65,6 +67,13 @@ export const Image = styled.img`
 `;
 export const Contents = styled.p`
   padding-bottom: 50px;
+`;
+export const YoutubeWrapper = styled.div`
+  width: 500px;
+  /* max-width: 640px; */
+  div {
+    width: 100%;
+  }
 `;
 export const LikeWrapper = styled.div`
   display: grid;

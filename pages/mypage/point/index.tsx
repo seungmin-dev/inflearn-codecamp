@@ -5,7 +5,8 @@ import { MyPonint } from "../../../src/components/units/mypage/point/MyPoint.ind
 import { MyPageMenu } from "../../../src/components/units/mypage/menu";
 
 const Wrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 import { Carousel } from "antd";
 
 export const Wrapper = styled.div`
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
 `;
 export const ItemInfoWrapper = styled.div`

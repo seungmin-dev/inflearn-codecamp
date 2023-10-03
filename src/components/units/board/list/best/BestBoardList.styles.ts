@@ -2,11 +2,16 @@ import { LikeFilled } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 export const CardWrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   height: 300px;
   display: grid;
   grid-template-columns: 3fr 1fr;
   gap: 20px;
+  @media (max-width: 600px) {
+    grid-template: 1fr/1fr;
+    height: 500px;
+  }
 `;
 export const CarouselWrapper = styled.div`
   width: 100%;
@@ -23,6 +28,9 @@ export const Card = styled.div`
   border-radius: 30px;
   display: grid;
   grid-template-columns: 1.5fr 1fr;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 export const CardImg = styled.div`
   width: 100%;
@@ -75,6 +83,9 @@ export const CardLike = styled.span`
 export const NewWrapper = styled.div`
   width: 100%;
   height: 100%;
+  @media (max-width: 600px) {
+    height: 180px;
+  }
   position: relative;
   border-radius: 30px;
   padding: 50px 0 0 30px;

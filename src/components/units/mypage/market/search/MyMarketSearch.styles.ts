@@ -2,17 +2,26 @@ import { SearchOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 
 export const SearchWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 30px;
   border-bottom: 1px solid #bdbdbd;
+  @media (max-width: 600px) {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+  }
 `;
 export const SearchTab = styled.div`
   padding-left: 20px;
   height: 40px;
   display: flex;
   gap: 20px;
+  @media (max-width: 600px) {
+    padding-left: 0;
+  }
 `;
 export const SearchOpt = styled.span`
   font-size: 16px;
@@ -51,6 +60,9 @@ export const SearchInputBox = styled.div`
   background: #f2f2f2;
   margin-right: 10px;
   border-radius: 20px;
+  @media (max-width: 600px) {
+    width: auto;
+  }
 `;
 export const SearchIcon = styled(SearchOutlined)`
   margin: 0 10px 0 15px;
@@ -62,6 +74,9 @@ export const SearchInput = styled.input`
   height: 40px;
   padding-left: 10px;
   margin-right: 10px;
+  @media (max-width: 600px) {
+    width: 380px;
+  }
 `;
 export const SearchDate = styled.input`
   width: 270px;

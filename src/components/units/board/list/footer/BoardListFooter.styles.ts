@@ -1,9 +1,6 @@
 import styled from "@emotion/styled";
 
-export const FooterWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
+export const FooterWrapper = styled.div``;
 export const Button = styled.a`
   display: block;
   width: 150px;

@@ -7,7 +7,8 @@ import { MyPointSellingList } from "./list/MyPointSellingList.index";
 import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   min-height: 70vh;
   padding-top: 30px;

@@ -102,6 +102,8 @@ export const BoardDetailBody = (props: IBoardDetailBodyProps): JSX.Element => {
         ""
       ) : (
         <ReactPlayer
+          width={"100%"}
+          maxWidth={640}
           url={props.data?.fetchBoard?.youtubeUrl}
           style={{ margin: "50px auto 30px" }}
         />

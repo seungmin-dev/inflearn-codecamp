@@ -17,9 +17,10 @@ const LayoutFooter = (): JSX.Element => {
   `;
   const FooterText = styled.h3`
     color: #828282;
+    padding: 0 10px;
   `;
   const SocialWrapper = styled.div`
-    padding: 30px 0 20px;
+    padding: 30px 10px 20px;
     border-bottom: 2px solid #bdbdbd;
     display: flex;
     flex-direction: row-reverse;
@@ -31,6 +32,7 @@ const LayoutFooter = (): JSX.Element => {
   `;
   const Copyright = styled.p`
     color: #bdbdbd;
+    padding: 0 10px;
   `;
   return (
     <FooterWrapper>

@@ -2,67 +2,50 @@ import styled from "@emotion/styled";
 
 export const ListWrapper = styled.div``;
 export const ListHeader = styled.div`
-  display: flex;
+  display: grid;
   width: 100%;
   height: 40px;
   flex-wrap: wrap;
-  justify-content: space-between;
   padding: 10px 0;
   border-top: 1px solid #000;
   font-size: 0.9rem;
-`;
-export const ListHeaderTextIndex = styled.h4`
+  grid-template-columns: 0.5fr 5fr 1.5fr 1fr;
   text-align: center;
-  width: 80px;
 `;
-export const ListHeaderTextTitle = styled.h4`
-  text-align: center;
-  width: 420px;
-`;
-export const ListHeaderTextWriter = styled.h4`
-  text-align: center;
-  width: 120px;
-`;
-export const ListHeaderTextDate = styled.h4`
-  text-align: center;
-  width: 140px;
-`;
+export const ListHeaderTextIndex = styled.h4``;
+export const ListHeaderTextTitle = styled.h4``;
+export const ListHeaderTextWriter = styled.h4``;
+export const ListHeaderTextDate = styled.h4``;
 export const ListBody = styled.div`
   border-bottom: 1px solid #000;
   margin-bottom: 30px;
 `;
 export const ListBodyLine = styled.div`
-  display: flex;
+  display: grid;
   width: 100%;
   height: 40px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   flex: 1 auto 1.5 1.5;
   padding: 7px 0;
   border-top: 0.5px solid #bdbdbd;
+  grid-template-columns: 0.5fr 5fr 1.5fr 1fr;
+  text-align: center;
 `;
 export const ListBodyTextIndex = styled.div`
-  text-align: center;
   color: #4f4f4f;
   font-size: 0.9rem;
-  width: 80px;
 `;
 export const ListBodyTextTitle = styled.div`
-  text-align: center;
   color: #4f4f4f;
   font-size: 0.9rem;
-  width: 420px;
   cursor: pointer;
 `;
 export const ListBodyTextWriter = styled.div`
-  text-align: center;
   color: #4f4f4f;
   font-size: 0.9rem;
-  width: 120px;
 `;
 export const ListBodyTextDate = styled.div`
-  text-align: center;
   color: #4f4f4f;
   font-size: 0.9rem;
-  width: 140px;
 `;

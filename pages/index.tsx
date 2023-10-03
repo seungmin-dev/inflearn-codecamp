@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styled from "@emotion/styled";
-import Link from "next/link";
 import LayoutBanner from "../src/commons/layout/banner";
+import Link from "next/link";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -11,6 +11,10 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 20px;
+  @media (max-width: 600px) {
+    grid-template: 1fr 1fr / 1fr 1fr;
+    height: 400px;
+  }
 `;
 const Menu = styled.div`
   width: 100%;
@@ -30,6 +34,12 @@ const Menu = styled.div`
     transform: translateY(-5px);
     img {
       transform: scale(120%);
+    }
+  }
+  @media (max-width: 600px) {
+    /* height: 200px; */
+    :first-of-type {
+      grid-column: 1/-1;
     }
   }
 `;
@@ -61,46 +71,52 @@ export default function Home(): JSX.Element {
       </Head>
       <LayoutBanner />
       <Wrapper>
-        <Menu
-          style={{
-            background:
-              "linear-gradient(220deg, rgba(194,255,135,1) 0%, rgba(159,222,255,1) 100%)",
-          }}
-        >
-          <TextWrapper>
-            <Title>중고마켓</Title>
-            <Text>중고 물품을 간편하게 사고 팔아보세요</Text>
-          </TextWrapper>
-          <Img src="/images/icons/shopping-cart.png" />
-        </Menu>
-        <Menu
-          style={{
-            background:
-              "linear-gradient(220deg, rgba(137,222,255,1) 0%, rgba(167,159,255,1) 100%)",
-          }}
-        >
-          <TextWrapper>
-            <Title>자유게시판</Title>
-            <Text>
-              사람 사는 이야기
-              <br />
-              해볼까요?
-            </Text>
-          </TextWrapper>
-          <Img src="/images/icons/3d-notes.png" />
-        </Menu>
-        <Menu
-          style={{
-            background:
-              "linear-gradient(220deg, rgba(255,252,137,1) 0%, rgba(255,159,159,1) 100%)",
-          }}
-        >
-          <TextWrapper>
-            <Title>포인트 충전</Title>
-            <Text>포인트로 거래해요</Text>
-          </TextWrapper>
-          <Img src="/images/icons/3d-piggy-bank.png" />
-        </Menu>
+        <Link href="/markets">
+          <Menu
+            style={{
+              background:
+                "linear-gradient(220deg, rgba(194,255,135,1) 0%, rgba(159,222,255,1) 100%)",
+            }}
+          >
+            <TextWrapper>
+              <Title>중고마켓</Title>
+              <Text>중고 물품을 간편하게 사고 팔아보세요</Text>
+            </TextWrapper>
+            <Img src="/images/icons/shopping-cart.png" />
+          </Menu>
+        </Link>
+        <Link href="/boards">
+          <Menu
+            style={{
+              background:
+                "linear-gradient(220deg, rgba(137,222,255,1) 0%, rgba(167,159,255,1) 100%)",
+            }}
+          >
+            <TextWrapper>
+              <Title>자유게시판</Title>
+              <Text>
+                사람 사는 이야기
+                <br />
+                해볼까요?
+              </Text>
+            </TextWrapper>
+            <Img src="/images/icons/3d-notes.png" />
+          </Menu>
+        </Link>
+        <Link href="/point">
+          <Menu
+            style={{
+              background:
+                "linear-gradient(220deg, rgba(255,252,137,1) 0%, rgba(255,159,159,1) 100%)",
+            }}
+          >
+            <TextWrapper>
+              <Title>포인트 충전</Title>
+              <Text>포인트로 거래해요</Text>
+            </TextWrapper>
+            <Img src="/images/icons/3d-piggy-bank.png" />
+          </Menu>
+        </Link>
       </Wrapper>
     </>
   );

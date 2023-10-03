@@ -13,7 +13,8 @@ interface IBoardListInterface {
   data: IBoard[];
 }
 export const Container = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   margin: 20px auto;
 `;
 export default function BoardList(props: IBoardListInterface): JSX.Element {

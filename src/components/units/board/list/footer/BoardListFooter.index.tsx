@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { FooterWrapper, Button } from "./BoardListFooter.styles";
+import { FooterWrapper } from "./BoardListFooter.styles";
 interface IBoardListFooterProps {
   children: JSX.Element;
 }

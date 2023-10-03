@@ -5,7 +5,8 @@ import { MyProfile } from "../../src/components/units/mypage/profile/MyProfile.i
 import styled from "@emotion/styled";
 
 const Wrapper = styled.div`
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   min-height: 70vh;
   margin: 0 auto;
   display: flex;
