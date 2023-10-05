@@ -52,7 +52,6 @@ export const Login = (): JSX.Element => {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
-  useAuth();
 
   return (
     <S.Wrapper>

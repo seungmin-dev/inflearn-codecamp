@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { pathState, userInfoState } from "../../stores";
+import { accessTokenState, pathState, userInfoState } from "../../stores";
 
 export const useAuth = (): void => {
   const router = useRouter();
-  const [userInfo] = useRecoilState(userInfoState);
+  const [accessToken] = useRecoilState(accessTokenState);
   const [path] = useRecoilState(pathState);
 
   useEffect(() => {
-    if (userInfo.id === "") {
+    if (accessToken === "") {
       if (!router.asPath.startsWith("/login")) {
         alert("로그인 후 이용 가능합니다.");
         void router.push("/login");
@@ -17,5 +17,5 @@ export const useAuth = (): void => {
     } else {
       if (router.asPath.startsWith("/login")) void router.push(path);
     }
-  }, [userInfo]);
+  }, [accessToken]);
 };

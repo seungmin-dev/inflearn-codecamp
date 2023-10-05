@@ -10,5 +10,5 @@ export const usePath = (): void => {
   useEffect(() => {
     if (!router.asPath.startsWith("/login"))
       setPath(router.asPath === "" ? "/" : router.asPath);
-  }, []);
+  }, [router]);
 };
