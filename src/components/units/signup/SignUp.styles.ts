@@ -1,24 +1,32 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 600px;
-  margin: 60px auto;
+  width: 500px;
+  min-height: 70vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
 `;
 export const Title = styled.h2`
   text-align: center;
-  margin-bottom: 40px;
-  font-size: 2rem;
-`;
-export const InputTitle = styled.h4`
-  padding: 6px 10px;
+  margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: bold;
 `;
 export const Input = styled.input`
   width: 100%;
-  height: 44px;
+  height: 52px;
   border: none;
-  background-color: #f2f2f2;
-  padding: 2px 14px;
+  padding: 0 15px;
   border-radius: 10px;
+  font-size: 14px;
+  line-height: 50px;
+  border: 2px solid #d1d6db;
+  ::placeholder {
+    color: #8b95a1;
+  }
 `;
 export const ErrorText = styled.div`
   width: 100%;
@@ -33,18 +41,26 @@ export const Button = styled.button`
   border: none;
   background-color: black;
   color: #fff;
+  font-size: 16px;
+  font-weight: bold;
   border-radius: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
-`;
-export const Anchor = styled.a`
-  text-decoration: none;
-  cursor: pointer;
-  color: #ffd600;
+  transition: background-color 0.2s ease 0s;
   :hover {
-    color: black;
+    background-color: #484848;
+  }
+`;
+export const Login = styled.a`
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  color: #08f;
+  cursor: pointer;
+  transition: color 0.2s ease 0s;
+  :hover {
+    color: #0064d9;
   }
 `;
