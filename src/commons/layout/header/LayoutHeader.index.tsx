@@ -10,6 +10,7 @@ import { LayoutNavigation } from "../navigation/LayoutNavigation.index";
 import { usePath } from "../../hooks/cutoms/usePath";
 import { Dispatch, SetStateAction } from "react";
 import { useUserInfo } from "../../hooks/cutoms/useUserInfo";
+import { useRouter } from "next/router";
 
 interface ILayoutHeaderProps {
   setNav: Dispatch<SetStateAction<boolean>>;
@@ -22,6 +23,7 @@ export default function LayoutHeader({
   usePath();
   useUserInfo();
 
+  const router = useRouter();
   const [userInfo] = useRecoilState(userInfoState);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const resetUserInfo = useResetRecoilState(userInfoState);
@@ -30,7 +32,7 @@ export default function LayoutHeader({
   const [logout] = useMutationLogoutUser();
   const onClickLogout = async (): Promise<void> => {
     try {
-      await logout();
+      await logout().then(() => router.push("/"));
       void client.clearStore();
       resetUserInfo();
       resetAccessToken();
