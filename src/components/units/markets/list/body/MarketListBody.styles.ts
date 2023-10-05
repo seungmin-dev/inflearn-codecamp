@@ -45,14 +45,14 @@ export const Row = styled.div`
       "image name name price" 0.9fr
       "image remarks remarks price" 0.5fr
       "image tags tags price" 0.5fr
-      "image seller count price" 1fr / 0.27fr 0.3fr 0.9fr 0.3fr;
+      "image seller count price" 1fr / 0.27fr 0.8fr 0.9fr 1fr;
   }
 `;
 export const ItemImg = styled.img`
   grid-area: image;
   width: 160px;
   height: 160px;
-  margin-right: 10px;
+  margin-right: 20px;
 `;
 export const Name = styled.p`
   grid-area: name;
@@ -93,7 +93,7 @@ export const Seller = styled.div`
   display: flex;
   align-items: center;
   @media (max-width: 600px) {
-    margin-right: 10px;
+    /* margin-right: 10px; */
   }
 `;
 export const Heart = styled(HeartFilled)`

@@ -16,9 +16,14 @@ export const Title = styled.h2`
   text-align: center;
   padding-bottom: 20px;
 `;
+export const Text = styled.p`
+  text-align: center;
+  font-size: 16px;
+  color: #aaa;
+`;
 export const Item = styled.div`
   width: 160px;
-  height: 200px;
+  height: auto;
   margin-bottom: 20px;
   padding: 10px;
   border: 1px solid #bdbdbd;

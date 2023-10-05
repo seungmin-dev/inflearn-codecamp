@@ -43,19 +43,17 @@ export const ImgWrapper = styled.div`
 `;
 export const Img = styled.img`
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   @media (max-width: 600px) {
-    /* width: auto; */
     height: 300px;
-    object-fit: cover;
   }
 `;
 export const Info = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template: "name name name" 1fr "remarks remarks remarks" 1fr "price heart count" 1fr "button button button" 1fr / 1fr 0.1fr 0.2fr;
+  grid-template: "name name name" 1fr "remarks remarks remarks" 0.7fr "price heart count" 0.7fr "button button button" 1fr / 1fr 0.1fr 0.2fr;
   padding: 30px 40px 40px 30px;
   align-items: center;
   @media (max-width: 600px) {
@@ -65,7 +63,7 @@ export const Info = styled.div`
 `;
 export const Name = styled.p`
   grid-area: name;
-  font-size: 24px;
+  font-size: 22px;
   word-wrap: break-word;
 `;
 export const Remarks = styled.p`
@@ -75,18 +73,18 @@ export const Remarks = styled.p`
 `;
 export const Price = styled.h3`
   grid-area: price;
-  font-size: 24px;
+  font-size: 22px;
 `;
 export const Heart = styled(HeartFilled)`
   grid-area: heart;
   color: #ffd600;
-  font-size: 1.5rem;
+  font-size: 22px;
   text-align: right;
 `;
 export const Count = styled.p`
   grid-area: count;
   text-align: center;
-  font-size: 18px;
+  font-size: 22px;
 `;
 export const Button = styled.div`
   grid-area: button;

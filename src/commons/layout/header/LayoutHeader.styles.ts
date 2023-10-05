@@ -38,6 +38,15 @@ export const LoginButton = styled.button`
   border-radius: 10px;
   font-weight: bold;
   cursor: pointer;
+  @media (max-width: 600px) {
+    display: none;
+  }
+`;
+export const MobLoginButton = styled.div`
+  display: none;
+  @media (max-width: 600px) {
+    display: block;
+  }
 `;
 export const UserInfoWrapper = styled.div`
   width: 200px;

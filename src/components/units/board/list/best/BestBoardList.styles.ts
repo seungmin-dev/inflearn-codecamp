@@ -53,11 +53,11 @@ export const CardInfo = styled.div`
 `;
 export const CardTitle = styled.h2`
   grid-area: title;
-  font-size: 24px;
+  font-size: 22px;
 `;
 export const CardWriter = styled.span`
   grid-area: name;
-  font-size: 20px;
+  font-size: 18px;
   display: flex;
   gap: 5px;
 `;
@@ -66,18 +66,18 @@ export const CardProfileImg = styled.img`
   height: 30px;
 `;
 export const CardThumbs = styled(LikeFilled)`
+  color: #ffd600;
   grid-area: thumb;
   font-size: 20px;
-  color: #ffd600;
 `;
 export const CardCreatedAt = styled.span`
   grid-area: date;
-  font-size: 18px;
+  font-size: 16px;
   color: #828282;
 `;
 export const CardLike = styled.span`
   grid-area: count;
-  font-size: 18px;
+  font-size: 16px;
   padding-top: 5px;
 `;
 export const NewWrapper = styled.div`

@@ -15,6 +15,7 @@ interface IBoardListInterface {
 export const Container = styled.div`
   width: 100%;
   max-width: 1200px;
+  margin: 0 auto;
 `;
 export default function BoardList(props: IBoardListInterface): JSX.Element {
   const { data, refetch } = useQueryFetchBoards();
