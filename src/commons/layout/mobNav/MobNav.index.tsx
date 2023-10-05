@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 
 const Wrapper = styled.div`
   position: fixed;
@@ -24,6 +26,7 @@ const Item = styled.li`
   list-style: none;
   width: 100%;
   padding: 20px 0;
+  cursor: pointer;
   a {
     display: block;
     width: 100%;
@@ -32,29 +35,28 @@ const Item = styled.li`
     text-align: center;
   }
 `;
-export const MobNav = (): JSX.Element => {
+interface IMobNavProps {
+  setNav: Dispatch<SetStateAction<boolean>>;
+}
+export const MobNav = ({ setNav }: IMobNavProps): JSX.Element => {
+  const router = useRouter();
+  const onClickNav = (url: string) => () => {
+    router.push(url).then(() => setNav(false));
+  };
   return (
     <Wrapper>
       <Menu>
-        <Item>
-          <Link href="/boards">
-            <a>자유게시판</a>
-          </Link>
+        <Item onClick={onClickNav("/boards")}>
+          <a>자유게시판</a>
         </Item>
-        <Item>
-          <Link href="/markets">
-            <a>중고마켓</a>
-          </Link>
+        <Item onClick={onClickNav("/markets")}>
+          <a>중고마켓</a>
         </Item>
-        <Item>
-          <Link href="/point">
-            <a>포인트 충전</a>
-          </Link>
+        <Item onClick={onClickNav("/point")}>
+          <a>포인트 충전</a>
         </Item>
-        <Item>
-          <Link href="/mypage">
-            <a>마이페이지</a>
-          </Link>
+        <Item onClick={onClickNav("/mypage")}>
+          <a>마이페이지</a>
         </Item>
       </Menu>
     </Wrapper>

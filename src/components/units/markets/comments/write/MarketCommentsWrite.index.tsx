@@ -19,7 +19,6 @@ interface IMarketCommentsWriteProps {
 export const MarketCommentsWrite = (
   props: IMarketCommentsWriteProps,
 ): JSX.Element => {
-  console.log("marketCommentsWrite : ", props.data);
   const router = useRouter();
   const [isComplete, setIsComplete] = useState(false);
   const [prevRating, setPrevRating] = useState(0);

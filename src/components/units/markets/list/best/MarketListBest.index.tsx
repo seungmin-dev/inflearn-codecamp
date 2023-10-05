@@ -31,7 +31,7 @@ export default function MarketListBest(
         {props.data && props.data.length === 4 ? (
           <Carousel>
             {props.data.map((el) => (
-              <div>
+              <div key={uuidv4()}>
                 <S.Card>
                   <S.ImgWrapper>
                     <S.Img
@@ -44,7 +44,7 @@ export default function MarketListBest(
                     <S.Price>{replaceNumberComma(el.price)}원</S.Price>
                     <S.Heart />
                     <S.Count>{el.pickedCount}</S.Count>
-                    <Link href={`/markets/${el._id}`} key={uuidv4()}>
+                    <Link href={`/markets/${el._id}`}>
                       <S.Button onMouseOver={prefetchPage(el._id)}>
                         보러가기 →
                       </S.Button>

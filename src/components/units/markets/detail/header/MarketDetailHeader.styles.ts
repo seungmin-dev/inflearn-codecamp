@@ -12,6 +12,9 @@ export const Wrapper = styled.div`
     "image date link location" 0.8fr / 0.35fr 4fr 0.2fr 0.2fr;
   padding-bottom: 20px;
   border-bottom: 1px solid #bdbdbd;
+  @media (max-width: 600px) {
+    gap: 10px;
+  }
 `;
 export const SellerPic = styled.img`
   grid-area: image;

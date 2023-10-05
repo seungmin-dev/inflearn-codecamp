@@ -16,8 +16,8 @@ export default function Layout(props: ILayoutProps): JSX.Element {
   const [nav, setNav] = useState(false);
   return (
     <>
-      <LayoutHeader setNav={setNav} />
-      {nav ? <MobNav /> : null}
+      <LayoutHeader setNav={setNav} nav={nav} />
+      {nav ? <MobNav setNav={setNav} /> : null}
       <ChildWrapper>{props.children}</ChildWrapper>
       <LayoutFooter />
     </>

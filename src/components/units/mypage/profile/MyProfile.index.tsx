@@ -96,7 +96,11 @@ export const MyProfile = (): JSX.Element => {
               (event.currentTarget.src = "/images/icons/profile.png")
             }
           />
-          <S.SettingIcon isProfile={router.pathname === "/mypage/profile"} />
+          <S.IconWrapper
+            isProfile={router.pathname.startsWith("/mypage/profile")}
+          >
+            <S.SettingIcon />
+          </S.IconWrapper>
         </S.UserPicWrapper>
         <S.UserName>{userInfo.name}</S.UserName>
       </S.InfoWrapper>

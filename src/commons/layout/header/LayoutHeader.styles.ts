@@ -66,7 +66,12 @@ export const UserName = styled.span`
 `;
 export const MobileNav = styled.div`
   display: none;
+  cursor: pointer;
+  transition: all 0.2s ease 0s;
   @media (max-width: 600px) {
     display: block;
+  }
+  :active {
+    transform: rotateZ(20deg);
   }
 `;

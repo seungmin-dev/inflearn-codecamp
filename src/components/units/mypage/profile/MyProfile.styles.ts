@@ -29,6 +29,10 @@ export const UserPic = styled.img`
   height: 80px;
   border-radius: 100%;
 `;
+export const IconWrapper = styled.div`
+  display: ${(props: IProfileProps) => (props.isProfile ? "visible" : "none")};
+  cursor: ${(props: IProfileProps) => (props.isProfile ? "pointer" : "")};
+`;
 export const SettingIcon = styled(SettingOutlined)`
   position: absolute;
   bottom: 0;
@@ -38,8 +42,6 @@ export const SettingIcon = styled(SettingOutlined)`
   color: black;
   border-radius: 100%;
   font-size: 14px;
-  display: ${(props: IProfileProps) => (props.isProfile ? "visible" : "none")};
-  cursor: ${(props: IProfileProps) => (props.isProfile ? "pointer" : "")};
 `;
 interface IProfileProps {
   isProfile: boolean;

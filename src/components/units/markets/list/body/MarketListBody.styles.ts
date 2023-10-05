@@ -52,9 +52,7 @@ export const ItemImg = styled.img`
   grid-area: image;
   width: 160px;
   height: 160px;
-  @media (max-width: 600px) {
-    margin-right: 10px;
-  }
+  margin-right: 10px;
 `;
 export const Name = styled.p`
   grid-area: name;
@@ -94,6 +92,9 @@ export const Seller = styled.div`
   color: #4f4f4f;
   display: flex;
   align-items: center;
+  @media (max-width: 600px) {
+    margin-right: 10px;
+  }
 `;
 export const Heart = styled(HeartFilled)`
   color: #ffd600;

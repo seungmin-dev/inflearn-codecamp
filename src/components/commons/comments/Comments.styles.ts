@@ -11,7 +11,7 @@ export const CommentItem = styled.div`
   grid-template:
     "picture writer rate edit delete" 0.5fr
     "picture contents contents edit delete" 1.5fr
-    "picture date date edit delete" 0.4fr / 0.3fr 0.4fr 4fr 0.15fr 0.15fr;
+    "picture date date edit delete" 0.4fr / 0.3fr 1fr 4fr 0.15fr 0.15fr;
   width: 100%;
   padding: 15px 0;
   border-bottom: 1px solid #bdbdbd;

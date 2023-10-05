@@ -9,7 +9,7 @@ export const ListHeader = styled.div`
   padding: 10px 0;
   border-top: 1px solid #000;
   font-size: 0.9rem;
-  grid-template-columns: 0.5fr 5fr 1.5fr 1fr;
+  grid-template-columns: 0.5fr 4fr 1.5fr 1.5fr;
   text-align: center;
 `;
 export const ListHeaderTextIndex = styled.h4``;
@@ -29,7 +29,7 @@ export const ListBodyLine = styled.div`
   flex: 1 auto 1.5 1.5;
   padding: 7px 0;
   border-top: 0.5px solid #bdbdbd;
-  grid-template-columns: 0.5fr 5fr 1.5fr 1fr;
+  grid-template-columns: 0.5fr 4fr 1.5fr 1.5fr;
   text-align: center;
 `;
 export const ListBodyTextIndex = styled.div`

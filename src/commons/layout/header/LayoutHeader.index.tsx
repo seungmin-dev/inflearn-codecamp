@@ -12,23 +12,26 @@ import { Dispatch, SetStateAction } from "react";
 
 interface ILayoutHeaderProps {
   setNav: Dispatch<SetStateAction<boolean>>;
+  nav: boolean;
 }
 export default function LayoutHeader({
   setNav,
+  nav,
 }: ILayoutHeaderProps): JSX.Element {
   usePath();
 
   const [userInfo] = useRecoilState(userInfoState);
-  const [, setAccessToken] = useRecoilState(accessTokenState);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
   const resetUserInfo = useResetRecoilState(userInfoState);
+  const resetAccessToken = useResetRecoilState(accessTokenState);
   const client = useApolloClient();
   const [logout] = useMutationLogoutUser();
   const onClickLogout = async (): Promise<void> => {
     try {
       await logout();
-      setAccessToken("");
       void client.clearStore();
       resetUserInfo();
+      resetAccessToken();
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
@@ -60,37 +63,53 @@ export default function LayoutHeader({
               </a>
             </Link>
           ) : (
-            <S.UserInfoWrapper>
-              <S.UserPic
-                src={`https://storage.googleapis.com/${userInfo?.picture}`}
-                onError={(event) =>
-                  (event.currentTarget.src = "/images/icons/profile.png")
-                }
-              />
-              <Dropdown menu={{ items }} placement="bottomLeft">
+            <Dropdown menu={{ items }} placement="bottomLeft">
+              <S.UserInfoWrapper>
+                <S.UserPic
+                  src={`https://storage.googleapis.com/${userInfo?.picture}`}
+                  onError={(event) =>
+                    (event.currentTarget.src = "/images/icons/profile.png")
+                  }
+                />
                 <S.UserName style={{ color: "#ffd600", fontWeight: "bold" }}>
                   {userInfo?.name}
                 </S.UserName>
-              </Dropdown>
-            </S.UserInfoWrapper>
+              </S.UserInfoWrapper>
+            </Dropdown>
           )}
         </S.SessionWrapper>
         <S.MobileNav onClick={onClickMobNav}>
-          <svg
-            style={{ width: "40px" }}
-            fill="none"
-            stroke="black"
-            strokeWidth={1.5}
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-            />
-          </svg>
+          {!nav ? (
+            <svg
+              fill="none"
+              stroke="black"
+              strokeWidth={1.5}
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          ) : (
+            <svg
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.5}
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          )}
         </S.MobileNav>
       </S.Header>
     </S.HeaderWrapper>
