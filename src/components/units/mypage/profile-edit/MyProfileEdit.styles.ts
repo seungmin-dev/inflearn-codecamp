@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 
 export const Wrapper = styled.div`
-  width: 900px;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
   padding: 40px 20px 0;
 `;
@@ -9,16 +10,27 @@ export const Title = styled.h2`
   font-size: 24px;
   padding-bottom: 35px;
 `;
+export const Form = styled.form`
+  /* width: 100%; */
+`;
 export const InputBox = styled.div`
   display: grid;
-  grid-template-columns: 250px 650px;
+  width: 100%;
+  grid-template-columns: 1fr 3fr;
   align-items: center;
   margin-bottom: 20px;
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    /* grid-template-rows: 1fr 0.5fr; */
+  }
 `;
 export const Span = styled.span`
   font-size: 16px;
   color: #4f4f4f;
   font-weight: bold;
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 export const Input = styled.input`
   border: none;
@@ -37,6 +49,9 @@ export const ErrorMessage = styled.span`
   padding-top: 5px;
   padding-left: 10px;
   color: #ffd600;
+  @media (max-width: 600px) {
+    grid-column-start: 1;
+  }
 `;
 export const Button = styled.button`
   display: block;

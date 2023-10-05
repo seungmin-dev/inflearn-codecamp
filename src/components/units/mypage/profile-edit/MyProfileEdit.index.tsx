@@ -36,7 +36,7 @@ export const MyProfileEdit = (): JSX.Element => {
   return (
     <S.Wrapper>
       <S.Title>비밀번호 변경</S.Title>
-      <form onSubmit={handleSubmit(onValid)}>
+      <S.Form onSubmit={handleSubmit(onValid)}>
         <S.InputBox>
           <S.Span>현재 비밀번호</S.Span>
           <S.Input
@@ -71,7 +71,7 @@ export const MyProfileEdit = (): JSX.Element => {
           </S.ErrorMessage>
         </S.InputBox>
         <S.Button isCompleted={formState.isValid}>비밀번호 변경</S.Button>
-      </form>
+      </S.Form>
     </S.Wrapper>
   );
 };
