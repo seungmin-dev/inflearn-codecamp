@@ -7,6 +7,7 @@ const { persistAtom } = recoilPersist();
 export const accessTokenState = atom({
   key: "accessTokenState",
   default: "",
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const userIdState = atom({

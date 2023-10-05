@@ -53,7 +53,6 @@ export const Login = (): JSX.Element => {
     }
   };
   useAuth();
-  useUserInfo();
 
   return (
     <S.Wrapper>

@@ -9,6 +9,7 @@ import { accessTokenState, userInfoState } from "../../stores";
 import { LayoutNavigation } from "../navigation/LayoutNavigation.index";
 import { usePath } from "../../hooks/cutoms/usePath";
 import { Dispatch, SetStateAction } from "react";
+import { useUserInfo } from "../../hooks/cutoms/useUserInfo";
 
 interface ILayoutHeaderProps {
   setNav: Dispatch<SetStateAction<boolean>>;
@@ -19,6 +20,7 @@ export default function LayoutHeader({
   nav,
 }: ILayoutHeaderProps): JSX.Element {
   usePath();
+  useUserInfo();
 
   const [userInfo] = useRecoilState(userInfoState);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
