@@ -55,10 +55,10 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
               tags: tagsArr,
               images: resultUrls,
               useditemAddress: {
-                address: data.useditemAddress.address,
-                addressDetail: data.useditemAddress.addressDetail,
-                lat: Number(data.useditemAddress.lat),
-                lng: Number(data.useditemAddress.lng),
+                address: data.address,
+                addressDetail: data.addressDetail,
+                lat: Number(data.lat),
+                lng: Number(data.lng),
               },
             },
             useditemId: props.data.fetchUseditem._id,
@@ -75,6 +75,7 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
         });
         void router.push(`/markets/${result.data.updateUseditem._id}`);
       } else {
+        console.log("data : ", data);
         const result = await createUseditem({
           variables: {
             createUseditemInput: {
@@ -85,10 +86,10 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
               tags: tagsArr,
               images: resultUrls,
               useditemAddress: {
-                address: data.useditemAddress.address,
-                addressDetail: data.useditemAddress.addressDetail,
-                lat: Number(data.useditemAddress.lat),
-                lng: Number(data.useditemAddress.lng),
+                address: data.address,
+                addressDetail: data.addressDetail,
+                lat: Number(data.lat),
+                lng: Number(data.lng),
               },
             },
           },

@@ -1,105 +1,97 @@
-import { useRecoilState } from "recoil";
-import { CommentsWrite } from "../../../../commons/comments/write/CommentsWrite.index";
-import { userInfoState } from "../../../../../commons/stores";
-import { Modal } from "antd";
+import { useRef } from "react";
+import type { Dispatch, SetStateAction } from "react";
+import * as S from "./MarketCommentsWrite.styles";
 import { useMutationCreateUseditemQuestion } from "../../../../../commons/hooks/mutations/useMutationCreateUseditemQuestion";
-import { useRouter } from "next/router";
-import type {
-  ICommentFormProps,
-  IcommentMarketProps,
-} from "../../../../commons/comments/Comments.types";
-import { useState, type Dispatch, type SetStateAction } from "react";
 import { useMutationUpdateUseditemQuestion } from "../../../../../commons/hooks/mutations/useMutationUpdateUseditemQuestion";
-
+import type {
+  IUseditemQuestion,
+  IUseditemQuestionAnswer,
+} from "../../../../../commons/types/generated/types";
+import { Modal } from "antd";
 interface IMarketCommentsWriteProps {
-  data?: IcommentMarketProps;
+  useditemId?: string;
+  questionId?: string;
   isEdit?: boolean;
+  data?: IUseditemQuestion | IUseditemQuestionAnswer;
   setIsEdit?: Dispatch<SetStateAction<boolean>>;
 }
+
 export const MarketCommentsWrite = (
   props: IMarketCommentsWriteProps,
 ): JSX.Element => {
-  const router = useRouter();
-  const [isComplete, setIsComplete] = useState(false);
-  const [prevRating, setPrevRating] = useState(0);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [useCreate] = useMutationCreateUseditemQuestion();
+  const [useEdit] = useMutationUpdateUseditemQuestion();
 
-  const [userInfo] = useRecoilState(userInfoState);
-  const [createMarketComment] = useMutationCreateUseditemQuestion();
-  const [updateMarketComment] = useMutationUpdateUseditemQuestion();
-
-  const onValid = async (data: ICommentFormProps): Promise<void> => {
-    if (!userInfo.id) {
-      Modal.error({ content: "댓글 작성은 로그인 후 가능합니다." });
-      void router.push("/login");
-    }
-    if (typeof router.query.useditemId !== "string") {
-      Modal.error({ content: "시스템에 이상이 있습니다." });
-      return;
-    }
+  const onClickEdit = async (): Promise<void> => {
     try {
-      if (!props.isEdit) {
-        setIsComplete(true);
-        setPrevRating(data.rating);
-        await createMarketComment({
-          // 댓글 등록
-          variables: {
-            createUseditemQuestionInput: {
-              contents: data.contents,
-            },
-            useditemId: router.query.useditemId,
+      await useEdit({
+        variables: {
+          updateUseditemQuestionInput: {
+            contents: textareaRef.current.value,
           },
-          update(cache, { data }) {
-            cache.modify({
-              fields: {
-                fetchUseditemQuestions: (prev) => {
-                  return [data.createUseditemQuestion, ...prev];
-                },
+          useditemQuestionId: props.questionId,
+        },
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchUseditemQuestions: (prev) => {
+                return [data.updateUseditemQuestion, ...prev];
               },
-            });
-          },
-        });
-        setIsComplete(false);
-        if (props.setIsEdit) props.setIsEdit(false);
-      } else {
-        // 댓글 수정
-        if (!data.contents) {
-          Modal.error({ content: "수정된 내용이 없습니다." });
-          return;
-        }
-        await updateMarketComment({
-          variables: {
-            updateUseditemQuestionInput: {
-              contents: data.contents,
             },
-            useditemQuestionId: props.data?._id,
+          });
+        },
+      });
+      props.setIsEdit(false);
+      textareaRef.current.value = "";
+      Modal.success({ content: "댓글이 정상적으로 수정되었습니다." });
+    } catch (error) {
+      if (error instanceof Error) Modal.error({ content: error.message });
+    }
+  };
+  const onClickCreate = async (): Promise<void> => {
+    try {
+      await useCreate({
+        variables: {
+          createUseditemQuestionInput: {
+            contents: textareaRef.current.value,
           },
-          update(cache, { data }) {
-            cache.modify({
-              id: cache.identify(data),
-              fields: {
-                fetchUseditemQuestions: (prev) => {
-                  console.log(data.updateUseditemQuestion);
-
-                  return [data.updateUseditemQuestion, ...prev];
-                },
+          useditemId: props.useditemId,
+        },
+        update(cache, { data }) {
+          cache.modify({
+            fields: {
+              fetchUseditemQuestions: (prev) => {
+                return [data.createUseditemQuestion, ...prev];
               },
-            });
-          },
-        });
-        props.setIsEdit(false);
-      }
+            },
+          });
+        },
+      });
+      textareaRef.current.value = "";
+      Modal.success({ content: "댓글이 정상적으로 등록되었습니다." });
     } catch (error) {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
   return (
-    <CommentsWrite
-      onValid={onValid}
-      kind="market"
-      data={props.data}
-      isEdit={props.isEdit}
-      isComplete={isComplete}
-      prevRating={prevRating}
-    />
+    <S.Wrapper>
+      <S.TextArea
+        ref={textareaRef}
+        maxLength={100}
+        placeholder={
+          "개인정보를 공유 및 요청하거나, 명예 훼손, 무단 광고, 불법 정보 유포시 모니터링 후 삭제될 수 있으며, 이에 대한 민형사상 책임은 게시자에게 있습니다."
+        }
+        defaultValue={props.data?.contents}
+      ></S.TextArea>
+      <S.Bottom>
+        <S.Length>{textareaRef.current?.value.length} / 100</S.Length>
+        {props.isEdit ? (
+          <S.Button onClick={onClickEdit}>수정하기</S.Button>
+        ) : (
+          <S.Button onClick={onClickCreate}>문의하기</S.Button>
+        )}
+      </S.Bottom>
+    </S.Wrapper>
   );
 };

@@ -21,7 +21,7 @@ export default function MarketDetail(): JSX.Element {
         sellerId={data?.fetchUseditem.seller?._id}
         buyerId={data?.fetchUseditem.buyer?._id}
       />
-      <MarketComments />
+      <MarketComments useditemId={id} />
     </S.Wrapper>
   );
 }

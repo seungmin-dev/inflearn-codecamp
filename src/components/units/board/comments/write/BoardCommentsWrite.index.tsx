@@ -8,6 +8,8 @@ import type {
   IcommentBoardProps,
 } from "../../../../commons/comments/Comments.types";
 import { useState, type Dispatch, type SetStateAction } from "react";
+import { useRecoilState } from "recoil";
+import { userInfoState } from "../../../../../commons/stores";
 
 interface IBoardCommentWrite {
   data?: IcommentBoardProps;
@@ -16,6 +18,7 @@ interface IBoardCommentWrite {
 }
 export const BoardCommentsWrite = (props: IBoardCommentWrite): JSX.Element => {
   const router = useRouter();
+  const [userInfo] = useRecoilState(userInfoState);
   const [isComplete, setIsComplete] = useState(false);
   const [prevRating, setPrevRating] = useState(0);
   const [createBoardComment] = useMutationCreateBoardComment();
@@ -34,7 +37,7 @@ export const BoardCommentsWrite = (props: IBoardCommentWrite): JSX.Element => {
         await createBoardComment({
           variables: {
             createBoardCommentInput: {
-              writer: data.writer,
+              writer: data.writer ?? userInfo.name,
               password: data.password,
               contents: data.contents,
               rating: data.rating ?? prevRating,

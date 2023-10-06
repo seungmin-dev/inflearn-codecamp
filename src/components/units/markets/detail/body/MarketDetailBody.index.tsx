@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import { userInfoState } from "../../../../../commons/stores";
 import { replaceNumberComma } from "../../../../../commons/libraries/utils";
 import Map from "../../../../commons/map";
+import { useEffect } from "react";
 
 interface IMarketDetailBodyProps {
   data: Pick<IQuery, "fetchUseditem">;
@@ -27,7 +28,7 @@ export default function MarketDetailBody(
       void router.push("/login");
     }
     await toggleHeart({
-      variables: { useditemId: props.data?.fetchUseditem._id },
+      variables: { useditemId: props.data?.fetchUseditem?._id },
       update(cache) {
         cache.modify({
           fields: {

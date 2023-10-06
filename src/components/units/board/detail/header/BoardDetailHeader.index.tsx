@@ -10,6 +10,7 @@ interface IBoardDetailHeaderProps {
 export const BoardDetailHeader = (
   props: IBoardDetailHeaderProps,
 ): JSX.Element => {
+  console.log(props.data?.fetchBoard);
   const onClickLink = (): void => {
     void navigator.clipboard.writeText(window.location.href);
   };
