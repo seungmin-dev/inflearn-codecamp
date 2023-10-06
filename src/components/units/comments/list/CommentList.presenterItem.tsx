@@ -12,7 +12,7 @@ import type {
 } from "../../../../commons/types/generated/types";
 import { DELETE_BOARD_COMMENT } from "../write/CommentWrite.queries";
 import { FETCH_BOARD_COMMENTS } from "./CommentList.queries";
-import CommentWrite from "../write/CommentWrite.container";
+import CommentWrite from "../write/CommentWrite.index";
 
 export default function CommentListUIItem(
   props: ICommentListUIItemProps,
@@ -34,7 +34,6 @@ export default function CommentListUIItem(
   const onClickDelete = async (
     event: MouseEvent<HTMLButtonElement>,
   ): Promise<void> => {
-    // const password = prompt("비밀번호를 입력하세요.");
     try {
       await deleteBoardComment({
         variables: {
@@ -54,10 +53,8 @@ export default function CommentListUIItem(
     }
   };
 
-  const onClickOpenDeleteModal = (
-    event: MouseEvent<HTMLImageElement>,
-  ): void => {
-    setIsOpenDeleteModal(true);
+  const onClickOpenDeleteModal = (): void => {
+    setIsOpenDeleteModal((prev) => !prev);
   };
 
   const onChangeDeletePassword = (
@@ -68,7 +65,11 @@ export default function CommentListUIItem(
   return (
     <>
       {isOpenDeleteModal && (
-        <S.PasswordModal open={true} onOk={onClickDelete}>
+        <S.PasswordModal
+          open={true}
+          onOk={onClickDelete}
+          onCancel={onClickOpenDeleteModal}
+        >
           <div>비밀번호 입력: </div>
           <S.PasswordInput type="password" onChange={onChangeDeletePassword} />
         </S.PasswordModal>
