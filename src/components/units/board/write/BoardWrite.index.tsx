@@ -15,6 +15,8 @@ import dynamic from "next/dynamic";
 import { useMuatationUploadFile } from "../../../../commons/hooks/mutations/useMutationUploadFile";
 import { BoardFormSchema } from "../../../../commons/validation/yup";
 import { Upload } from "../../../commons/upload/Upload.index";
+import { useRecoilState } from "recoil";
+import { accessTokenState, userInfoState } from "../../../../commons/stores";
 
 interface IBoardFormProps {
   writer: string;
@@ -35,6 +37,10 @@ const ReactQuill = dynamic(async () => await import("react-quill"), {
 });
 export const BoardWrite = (props: IBoardWriteProps): JSX.Element => {
   const router = useRouter();
+
+  const [accessToken] = useRecoilState(accessTokenState);
+  const [userInfo] = useRecoilState(userInfoState);
+
   const [createBoard] = useMutationCreateBoard();
   const [updateBoard] = useMutationUpdateBoard();
   const [uploadFile] = useMuatationUploadFile();
@@ -78,6 +84,9 @@ export const BoardWrite = (props: IBoardWriteProps): JSX.Element => {
   };
 
   useEffect(() => {
+    if (accessToken) {
+      setValue("writer", userInfo.name);
+    }
     const images = props.data?.fetchBoard.images;
     if (images !== undefined && images !== null) {
       urls.splice(0, images.length);
@@ -196,8 +205,9 @@ export const BoardWrite = (props: IBoardWriteProps): JSX.Element => {
             <S.Input
               type="text"
               {...register("writer")}
-              readOnly={!!props.data?.fetchBoard.writer}
+              readOnly={!!props.data?.fetchBoard.writer || accessToken}
               defaultValue={props.data?.fetchBoard.writer ?? ""}
+              style={{ cursor: accessToken ? "not-allowed" : "" }}
               placeholder="이름을 적어주세요."
             ></S.Input>
             <S.Error>{formState.errors?.writer?.message}</S.Error>
