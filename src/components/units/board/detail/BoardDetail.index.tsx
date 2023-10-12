@@ -4,6 +4,8 @@ import * as S from "./BoardDetail.styles";
 import { BoardDetailHeader } from "./header/BoardDetailHeader.index";
 import { BoardDetailFooter } from "./footer/BoardDetailFooter.index";
 import { BoardDetailBody } from "./body/BoardDetailBody.index";
+import { Comments } from "../../../commons/comments/write";
+import { ListComments } from "../../../commons/comments/list";
 
 export const BoardDetail = (): JSX.Element => {
   const router = useRouter();
@@ -16,6 +18,8 @@ export const BoardDetail = (): JSX.Element => {
       <BoardDetailHeader data={data} />
       <BoardDetailBody data={data} />
       <BoardDetailFooter />
+      <Comments />
+      <ListComments />
     </S.Container>
   );
 };

@@ -1,55 +1,76 @@
-import {
-  CloseOutlined,
-  EditOutlined,
-  MessageOutlined,
-} from "@ant-design/icons";
 import styled from "@emotion/styled";
+import { Rate } from "antd";
 
-export const Row = styled.div`
+export const Wrapper = styled.div`
   width: 100%;
-  display: grid;
-  grid-template: ${(props: IRowProps) =>
-    !props.isEdit
-      ? "'pic name icons' 1.8fr 'pic contents contents' auto 'date date date' 1fr / 0.6fr 10fr 0.5fr"
-      : "'pic name' 1.8fr 'pic contents' auto 'date date' 1fr / 0.6fr 10fr"};
-  padding-bottom: 20px;
+  max-width: 800px;
+  margin: 0 auto;
 `;
-interface IRowProps {
-  isEdit: boolean;
-}
-export const UserPic = styled.img`
-  grid-area: pic;
-  width: 48px;
-  height: 48px;
-  border-radius: 100%;
+export const Form = styled.form`
+  grid-area: form;
 `;
-export const UserName = styled.p`
-  grid-area: name;
-  font-size: 16px;
-  padding-bottom: 10px;
-`;
-export const Icons = styled.div`
-  grid-area: icons;
-  display: flex;
-  flex-direction: row-reverse;
-  color: #bdbdbd;
-  span {
-    margin-right: 10px;
+export const Rating = styled(Rate)``;
+export const Input = styled.input`
+  border: none;
+  border: 1px solid #bdbdbd;
+  height: 30px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  padding: 10px;
+  ::placeholder {
+    color: #bdbdbd;
   }
 `;
-export const EditIcon = styled(EditOutlined)``;
-export const DeleteIcon = styled(CloseOutlined)``;
-export const CommentIcon = styled(MessageOutlined)``;
-export const Contents = styled.p`
-  grid-area: contents;
-  font-size: 16px;
-  color: #4f4f4f;
-  align-items: start;
-  padding-bottom: 10px;
+
+export const ListWrapper = styled.div`
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 20px;
+`;
+export const Row = styled.div`
+  display: grid;
+  grid-template: ${({ onEdit }: IRowProps) =>
+    !onEdit
+      ? "'pic date date icons' 0.5fr 'pic contents contents contents' 2fr 'name contents contents contents' 1fr / 1fr 6fr 0.5fr 0.6fr"
+      : "'pic form form form' 1fr 'pic form form form' 1fr 'name form form form' 3fr / 1fr 6fr 0.5fr 0.6fr"};
+
+  padding: 10px 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #bdbdbd;
+`;
+interface IRowProps {
+  onEdit: boolean;
+}
+export const CommentPic = styled.img`
+  grid-area: pic;
+  margin: 0 auto 10px;
 `;
 export const CommentDate = styled.span`
   grid-area: date;
-  grid-column-start: 2;
-  font-size: 12px;
+  text-align: right;
+  font-size: 14px;
   color: #bdbdbd;
+`;
+export const CommentContents = styled.span`
+  grid-area: contents;
+`;
+export const CommentName = styled.span`
+  grid-area: name;
+  text-align: center;
+  font-size: 14px;
+`;
+export const CommentIcons = styled.div`
+  grid-area: icons;
+  text-align: right;
+`;
+export const Icon = styled.button`
+  width: 15px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  img {
+    width: 15px;
+  }
 `;
