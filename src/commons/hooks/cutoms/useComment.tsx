@@ -55,7 +55,6 @@ export const useComment = ({ kind }: IUseCommentArgs) => {
           },
         });
       } else {
-        console.log("data : ", data);
         await useCreate({
           variables: {
             createUseditemQuestionInput: {

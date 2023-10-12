@@ -1,3 +1,4 @@
+import { EnterOutlined } from "@ant-design/icons";
 import styled from "@emotion/styled";
 import { Rate } from "antd";
 
@@ -36,9 +37,11 @@ export const Row = styled.div`
       ? "'pic date date icons' 0.5fr 'pic contents contents contents' 2fr 'name contents contents contents' 1fr / 1fr 6fr 0.5fr 0.6fr"
       : "'pic form form form' 1fr 'pic form form form' 1fr 'name form form form' 1fr / 1fr 6fr 0.5fr 0.6fr"};
 
-  padding: 10px 0;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #bdbdbd;
+  padding: 20px 0 10px;
+  border-top: 1px solid #bdbdbd;
+  :first-of-type {
+    border-top: none;
+  }
 `;
 interface IRowProps {
   onEdit: boolean;
@@ -60,6 +63,7 @@ export const CommentDate = styled.span`
 `;
 export const CommentContents = styled.span`
   grid-area: contents;
+  word-wrap: break-word;
 `;
 export const CommentName = styled.span`
   grid-area: name;
@@ -79,3 +83,28 @@ export const Icon = styled.button`
     width: 15px;
   }
 `;
+export const ReplyIcon = styled(EnterOutlined)`
+  /* text-align: left;
+  padding-left: 20px; */
+  width: 5%;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  transform: scale(-1, 1);
+`;
+export const ReplyWrapper = styled.div`
+  display: flex;
+  padding: 10px 0;
+`;
+export const ReplyRow = styled.div`
+  width: 100%;
+  min-height: 80px;
+  display: grid;
+  grid-template: ${({ onEdit }: IRowProps) =>
+    !onEdit
+      ? "'pic date date icons' 0.5fr 'pic contents contents contents' 2fr 'name contents contents contents' 1fr / 1fr 6fr 0.5fr 0.6fr"
+      : "'pic form form form' 1fr 'pic form form form' 1fr 'name form form form' 1fr / 1fr 6fr 0.5fr 0.6fr"};
+`;
+
+interface IRowProps {
+  onEdit: boolean;
+}

@@ -77,7 +77,6 @@ export const ListComments = () => {
               <>
                 <S.CommentDate>{getDate(el.updatedAt)}</S.CommentDate>
                 <S.CommentContents>{el.contents}</S.CommentContents>
-
                 <S.CommentIcons>
                   <S.Icon onClick={onClickEdit(el._id)}>
                     <img src="/images/icons/comment-edit.png" />
