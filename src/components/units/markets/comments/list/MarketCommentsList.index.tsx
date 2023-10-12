@@ -13,12 +13,12 @@ export const MarketCommentsList = (): JSX.Element => {
   return (
     <S.Wrapper>
       <S.List>
-        {data?.fetchUseditemQuestions?.map((el) => (
+        {/* {data?.fetchUseditemQuestions?.map((el) => (
           <S.CommentWrapper key={uuidv4()}>
             <Comment questionId={el._id} data={el} />
             <MarketCommentsAnswersList key={uuidv4()} questionId={el._id} />
           </S.CommentWrapper>
-        ))}
+        ))} */}
       </S.List>
     </S.Wrapper>
   );

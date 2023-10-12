@@ -18,7 +18,7 @@ export const BoardDetail = (): JSX.Element => {
       <BoardDetailHeader data={data} />
       <BoardDetailBody data={data} />
       <BoardDetailFooter />
-      <Comments />
+      <Comments kind="board" />
       <ListComments />
     </S.Container>
   );

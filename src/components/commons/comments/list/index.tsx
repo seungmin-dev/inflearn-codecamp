@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import { useQueryFetchBoardComments } from "../../../../commons/hooks/queries/useQueryFetchBoardComments";
-import { useDeleteBoardComment } from "../../../../commons/hooks/cutoms/useDeleteBoardComment";
+import { useDeleteComment } from "../../../../commons/hooks/cutoms/useDeleteComment";
 import { getDate } from "../../../../commons/libraries/utils";
 import * as S from "../styles";
 import { Modal } from "antd";
 import { TextareaUI } from "../../textarea";
 import { useTextarea } from "../../../../commons/hooks/cutoms/useTextarea";
 import { useForm } from "react-hook-form";
-import { useEditBoardComment } from "../../../../commons/hooks/cutoms/useEditBoardComment";
+import { useEditComment } from "../../../../commons/hooks/cutoms/useEditComment";
 
 export const ListComments = () => {
   const router = useRouter();
@@ -21,20 +21,20 @@ export const ListComments = () => {
     onClickDelete,
     onClickOpenDeleteModal,
     onClickDeleteButton,
-  } = useDeleteBoardComment();
+  } = useDeleteComment({ kind: "board" });
   const {
     onValid,
-    boardCommentId,
+    commentId,
     openEditModal,
-    setBoardCommentId,
+    setCommentId,
     onChangeEditPassword,
     onClickOpenEditModal,
-  } = useEditBoardComment();
+  } = useEditComment({ kind: "board" });
   const { leng, onChangeTextarea } = useTextarea({
     setValue,
   });
   const onClickEdit = (id: string) => () => {
-    setBoardCommentId(id);
+    setCommentId(id);
   };
 
   return (
@@ -65,7 +65,7 @@ export const ListComments = () => {
       </Modal>
       <S.ListWrapper>
         {data?.fetchBoardComments.map((el) => (
-          <S.Row onEdit={boardCommentId === el._id}>
+          <S.Row onEdit={commentId === el._id}>
             <S.CommentPic
               src={
                 el.user?.picture
@@ -73,7 +73,7 @@ export const ListComments = () => {
                   : "/images/icons/profile.png"
               }
             />
-            {boardCommentId !== el._id ? (
+            {commentId !== el._id ? (
               <>
                 <S.CommentDate>{getDate(el.updatedAt)}</S.CommentDate>
                 <S.CommentContents>{el.contents}</S.CommentContents>

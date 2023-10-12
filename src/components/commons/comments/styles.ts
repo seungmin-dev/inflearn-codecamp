@@ -34,7 +34,7 @@ export const Row = styled.div`
   grid-template: ${({ onEdit }: IRowProps) =>
     !onEdit
       ? "'pic date date icons' 0.5fr 'pic contents contents contents' 2fr 'name contents contents contents' 1fr / 1fr 6fr 0.5fr 0.6fr"
-      : "'pic form form form' 1fr 'pic form form form' 1fr 'name form form form' 3fr / 1fr 6fr 0.5fr 0.6fr"};
+      : "'pic form form form' 1fr 'pic form form form' 1fr 'name form form form' 1fr / 1fr 6fr 0.5fr 0.6fr"};
 
   padding: 10px 0;
   margin-bottom: 10px;
@@ -46,6 +46,11 @@ interface IRowProps {
 export const CommentPic = styled.img`
   grid-area: pic;
   margin: 0 auto 10px;
+  padding: 15px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 100%;
+  object-fit: cover;
 `;
 export const CommentDate = styled.span`
   grid-area: date;
