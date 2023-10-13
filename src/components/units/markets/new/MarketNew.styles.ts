@@ -70,9 +70,6 @@ export const LocateInputs = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  input {
-    width: 100px;
-  }
 `;
 export const RadioInput = styled.input`
   appearance: none;

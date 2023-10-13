@@ -12,9 +12,9 @@ import { LocationIcon } from "../detail/header/MarketDetailHeader.styles";
 import { useEffect, useState } from "react";
 import { useMutationUpdateUseditem } from "../../../../commons/hooks/mutations/useMutationUpdateUseditem";
 import { ItemFormSchema } from "../../../../commons/validation/yup";
-import Map from "../../../commons/map";
 import { Upload } from "../../../commons/upload/Upload.index";
 import { useMuatationUploadFile } from "../../../../commons/hooks/mutations/useMutationUploadFile";
+import EditMap from "../../../commons/map/edit";
 
 const ReactQuill = dynamic(async () => await import("react-quill"), {
   ssr: false,
@@ -25,15 +25,17 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
   const [createUseditem] = useMutationCraeteUseditem();
   const [updateUseditem] = useMutationUpdateUseditem();
   const [uploadFile] = useMuatationUploadFile();
+  const [pickedCoord, setPickedCoord] = useState({ lat: 0, lon: 0 });
 
   type ItemData = yup.InferType<typeof ItemFormSchema>;
   const { register, handleSubmit, formState, setValue, trigger } =
     useForm<ItemData>({
       resolver: yupResolver(ItemFormSchema),
-      mode: "onSubmit",
+      mode: "onChange",
     });
   const css = `.ql-editor {min-height: 250px;}`;
   const onValid = async (data: IItemFormProps): Promise<void> => {
+    console.log("data : ", typeof data.useditemAddress.lng);
     const tagsArr = [];
     data.tags
       .trim()
@@ -55,10 +57,10 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
               tags: tagsArr,
               images: resultUrls,
               useditemAddress: {
-                address: data.address,
-                addressDetail: data.addressDetail,
-                lat: Number(data.lat),
-                lng: Number(data.lng),
+                address: data.useditemAddress.address,
+                addressDetail: data.useditemAddress.addressDetail,
+                lat: Number(data.useditemAddress.lat),
+                lng: Number(data.useditemAddress.lng),
               },
             },
             useditemId: props.data.fetchUseditem._id,
@@ -75,7 +77,6 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
         });
         void router.push(`/markets/${result.data.updateUseditem._id}`);
       } else {
-        console.log("data : ", data);
         const result = await createUseditem({
           variables: {
             createUseditemInput: {
@@ -86,10 +87,10 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
               tags: tagsArr,
               images: resultUrls,
               useditemAddress: {
-                address: data.address,
-                addressDetail: data.addressDetail,
-                lat: Number(data.lat),
-                lng: Number(data.lng),
+                address: data.useditemAddress.address,
+                addressDetail: data.useditemAddress.addressDetail,
+                lat: Number(data.useditemAddress.lat),
+                lng: Number(data.useditemAddress.lng),
               },
             },
           },
@@ -114,6 +115,30 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
       if (error instanceof Error) Modal.error({ content: error.message });
     }
   };
+  useEffect(() => {
+    setValue("useditemAddress.lat", pickedCoord.lat);
+    setValue("useditemAddress.lng", pickedCoord.lon);
+  }, [pickedCoord]);
+
+  useEffect(() => {
+    setValue("name", props.data?.fetchUseditem?.name);
+    setValue("remarks", props.data?.fetchUseditem?.remarks);
+    setValue("contents", props.data?.fetchUseditem?.contents);
+    setValue("price", props.data?.fetchUseditem?.price);
+    setValue(
+      "useditemAddress.address",
+      props.data?.fetchUseditem?.useditemAddress?.address,
+    );
+    setValue(
+      "useditemAddress.addressDetail",
+      props.data?.fetchUseditem?.useditemAddress?.addressDetail,
+    );
+    setPickedCoord({
+      lat: props.data?.fetchUseditem.useditemAddress?.lat,
+      lon: props.data?.fetchUseditem.useditemAddress?.lng,
+    });
+  }, [props.data?.fetchUseditem]);
+
   const onChangeContents = (value: string): void => {
     setValue("contents", value === "<p><br></p>" ? "" : value);
     void trigger("contents");
@@ -196,23 +221,40 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
         <S.MapWrapper>
           <div>
             <S.SmallTitle>거래위치</S.SmallTitle>
-            <Map />
+            <EditMap
+              setPickedCoord={setPickedCoord}
+              lat={props.data?.fetchUseditem?.useditemAddress?.lat}
+              lon={props.data?.fetchUseditem?.useditemAddress?.lng}
+              isEdit={props.isEdit}
+            />
           </div>
           <div>
             <S.SmallTitle>GPS</S.SmallTitle>
             <S.LocateInputs>
               <S.Input
                 type="number"
-                {...register("lat")}
+                {...register("useditemAddress.lat")}
+                disabled
                 placeholder="위도(LAT)"
                 defaultValue={props.data?.fetchUseditem?.useditemAddress?.lat}
+                value={
+                  props.data
+                    ? props.data?.fetchUseditem?.useditemAddress?.lat
+                    : pickedCoord.lat
+                }
               />
               <LocationIcon />
               <S.Input
                 type="number"
-                {...register("lng")}
+                {...register("useditemAddress.lng")}
+                disabled
                 placeholder="경도(LNG)"
                 defaultValue={props.data?.fetchUseditem?.useditemAddress?.lng}
+                value={
+                  props.data
+                    ? props.data?.fetchUseditem?.useditemAddress?.lng
+                    : pickedCoord.lon
+                }
               />
             </S.LocateInputs>
           </div>
@@ -220,12 +262,14 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
             <S.SmallTitle>주소</S.SmallTitle>
             <S.Input
               type="text"
-              {...register("address")}
+              {...register("useditemAddress.address")}
+              placeholder="주소"
               defaultValue={props.data?.fetchUseditem?.useditemAddress?.address}
             />
             <S.Input
               type="text"
-              {...register("addressDetail")}
+              {...register("useditemAddress.addressDetail")}
+              placeholder="상세주소"
               defaultValue={
                 props.data?.fetchUseditem?.useditemAddress?.addressDetail
               }
@@ -246,28 +290,6 @@ export default function MarketNew(props: IMarketNewProps): JSX.Element {
             ))}
           </div>
         </S.InputSet>
-        {/* <S.InputSet>
-          <S.SmallTitle>메인 사진 설정</S.SmallTitle>
-          <S.Label onClick={onClickRadio} htmlFor="photo1">
-            <S.RadioInput
-              type="radio"
-              defaultChecked
-              name="mainPhoto"
-              value="photo1"
-              id="photo1"
-            />
-            사진 1
-          </S.Label>{" "}
-          <S.Label onClick={onClickRadio} htmlFor="photo2">
-            <S.RadioInput
-              type="radio"
-              name="mainPhoto"
-              value="photo2"
-              id="photo2"
-            />
-            사진 2
-          </S.Label>
-        </S.InputSet> */}
         <div style={{ display: "flex" }}>
           <S.Button isCompleted={formState.isValid}>
             {props.isEdit ? "수정" : "등록"}하기

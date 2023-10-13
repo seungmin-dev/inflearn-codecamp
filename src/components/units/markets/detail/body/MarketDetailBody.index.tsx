@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 import { userInfoState } from "../../../../../commons/stores";
 import { replaceNumberComma } from "../../../../../commons/libraries/utils";
 import Map from "../../../../commons/map";
-import { useEffect } from "react";
 
 interface IMarketDetailBodyProps {
   data: Pick<IQuery, "fetchUseditem">;

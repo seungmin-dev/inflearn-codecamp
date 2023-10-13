@@ -26,15 +26,15 @@ export default function Map(props: IMapProps): JSX.Element {
         const container = document.getElementById("map");
 
         const options = {
-          center: new window.kakao.maps.LatLng(props.lat, props.lon),
+          center: new window.kakao.maps.LatLng(props.lon, props.lat),
           level: 1,
         };
 
         const map = new window.kakao.maps.Map(container, options);
 
         const markerPosition = new window.kakao.maps.LatLng(
-          props.lat,
           props.lon,
+          props.lat,
         );
 
         const marker = new window.kakao.maps.Marker({
