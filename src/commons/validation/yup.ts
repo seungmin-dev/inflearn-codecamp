@@ -30,10 +30,12 @@ export const ItemFormSchema = yup.object({
     .typeError("숫자만 입력가능합니다.")
     .required("상품 가격을 입력해주세요."),
   tags: yup.string(),
-  lat: yup.number().typeError("숫자만 입력가능합니다."),
-  lng: yup.number().typeError("숫자만 입력가능합니다."),
-  address: yup.string(),
-  addressDetail: yup.string(),
+  useditemAddress: yup.object().shape({
+    lat: yup.number(),
+    lng: yup.number(),
+    address: yup.string(),
+    addressDetail: yup.string(),
+  }),
 });
 
 export const ChangePasswordFormSchema = yup.object({
@@ -42,11 +44,11 @@ export const ChangePasswordFormSchema = yup.object({
   newPassword: yup
     .string()
     .min(6, "비밀번호는 6자리 이상 입력해야 합니다.")
-    .max(8, "비밀번호는 8자리 이하로 입력해야 합니다.")
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,15}$/,
-      "영문, 숫자 포함 8자리를 입력해주세요.",
+      "영문, 숫자 포함 8자리 이하를 입력해주세요.",
     )
+    .max(8, "비밀번호는 8자리 이하로 입력해야 합니다.")
     .required("새 비밀번호를 입력해 주세요."),
   newPasswordConfirm: yup
     .string()

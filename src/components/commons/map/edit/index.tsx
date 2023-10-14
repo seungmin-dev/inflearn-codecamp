@@ -34,20 +34,18 @@ export default function EditMap(props: IMapProps): JSX.Element {
   });
 
   useEffect(() => {
-    if (!fixed) {
-      if (!props.isEdit) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          console.log("navigator position : ", position);
-          setLatlon({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
+    if (!props.isEdit) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log("navigator position : ", position);
+        setLatlon({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
         });
-      } else {
-        setLatlon({ lat: props.lat, lon: props.lon });
-      }
-      setFixed(true);
+      });
+    } else {
+      setLatlon({ lat: props.lat, lon: props.lon });
     }
+    setFixed(true);
   }, [fixed]);
 
   useEffect(() => {
@@ -60,7 +58,7 @@ export default function EditMap(props: IMapProps): JSX.Element {
         const container = document.getElementById("map");
 
         const options = {
-          center: new window.kakao.maps.LatLng(latlon.lon, latlon.lat),
+          center: new window.kakao.maps.LatLng(latlon.lat, latlon.lon),
           level: 1,
         };
 
@@ -68,9 +66,16 @@ export default function EditMap(props: IMapProps): JSX.Element {
 
         const map = new window.kakao.maps.Map(container, options);
 
+        console.log("options center : ", options.center);
+        console.log("options center Ma : ", options.center.Ma);
+
+        console.log("latlon lat : ", latlon.lat);
+        console.log("latlon lon : ", latlon.lon);
         const marker = new window.kakao.maps.Marker({
           position: map.getCenter(),
         });
+
+        console.log("marker : ", marker);
 
         marker.setMap(map);
 

@@ -10,7 +10,7 @@ export const useMapMarker = ({ setPickedCoord }: MapMarkerArgs) => {
   const markerMaker = (marker) => (e) => {
     marker.setPosition(e.latLng);
 
-    setPickedCoord({ lat: e.latLng.La, lon: e.latLng.Ma });
+    setPickedCoord({ lat: e.latLng.Ma, lon: e.latLng.La });
   };
   return { markerMaker };
 };
